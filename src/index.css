@@ -1,3 +1,15 @@
+:root {
+  --main-color-100: #e2fdff;
+  --main-color-200: #bfd7ff;
+  --main-color-300: #9bb1ff;
+  --main-color-400: #788bff;
+  --main-color-500: #5465ff;
+
+  --breakpoint-small: 480px;
+  --breakpoint-medium: 768px;
+  --breakpoint-large: 1024px;
+}
+
 *,
 *::before,
 *::after {
