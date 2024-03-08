@@ -8,6 +8,23 @@
   --breakpoint-small: 480px;
   --breakpoint-medium: 768px;
   --breakpoint-large: 1024px;
+
+  --font-size-100: 3rem;
+  --font-size-200: 2.8rem;
+  --font-size-300: 2.6rem;
+  --font-size-400: 2.3rem;
+  --font-size-500: 2rem;
+  --font-size-600: 1.8rem;
+  --font-size-700: 1.6rem;
+
+  --white-color-100: #fff;
+  --white-color-200: #f4f4f4;
+  --white-color-300: #f7f7f7;
+  --white-color-400: #ddd;
+  --white-color-500: #c0c0c0;
+  --white-color-600: #bdbdbd;
+  --white-color-700: #b5b5b5;
+  --white-color-800: #000;
 }
 
 *,
