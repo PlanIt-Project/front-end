@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
     :root {
@@ -7,10 +7,6 @@ export const GlobalStyles = createGlobalStyle`
         --main-color-300: #9bb1ff;
         --main-color-400: #788bff;
         --main-color-500: #5465ff;
-
-        --breakpoint-small: 480px;
-        --breakpoint-medium: 768px;
-        --breakpoint-large: 1024px;
 
         --font-size-100: 3rem;
         --font-size-200: 2.8rem;
@@ -97,4 +93,34 @@ export const GlobalStyles = createGlobalStyle`
 		all: unset;
 		cursor: pointer;
 	}
+`;
+
+export const CommonButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  height: 35px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: var(--main-color-300);
+  font-size: var(--font-size-400);
+
+  &:hover {
+    background-color: var(--main-color-400);
+  }
+`;
+
+export const CommonInput = styled.input`
+  width: 200px;
+  height: 30px;
+  padding: 10px;
+  outline: none;
+  border: 1px solid var(--white-color-700);
+  border-radius: 10px;
+
+  &:focus {
+    outline: none;
+    outline: 1px solid var(--main-color-500);
+  }
 `;
