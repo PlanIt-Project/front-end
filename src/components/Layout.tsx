@@ -1,13 +1,18 @@
-import React from "react";
 import { Outlet } from "react-router";
+import Header from "./Header";
+import styled from "styled-components";
 
-const Layout = () => {
+export default function Layout() {
   return (
-    <>
-      <div>Layout</div>
+    <LayoutContainer>
+      <Header />
       <Outlet />
-    </>
+    </LayoutContainer>
   );
-};
+}
 
-export default Layout;
+const LayoutContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;

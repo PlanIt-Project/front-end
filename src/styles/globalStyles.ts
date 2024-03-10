@@ -80,6 +80,7 @@ export const GlobalStyles = createGlobalStyle`
 	html {
         font-family: "Pretendard";
         font-size: 62.5%;
+        overflow-x: hidden;
 	}
 	img {
 		width: 100%;
