@@ -1,19 +1,5 @@
-import "./App.css";
-import Layout from "./components/Layout";
-import Main from "./pages/Main";
+import { Outlet } from "react-router";
 
-export const App = [
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        index: true,
-        element: <Main />,
-        label: "main",
-      },
-    ],
-  },
-];
-
-export default App;
+export default function App() {
+  return <Outlet />;
+}
