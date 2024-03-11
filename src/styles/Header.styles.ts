@@ -8,6 +8,7 @@ export const HeaderContainer = styled.header`
   padding: 5px 20px 5px 0px;
   width: calc(100% - 20px);
   height: 80px;
+  background-color: #f6ffff;
 `;
 
 export const LogoContainer = styled.div`
@@ -16,6 +17,7 @@ export const LogoContainer = styled.div`
   align-items: center;
   width: 220px;
   height: 100px;
+  margin-left: -20px;
 
   @media screen and (max-width: ${breakPoints.medium}px) {
     width: 200px;
