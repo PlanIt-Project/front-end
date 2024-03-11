@@ -114,11 +114,12 @@ export const CommonButton = styled.button`
 
 export const CommonInput = styled.input`
   width: 200px;
-  height: 30px;
+  height: 25px;
   padding: 10px;
   outline: none;
   border: 1px solid var(--white-color-700);
   border-radius: 10px;
+  font-size: var(--font-size-600);
 
   &:focus {
     outline: none;
