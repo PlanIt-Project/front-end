@@ -1,35 +1,37 @@
-import { useEffect, useRef, useState } from "react";
-import CommonSelectBox from "../components/CommonSelectBox";
-import { CommonInput } from "../styles/globalStyles";
-import clickOutside from "../utils/clickOutside";
+import { useEffect } from "react";
+import * as S from "../styles/Landing.styles";
+import { setVH } from "../utils/setVH";
+import Kettlebell from "../assets/img_kettlebell.png";
+import Dumbell from "../assets/img_dumbell.png";
+import { useNavigate } from "react-router";
 
 export default function Landing() {
-  const [isSelectBoxOpen, setIsSelectBoxOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("test1");
-
-  const selectBoxRef = useRef(null);
-
-  const optionList = [
-    { label: "test1", value: "test1" },
-    { label: "test2", value: "test2" },
-  ];
-
   useEffect(() => {
-    clickOutside(isSelectBoxOpen, setIsSelectBoxOpen, selectBoxRef);
-  }, [isSelectBoxOpen]);
+    window.addEventListener("resize", setVH);
+    setVH();
+  }, []);
+
+  const navigate = useNavigate();
+
+  const handleMoveToLogin = () => {
+    navigate("/login");
+  };
 
   return (
-    <div style={{ padding: "20px" }}>
-      랜딩페이지
-      <CommonSelectBox
-        selectBoxRef={selectBoxRef}
-        isSelectBoxOpen={isSelectBoxOpen}
-        setIsSelectBoxOpen={setIsSelectBoxOpen}
-        selectedOption={selectedOption}
-        setSelectedOption={setSelectedOption}
-        optionList={optionList}
-      />
-      <CommonInput />
-    </div>
+    <S.Container>
+      <S.TitleButtonContainer>
+        <S.Title>
+          <p>언제 어디서나</p>
+          <p>이용권 스케줄 관리를!</p>
+        </S.Title>
+        <S.StartButton onClick={handleMoveToLogin}>Get Start</S.StartButton>
+      </S.TitleButtonContainer>
+      <S.KettlebellContainer>
+        <img src={Kettlebell} alt="kettlebell" />
+      </S.KettlebellContainer>
+      <S.DumbellContainer>
+        <img src={Dumbell} alt="dumbell" />
+      </S.DumbellContainer>
+    </S.Container>
   );
 }
