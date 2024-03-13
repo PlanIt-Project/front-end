@@ -7,6 +7,8 @@ import MyPage from "../pages/MyPage";
 import Main from "../pages/Main";
 import UserTicket from "../pages/user/Ticket";
 import UserSchedule from "../pages/user/Schedule";
+import UserReservation from "../pages/user/Reservation";
+import TrainerReservation from "../pages/trainer/Reservation";
 import TrainerSchedule from "../pages/trainer/Schedule";
 import Account from "../pages/admin/Account";
 import Trainer from "../pages/admin/Trainer";
@@ -37,12 +39,14 @@ export const router = createBrowserRouter([
             children: [
               { path: "/user/ticket", element: <UserTicket /> },
               { path: "/user/schedule", element: <UserSchedule /> },
+              { path: "/user/reservation", element: <UserReservation /> },
             ],
           },
           {
             path: "/trainer",
             element: <TrainerRoute />,
             children: [
+              { path: "/trainer/reservation", element: <TrainerReservation /> },
               { path: "/trainer/schedule", element: <TrainerSchedule /> },
             ],
           },

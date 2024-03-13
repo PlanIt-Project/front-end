@@ -1,3 +1,9 @@
+import * as S from "../../styles/Schedule.styles";
+
 export default function UserSchedule() {
-  return <div>유저 스케줄</div>;
+  return (
+    <S.Container>
+      <S.TopContainer></S.TopContainer>
+    </S.Container>
+  );
 }
