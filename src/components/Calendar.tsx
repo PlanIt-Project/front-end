@@ -1,15 +1,15 @@
 import * as S from "../styles/Calendar.styles";
 import LeftArrow from "../assets/icon_left-arrow.png";
 import RightArrow from "../assets/icon_right-arrow.png";
+import { DAYS_OF_WEEK, TODAY } from "../constants/Calendar.constants";
+import { ICalendarProps } from "../types/Calendar.types";
 import { useState } from "react";
 
-export default function Calendar() {
-  const TODAY = new Date();
-  TODAY.setHours(0, 0, 0, 0);
-  const DAYS_OF_WEEK = ["일", "월", "화", "수", "목", "금", "토"];
-
+export default function Calendar({
+  selectedDay,
+  handleClickDay,
+}: ICalendarProps) {
   const [currentMonth, setCurrentMonth] = useState(TODAY);
-  const [selectedDay, setSelectedDay] = useState(TODAY);
 
   const isSameDay = (toDay: Date, compareDay?: Date | null) => {
     if (
@@ -20,11 +20,6 @@ export default function Calendar() {
       return true;
     }
     return false;
-  };
-
-  // NOTE 날짜 선택
-  const handleClickDay = (day: Date) => {
-    setSelectedDay(day);
   };
 
   // NOTE 전 달로 이동
