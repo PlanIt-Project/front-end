@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { CommonInput, CommonButton } from "../styles/globalStyles";
-import LoginPageContainer from "./Login";
+import { LoginSignUpContainer } from "../styles/LoginSignUp.style";
 
-export default function SignUp() {
+export default function Login() {
   return (
     <SignUpContainer>
       <h1>SIGN UP</h1>
@@ -12,14 +12,14 @@ export default function SignUp() {
         placeholder="Password"
         required
       ></CommonInput>
-      <LoginButton>회원가입</LoginButton>
+      <SignUpButton>회원가입</SignUpButton>
     </SignUpContainer>
   );
 }
 
-const SignUpContainer = styled(LoginPageContainer)``;
+const SignUpContainer = styled(LoginSignUpContainer)``;
 
-const LoginButton = styled(CommonButton)`
+const SignUpButton = styled(CommonButton)`
   background: white;
   color: black;
 `;
