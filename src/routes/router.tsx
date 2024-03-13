@@ -40,6 +40,10 @@ export const router = createBrowserRouter([
               { path: "/user/ticket", element: <UserTicket /> },
               { path: "/user/schedule", element: <UserSchedule /> },
               { path: "/user/reservation", element: <UserReservation /> },
+              {
+                path: "/user/reservation/:reservationId",
+                element: <UserReservation />,
+              },
             ],
           },
           {
