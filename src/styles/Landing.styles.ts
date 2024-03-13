@@ -30,7 +30,8 @@ export const TitleButtonContainer = styled.div`
 
   height: 50%;
   transform: translate(0, 20%);
-  gap: 100px;
+  gap: 80px;
+  z-index: 2;
 `;
 
 export const Title = styled.div`
@@ -47,7 +48,7 @@ export const Title = styled.div`
   }
 
   @media screen and (max-width: ${breakPoints.small}px) {
-    font-size: 3.5rem;
+    font-size: 3.3rem;
   }
 `;
 

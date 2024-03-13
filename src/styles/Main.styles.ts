@@ -4,55 +4,30 @@ import { breakPoints } from "./breakPoints";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   height: calc((var(--vh, 1vh) * 100) - 90px);
 `;
 
 export const Banner = styled.div`
   width: 100%;
-  height: 35%;
+  height: 40%;
   border: 1px solid gray;
-
-  @media screen and (max-width: ${breakPoints.medium}px) {
-    height: 27%;
-  }
 `;
 
-export const BottomContainer = styled.div`
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 50%;
-
-  @media screen and (max-width: ${breakPoints.medium}px) {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    height: 57%;
-    gap: 20px;
-  }
-`;
-
-export const HalfContainer = styled.div`
+export const TrainerContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  width: 48%;
-  height: 100%;
-  gap: 20px;
-
-  @media screen and (max-width: ${breakPoints.medium}px) {
-    width: 100%;
-    gap: 10px;
-  }
+  width: 100%;
+  height: 50%;
+  gap: 5%;
 `;
 
 export const Title = styled.div`
   font-size: var(--font-size-300);
   font-weight: 700;
+  height: 5%;
+  padding: 0 5px;
 
   @media screen and (max-width: ${breakPoints.medium}px) {
     font-size: var(--font-size-400);
@@ -64,7 +39,58 @@ export const Title = styled.div`
 `;
 
 export const ContentsContainer = styled.div`
-  width: 100%;
-  height: 80%;
+  display: flex;
+  align-items: center;
+  height: 90%;
+  padding: 10px;
+  gap: 15px;
   border: 1px solid gray;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export const Grid = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 400px;
+  height: 80%;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 10px;
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    min-width: 300px;
+  }
+`;
+
+export const ImageContainer = styled.div`
+  width: 35%;
+  height: 50%;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid gray;
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    width: 25%;
+    height: 30%;
+  }
+`;
+
+export const InfoContainer = styled.div`
+  width: 57%;
+  height: 80%;
+  padding: 10px;
+  font-size: var(--font-size-400);
+  border: 1px solid gray;
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    width: 65%;
+    font-size: var(--font-size-500);
+  }
 `;
