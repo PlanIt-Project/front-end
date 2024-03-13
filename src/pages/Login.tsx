@@ -19,7 +19,7 @@ export default function Login() {
         required
       ></CommonInput>
       <LoginButton>로그인</LoginButton>
-      <p onClick={goToSingUp}>회원가입</p>
+      <p onClick={goToSignUp}>회원가입</p>
     </LoginPageContainer>
   );
 }
