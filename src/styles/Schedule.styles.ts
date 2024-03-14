@@ -54,12 +54,26 @@ export const BottomContainer = styled.div`
   width: calc(100% - 2px);
   gap: 15px;
   margin: 10px 0 20px 1px;
+
+  &.reservation {
+    gap: 80px;
+    margin: 20px 0 50px 1px;
+    align-items: center;
+
+    @media screen and (max-width: ${breakPoints.small}px) {
+      gap: 50px;
+    }
+  }
 `;
 
 export const Title = styled.div`
   font-size: var(--font-size-400);
   font-weight: 700;
   padding: 10px 0 0 10px;
+
+  &.reservation {
+    text-align: center;
+  }
 
   @media screen and (max-width: ${breakPoints.small}px) {
     font-size: var(--font-size-500);
@@ -158,5 +172,82 @@ export const ChangeDeleteButton = styled(CommonButton)`
   @media screen and (max-width: ${breakPoints.small}px) {
     height: 30px;
     font-size: var(--font-size-500);
+  }
+`;
+
+export const ItemContainer = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  height: 180px;
+  gap: 30px;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    height: 160px;
+  }
+`;
+
+export const TimeTitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+`;
+
+export const TimeTitle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-size-300);
+  font-weight: 700;
+  width: 10%;
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    width: 100%;
+    justify-content: center;
+    font-size: var(--font-size-500);
+  }
+`;
+
+export const TimeContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  height: 40px;
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    width: 100%;
+  }
+`;
+
+export const Time = styled.div<{ $disabled: boolean; $isSelected: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: var(--font-size-400);
+  height: 150%;
+  padding: 0 2px;
+  color: ${(props) => props.$disabled && "var(--white-color-600)"};
+  background-color: ${(props) => props.$isSelected && "var(--main-color-200)"};
+  border-radius: 50%;
+  cursor: ${(props) => (props.$disabled ? "not-allowed" : "pointer")};
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    font-size: var(--font-size-600);
+    height: 120%;
   }
 `;
