@@ -18,6 +18,9 @@ import UserRoute from "./UserRoute";
 import TrainerRoute from "./TrainerRoute";
 import AdminRoute from "./AdminRoute";
 import Layout from "../components/Layout";
+import Product from "../pages/admin/Product";
+import Program from "../pages/admin/Program";
+import AdmitRequest from "../pages/admin/AdmitRequest";
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +64,9 @@ export const router = createBrowserRouter([
               { path: "/admin/account", element: <Account /> },
               { path: "/admin/trainer", element: <Trainer /> },
               { path: "/admin/banner", element: <Banner /> },
+              { path: "/admin/product", element: <Product /> },
+              { path: "/admin/program", element: <Program /> },
+              { path: "/admin/admit-request", element: <AdmitRequest /> },
             ],
           },
         ],
