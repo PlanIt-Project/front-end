@@ -42,6 +42,18 @@ export class MenuFactory {
           label: "배너 관리",
           path: "/admin/banner",
         },
+        {
+          label: "상품 관리",
+          path: "/admin/product",
+        },
+        {
+          label: "이용권 관리",
+          path: "/admin/program",
+        },
+        {
+          label: "승인 요청 관리",
+          path: "/admin/admit-request",
+        },
       ];
     }
 
