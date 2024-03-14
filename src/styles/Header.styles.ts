@@ -62,7 +62,7 @@ export const AdminMenuContainer = styled.div`
   height: 500px;
   border-bottom-left-radius: 20px;
   background-color: var(--main-color-300);
-  box-shadow: 4px 4px 4px rgba(0,0,0,0.25);
+  box-shadow: 4px 3px 4px rgba(0,0,0,0.30);
   display: flex;
   flex-direction: column;
   align-items: center;
