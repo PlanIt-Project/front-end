@@ -1,7 +1,8 @@
 import * as S from "../styles/Main.styles";
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { setVH } from "../utils/setVH";
 import { throttle } from "../utils/throttle";
+import { dragFn } from "../utils/dragFn";
 
 export default function Main() {
   const trainerList = [
@@ -24,33 +25,15 @@ export default function Main() {
     setVH();
   }, []);
 
-  const handleDragStart = (e: MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    if (trainerScrollRef.current) {
-      setIsDrag(true);
-      setStartX(e.pageX + trainerScrollRef.current.scrollLeft);
-    }
-  };
+  const dragFunction = dragFn(
+    trainerScrollRef,
+    isDrag,
+    setIsDrag,
+    startX,
+    setStartX,
+  );
 
-  const handleDragEnd = () => {
-    setIsDrag(false);
-  };
-
-  const handleDragMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (isDrag && trainerScrollRef.current) {
-      const { scrollWidth, clientWidth, scrollLeft } = trainerScrollRef.current;
-
-      trainerScrollRef.current.scrollLeft = startX - e.pageX;
-
-      if (scrollLeft === 0) {
-        setStartX(e.pageX);
-      } else if (scrollWidth <= clientWidth + scrollLeft) {
-        setStartX(e.pageX + scrollLeft);
-      }
-    }
-  };
-
-  const throttleDragMove = throttle(handleDragMove, 50);
+  const throttleDragMove = throttle(dragFunction.handleDragMove, 50);
 
   return (
     <S.Container>
@@ -59,10 +42,10 @@ export default function Main() {
         <S.Title>트레이너 소개</S.Title>
         <S.ContentsContainer
           ref={trainerScrollRef}
-          onMouseDown={handleDragStart}
+          onMouseDown={dragFunction.handleDragStart}
           onMouseMove={isDrag ? throttleDragMove : undefined}
-          onMouseUp={handleDragEnd}
-          onMouseLeave={handleDragEnd}
+          onMouseUp={dragFunction.handleDragEnd}
+          onMouseLeave={dragFunction.handleDragEnd}
         >
           {trainerList.map((trainer) => (
             <S.Grid key={trainer.id}>
