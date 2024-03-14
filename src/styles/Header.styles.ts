@@ -62,11 +62,12 @@ export const AdminMenuContainer = styled.div`
   height: 500px;
   border-bottom-left-radius: 20px;
   background-color: var(--main-color-300);
+  box-shadow: 4px 4px 4px rgba(0,0,0,0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
-
+  gap: 35px;
+  
   @media screen and (max-width: ${breakPoints.small}px) {
     width: 250px;
   }
