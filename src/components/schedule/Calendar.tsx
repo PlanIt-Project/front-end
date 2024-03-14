@@ -1,8 +1,8 @@
-import * as S from "../styles/Calendar.styles";
-import LeftArrow from "../assets/icon_left-arrow.png";
-import RightArrow from "../assets/icon_right-arrow.png";
-import { DAYS_OF_WEEK, TODAY } from "../constants/Calendar.constants";
-import { ICalendarProps } from "../types/Calendar.types";
+import * as S from "../../styles/Calendar.styles";
+import LeftArrow from "../../assets/icon_left-arrow.png";
+import RightArrow from "../../assets/icon_right-arrow.png";
+import { DAYS_OF_WEEK, TODAY } from "../../constants/Calendar.constants";
+import { ICalendarProps } from "../../types/Calendar.types";
 import { useState } from "react";
 
 export default function Calendar({

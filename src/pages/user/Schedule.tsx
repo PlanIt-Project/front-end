@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Calendar from "../../components/Calendar";
+import Calendar from "../../components/schedule/Calendar";
 import * as S from "../../styles/Schedule.styles";
 import { TODAY } from "../../constants/Calendar.constants";
 import { useNavigate } from "react-router";
