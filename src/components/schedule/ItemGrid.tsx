@@ -1,13 +1,25 @@
 import styled from "styled-components";
 import { IItemList } from "../../types/UserReservation.types";
+import { breakPoints } from "../../styles/breakPoints";
 
 interface IItemGridProps {
   item: IItemList;
+  isSelected: boolean;
+  onClickItem: (id: string) => void;
 }
 
-export default function ItemGrid({ item }: IItemGridProps) {
+export default function ItemGrid({
+  item,
+  isSelected,
+  onClickItem,
+}: IItemGridProps) {
   return (
-    <Container>
+    <Container
+      onClick={() => {
+        onClickItem(item.id);
+      }}
+      $isSelected={isSelected}
+    >
       <Title>{item.name}</Title>
       <Contents>
         {item.startDate} ~ {item.endDate}
@@ -21,7 +33,7 @@ export default function ItemGrid({ item }: IItemGridProps) {
   );
 }
 
-const Container = styled.div`
+const Container = styled.div<{ $isSelected: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -31,11 +43,22 @@ const Container = styled.div`
   padding: 10px;
   border: 1px solid var(--main-color-500);
   border-radius: 10px;
+  background-color: ${(props) => props.$isSelected && "var(--main-color-300)"};
+  cursor: pointer;
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    min-width: 260px;
+    height: 130px;
+  }
 `;
 
 const Title = styled.div`
   font-size: var(--font-size-400);
   font-weight: 700;
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    font-size: var(--font-size-500);
+  }
 `;
 
 const Contents = styled.div`
@@ -48,5 +71,9 @@ const Contents = styled.div`
     &.strong {
       font-weight: 700;
     }
+  }
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    font-size: var(--font-size-700);
   }
 `;
