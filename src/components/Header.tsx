@@ -2,8 +2,8 @@ import * as S from "../styles/Header.styles";
 import Logo from "../assets/img_logo.png";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import AdminMenu from "./Menu/AdminMenu";
-import Menu from "./Menu/Menu";
+import AdminMenu from "./menu/AdminMenu";
+import Menu from "./menu/Menu";
 
 export default function Header() {
   const [login, setLogin] = useState({ user: "user" });
