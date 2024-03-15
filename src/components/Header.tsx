@@ -1,24 +1,13 @@
 import * as S from "../styles/Header.styles";
 import Logo from "../assets/img_logo.png";
-import { getMenuList } from "../hooks/getMenuList";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
+import AdminMenu from "./Menu/AdminMenu";
+import Menu from "./Menu/Menu";
 
 export default function Header() {
   const [login, setLogin] = useState({ user: "user" });
-  const [onMenu, setonMenu] = useState<boolean>(false);
-
-  const menuList = getMenuList(login);
-  const navigate = useNavigate();
   const locationObject = useLocation();
-
-  const handleMoveToMenu = (path: string) => {
-    navigate(path);
-  };
-
-  const handleMenu = () => {
-    setonMenu(!onMenu);
-  };
 
   // 로그인 구현 전에 임시로 만든 코드입니다.
   useEffect(() => {
@@ -26,7 +15,6 @@ export default function Header() {
       setLogin({ user: "admin" });
     }
   }, []);
-
   return (
     <S.HeaderContainer>
       <S.LogoContainer>
@@ -34,45 +22,9 @@ export default function Header() {
       </S.LogoContainer>
       <S.MenuContainer>
         {login.user !== "admin" ? (
-          menuList.map((menu: any, index: number) => (
-            <S.Menu
-              key={index}
-              onClick={() => {
-                handleMoveToMenu(menu.path);
-              }}
-            >
-              {menu.label}
-            </S.Menu>
-          ))
+          <Menu login={login}/>
         ) : (
-          <S.Menu
-            onClick={() => {
-              handleMenu();
-            }}
-          >
-            MENU
-          </S.Menu>
-        )}
-        {onMenu && (
-          <S.Overlay
-            onClick={() => {
-              handleMenu();
-            }}
-          >
-            <S.AdminMenuContainer>
-              <S.AdminMenuTitle>MENU</S.AdminMenuTitle>
-              {menuList.map((menu: any, index: number) => (
-                <S.AdminMenuContent
-                  key={index}
-                  onClick={() => {
-                    handleMoveToMenu(menu.path);
-                  }}
-                >
-                  {menu.label}
-                </S.AdminMenuContent>
-              ))}
-            </S.AdminMenuContainer>
-          </S.Overlay>
+          <AdminMenu login={login}/>
         )}
       </S.MenuContainer>
     </S.HeaderContainer>

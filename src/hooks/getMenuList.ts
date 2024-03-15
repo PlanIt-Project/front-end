@@ -1,8 +1,9 @@
 // TODO login, menuList type 지정 필요
 
+
 export class MenuFactory {
   public createMenuList(login: any) {
-    let menu: any = [];
+    let menu:any = [];
 
     if (login.user === "user") {
       menu = [
