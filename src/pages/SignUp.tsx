@@ -1,14 +1,28 @@
 import styled from "styled-components";
 import { CommonInput, CommonButton } from "../styles/globalStyles";
 import { LoginSignUpContainer } from "../styles/LoginSignUp.style";
+import { useState } from "react";
 
 export default function Login() {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [birth, setBirth] = useState<string>("");
+  const [number, setNumber] = useState<string>("");
+
   return (
     <SignUpContainer>
       <h1>SIGN UP</h1>
       <SignUpColumn>
         <p>Email</p>
-        <SignUpInput type="email" placeholder="Email" required></SignUpInput>
+        <SignUpInput
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        ></SignUpInput>
       </SignUpColumn>
       <CheckEmail>Email 인증</CheckEmail>
       <SignUpColumn>
@@ -17,6 +31,8 @@ export default function Login() {
           type="password"
           placeholder="영문,숫자 포함 8자리 이상"
           required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         ></SignUpInput>
       </SignUpColumn>
       <SignUpColumn>
@@ -25,11 +41,19 @@ export default function Login() {
           type="password"
           placeholder="영문,숫자 포함 8자리 이상"
           required
+          value={passwordConfirm}
+          onChange={(e) => setPasswordConfirm(e.target.value)}
         ></SignUpInput>
       </SignUpColumn>
       <SignUpColumn>
         <p>이름</p>
-        <SignUpInput type="text" placeholder="이름" required></SignUpInput>
+        <SignUpInput
+          type="text"
+          placeholder="이름"
+          required
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        ></SignUpInput>
       </SignUpColumn>
       <SignUpColumn>
         <p>출생년도</p>
@@ -37,6 +61,8 @@ export default function Login() {
           type="text"
           placeholder="8자리 입력"
           required
+          value={birth}
+          onChange={(e) => setBirth(e.target.value)}
         ></SignUpInput>
       </SignUpColumn>
       <SignUpColumn>
@@ -62,6 +88,8 @@ export default function Login() {
           type="text"
           placeholder="-없이 숫자만"
           required
+          value={number}
+          onChange={(e) => setNumber(e.target.value)}
         ></SignUpInput>
       </SignUpColumn>
       <SignUpButton>회원가입</SignUpButton>
