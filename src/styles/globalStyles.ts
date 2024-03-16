@@ -24,6 +24,8 @@ export const GlobalStyles = createGlobalStyle`
         --white-color-600: #bdbdbd;
         --white-color-700: #b5b5b5;
         --white-color-800: #000;
+
+        --background-color-100: #EBEFFF;
     }
 
     @font-face {
