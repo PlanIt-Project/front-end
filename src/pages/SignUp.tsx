@@ -11,6 +11,16 @@ export default function Login() {
   const [birth, setBirth] = useState<string>("");
   const [number, setNumber] = useState<string>("");
 
+  const handleSignUp = () => {
+    if (password !== passwordConfirm) {
+      alert("비밀번호가 일치하지 않습니다");
+    }
+    if (!email || !password || !name || !birth || !number) {
+      alert("모든 항목을 입력해주세요");
+    }
+    // TO DO signup api 추가
+  };
+
   return (
     <SignUpContainer>
       <h1>SIGN UP</h1>
@@ -20,7 +30,9 @@ export default function Login() {
           type="email"
           placeholder="Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
           required
         ></SignUpInput>
       </SignUpColumn>
@@ -32,7 +44,9 @@ export default function Login() {
           placeholder="영문,숫자 포함 8자리 이상"
           required
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
         ></SignUpInput>
       </SignUpColumn>
       <SignUpColumn>
@@ -42,7 +56,9 @@ export default function Login() {
           placeholder="영문,숫자 포함 8자리 이상"
           required
           value={passwordConfirm}
-          onChange={(e) => setPasswordConfirm(e.target.value)}
+          onChange={(e) => {
+            setPasswordConfirm(e.target.value);
+          }}
         ></SignUpInput>
       </SignUpColumn>
       <SignUpColumn>
@@ -52,7 +68,9 @@ export default function Login() {
           placeholder="이름"
           required
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
         ></SignUpInput>
       </SignUpColumn>
       <SignUpColumn>
@@ -62,7 +80,9 @@ export default function Login() {
           placeholder="8자리 입력"
           required
           value={birth}
-          onChange={(e) => setBirth(e.target.value)}
+          onChange={(e) => {
+            setBirth(e.target.value);
+          }}
         ></SignUpInput>
       </SignUpColumn>
       <SignUpColumn>
@@ -89,10 +109,12 @@ export default function Login() {
           placeholder="-없이 숫자만"
           required
           value={number}
-          onChange={(e) => setNumber(e.target.value)}
+          onChange={(e) => {
+            setNumber(e.target.value);
+          }}
         ></SignUpInput>
       </SignUpColumn>
-      <SignUpButton>회원가입</SignUpButton>
+      <SignUpButton onClick={handleSignUp}>회원가입</SignUpButton>
     </SignUpContainer>
   );
 }
