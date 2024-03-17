@@ -40,6 +40,7 @@ export const ManageBox = styled.div`
   height: 70vh;
   display: flex;
   flex-direction: column;
+  padding-bottom: 30px;
 `;
 
 export const NameBar = styled.div`
@@ -61,6 +62,7 @@ export const Name = styled.span`
 export const ContentContainer = styled.ul`
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 `;
 
 export const ContentBar = styled.li`
@@ -68,7 +70,7 @@ export const ContentBar = styled.li`
   grid-template-columns: repeat(6, 1fr);
   justify-items: center;
   align-items: center;
-  padding: 10px 0;
+  padding: 15px 0;
 `;
 export const Content = styled.span`
   font-size: var(--font-size-500);
