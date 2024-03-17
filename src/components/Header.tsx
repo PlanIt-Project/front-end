@@ -1,35 +1,31 @@
 import * as S from "../styles/Header.styles";
 import Logo from "../assets/img_logo.png";
-import { getMenuList } from "../hooks/getMenuList";
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router";
+import AdminMenu from "./menu/AdminMenu";
+import Menu from "./menu/Menu";
 
 export default function Header() {
-  const [login] = useState({ user: "user" });
+  const [login, setLogin] = useState({ user: "user" });
+  const locationObject = useLocation();
 
-  const menuList = getMenuList(login);
-  const navigate = useNavigate();
-
-  const handleMoveToMenu = (path: string) => {
-    navigate(path);
-  };
-
+  // 로그인 구현 전에 임시로 만든 코드입니다.
+  useEffect(() => {
+    if (locationObject.pathname.includes("admin")) {
+      setLogin({ user: "admin" });
+    }
+  }, []);
   return (
     <S.HeaderContainer>
       <S.LogoContainer>
         <img src={Logo} alt="로고" />
       </S.LogoContainer>
       <S.MenuContainer>
-        {menuList.map((menu: any, index: number) => (
-          <S.Menu
-            key={index}
-            onClick={() => {
-              handleMoveToMenu(menu.path);
-            }}
-          >
-            {menu.label}
-          </S.Menu>
-        ))}
+        {login.user !== "admin" ? (
+          <Menu login={login}/>
+        ) : (
+          <AdminMenu login={login}/>
+        )}
       </S.MenuContainer>
     </S.HeaderContainer>
   );

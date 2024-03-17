@@ -1,13 +1,16 @@
 // TODO login, menuList type 지정 필요
 
-export class MenuFactory {
-  baseMenu = [{ label: "PlanIt?", path: "/about" }];
 
+export class MenuFactory {
   public createMenuList(login: any) {
-    let menu: any = [];
+    let menu:any = [];
 
     if (login.user === "user") {
       menu = [
+        { 
+          label: "PlanIt?", 
+          path: "/about" 
+        },
         {
           label: "이용권",
           path: "/user/ticket",
@@ -21,6 +24,10 @@ export class MenuFactory {
 
     if (login.user === "trainer") {
       menu = [
+        { 
+          label: "PlanIt?", 
+          path: "/about" 
+        },
         {
           label: "스케줄",
           path: "/trainer/schedule",
@@ -42,10 +49,22 @@ export class MenuFactory {
           label: "배너 관리",
           path: "/admin/banner",
         },
+        {
+          label: "상품 관리",
+          path: "/admin/product",
+        },
+        {
+          label: "이용권 관리",
+          path: "/admin/program",
+        },
+        {
+          label: "승인 요청 관리",
+          path: "/admin/admit-request",
+        },
       ];
     }
 
-    return [...this.baseMenu, ...menu];
+    return [...menu];
   }
 }
 
