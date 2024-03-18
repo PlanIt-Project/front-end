@@ -28,15 +28,15 @@ export default function Product() {
               <S.SelectOption>판매중지</S.SelectOption>
             </S.SelectButton>
 
-          <S.MakeButton
-            onClick={() => {
-              onClickMakeButton();
-            }}
-          >
-            상품추가
-          </S.MakeButton>
+            <S.MakeButton
+              onClick={() => {
+                onClickMakeButton();
+              }}
+            >
+              상품추가
+            </S.MakeButton>
           </S.ButtonContainer>
-          
+
           <ProductBox />
         </S.AdminContent>
       </S.AdminContainer>
