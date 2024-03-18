@@ -139,3 +139,59 @@ export const PRODUCT_CONTENTS = [
     saleOrNot: "판매중지",
   },
 ];
+
+export const ACCOUNT_NAMES = [
+  {
+    id: 1,
+    value: "id",
+  },
+  {
+    id: 2,
+    value: "이름",
+  },
+  {
+    id: 3,
+    value: "이메일",
+  },
+  {
+    id: 4,
+    value: "출생년도",
+  },
+  {
+    id: 5,
+    value: "휴대폰 번호",
+  },
+  {
+    id: 6,
+    value: "성별",
+  },
+  {
+    id: 7,
+    value: "권한",
+  },
+  {
+    id: 8,
+    value: "계정권한",
+  },
+];
+
+export const ACCOUNT_CONTENTS = [
+  {
+    id: 1,
+    name: "홍길동",
+    emailId: "abc@abc.com",
+    birthday: "2000.01.01",
+    phoneNumber: "010-1111-1111",
+    gender: "남",
+    permission: "유저",
+  },
+  {
+    id: 2,
+    name: "길동홍",
+    emailId: "abc@abc.com",
+    birthday: "2000.01.01",
+    phoneNumber: "010-1111-1111",
+    gender: "여",
+    permission: "트레이너",
+  },
+]

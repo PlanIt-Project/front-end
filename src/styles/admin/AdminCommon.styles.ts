@@ -43,12 +43,12 @@ export const ManageBox = styled.div`
   padding-bottom: 30px;
 `;
 
-export const NameBar = styled.div`
+export const NameBar = styled.div<{ $nameNumber?: number }>`
   background-color: var(--main-color-300);
   color: white;
   border-radius: 20px 20px 0 0;
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: ${props => props.$nameNumber ? `repeat(${props.$nameNumber}, 1fr)` : `repeat(7, 1fr)`};
   justify-items: center;
   align-items: center;
   margin-top: 30px;
@@ -69,9 +69,9 @@ export const ContentContainer = styled.ul`
   }
 `;
 
-export const ContentBar = styled.li`
+export const ContentBar = styled.li<{ $nameNumber?: number }>`
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: ${props => props.$nameNumber ? `repeat(${props.$nameNumber}, 1fr)` : `repeat(7, 1fr)`};
   justify-items: center;
   align-items: center;
   width: 1020px;
