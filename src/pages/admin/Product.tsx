@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as S from "../../styles/admin/Product.styles";
+import * as S from "../../styles/admin/AdminCommon.styles";
 import ProductBox from "../../components/admin/ProductBox";
 import ProductModal from "../../components/admin/ProductModal";
 

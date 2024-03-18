@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import * as S from "../../styles/admin/Product.styles";
+import * as S from "../../styles/admin/AdminModal.styles";
 import CommonSelectBox from "../../components/CommonSelectBox";
 import { IProductModal } from "../../types/admin/Product.types";
 

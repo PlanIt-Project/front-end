@@ -3,7 +3,7 @@ import {
   PRODUCT_CONTENTS,
   PRODUCT_NAMES,
 } from "../../constants/Admin.constants";
-import * as S from "../../styles/admin/Product.styles";
+import * as S from "../../styles/admin/AdminCommon.styles";
 import ProductModal from "./ProductModal";
 
 export default function ProductBox() {
