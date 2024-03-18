@@ -9,6 +9,7 @@ const type = [
 ];
 
 export default function ProductModal({ setOnModal,isModify }: IProductModal) {
+// TODO zustand로 수정, 등록시에 isModify 관리, react-hook-form 사용
   const [boxOpen, setBoxOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("패키지");
   const TypeSelectRef = useRef<HTMLDivElement>(null);
