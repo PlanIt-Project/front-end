@@ -20,7 +20,7 @@ import AdminRoute from "./AdminRoute";
 import Layout from "../components/Layout";
 import Product from "../pages/admin/Product";
 import Program from "../pages/admin/Program";
-import AdmitRequest from "../pages/admin/AdmitRequest";
+import AdminRequest from "../pages/admin/AdminRequest";
 
 export const router = createBrowserRouter([
   {
@@ -66,7 +66,7 @@ export const router = createBrowserRouter([
               { path: "/admin/banner", element: <Banner /> },
               { path: "/admin/product", element: <Product /> },
               { path: "/admin/program", element: <Program /> },
-              { path: "/admin/admit-request", element: <AdmitRequest /> },
+              { path: "/admin/adminRequest", element: <AdminRequest /> },
             ],
           },
         ],
