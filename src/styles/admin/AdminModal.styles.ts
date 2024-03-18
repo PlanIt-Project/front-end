@@ -115,3 +115,5 @@ export const ModalButton = styled(CommonButton)`
     background-color: var(--main-color-300);
   }
 `;
+
+
