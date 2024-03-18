@@ -63,12 +63,12 @@ export default function ProductModal({ setOnModal,isModify }: IProductModal) {
         <S.ModalContent>
           <S.ContentName>가격</S.ContentName>
           <S.InputContainer>
-            <S.ContentInput $width={250} />
+            <S.ContentInput $width={250} placeholder="100000"/>
             <S.InputText>원</S.InputText>
           </S.InputContainer>
         </S.ModalContent>
         <S.ButtonContainer>
-          <S.ModalButton>등록</S.ModalButton>
+          <S.ModalButton>{isModify ? "수정" : "등록"}</S.ModalButton>
           <S.ModalButton
             onClick={() => {
               onClickClose();
