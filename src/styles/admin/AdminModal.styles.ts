@@ -16,10 +16,10 @@ export const Overlay = styled.div`
 
 export const Modal = styled.div`
   width: 550px;
-  height: 500px;
+  height: fit-content;
   background: var(--background-color-100);
   border-radius: 20px;
-  padding-top: 50px;
+  padding: 50px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,3 +87,5 @@ export const ModalButton = styled(CommonButton)`
     background-color: var(--main-color-300);
   }
 `;
+
+

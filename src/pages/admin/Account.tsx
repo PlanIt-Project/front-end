@@ -1,3 +1,13 @@
+import AccountBox from "../../components/admin/AccountBox";
+import * as S from "../../styles/admin/AdminCommon.styles";
+
 export default function Account() {
-  return <div>신규 계정관리</div>;
+  return <>
+  <S.AdminContainer>
+    <S.AdminContent>
+      <S.Title>신규 계정 관리</S.Title>
+      <AccountBox />
+    </S.AdminContent>
+  </S.AdminContainer>
+</>;
 }
