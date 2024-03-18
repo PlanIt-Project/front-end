@@ -15,6 +15,7 @@ export default function Header() {
       setLogin({ user: "admin" });
     }
   }, []);
+
   return (
     <S.HeaderContainer>
       <S.LogoContainer>
@@ -22,9 +23,9 @@ export default function Header() {
       </S.LogoContainer>
       <S.MenuContainer>
         {login.user !== "admin" ? (
-          <Menu login={login}/>
+          <Menu login={login} />
         ) : (
-          <AdminMenu login={login}/>
+          <AdminMenu login={login} />
         )}
       </S.MenuContainer>
     </S.HeaderContainer>

@@ -2,12 +2,9 @@ import { getMenuList } from "../../hooks/getMenuList";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import * as S from "../../styles/menu/Menu.styles";
+import { ILogin } from "../../types/Login.types";
 
-interface Ilogin {
-  login: { user: string };
-}
-
-export default function Menu({ login }: Ilogin) {
+export default function Menu({ login }: { login: ILogin }) {
   const [onMenu, setonMenu] = useState<boolean>(false);
   const menuList = getMenuList(login);
   const navigate = useNavigate();
@@ -15,9 +12,11 @@ export default function Menu({ login }: Ilogin) {
   const handleMoveToMenu = (path: string) => {
     navigate(path);
   };
+
   const handleMenu = () => {
     setonMenu(!onMenu);
   };
+
   return (
     <>
       {menuList.map((menu: any, index: number) => (
