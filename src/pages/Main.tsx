@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { setVH } from "../utils/setVH";
 import { throttle } from "../utils/throttle";
 import { dragFn } from "../utils/dragFn";
+import { getBannerList } from "../hooks/queries/getBannerList";
 
 export default function Main() {
   const trainerList = [
@@ -19,6 +20,12 @@ export default function Main() {
   const [startX, setStartX] = useState(0);
 
   const trainerScrollRef = useRef<HTMLDivElement>(null);
+
+  const list = getBannerList();
+
+  useEffect(() => {
+    console.log("list", list);
+  }, []);
 
   useEffect(() => {
     window.addEventListener("resize", setVH);
