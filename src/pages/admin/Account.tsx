@@ -5,7 +5,7 @@ export default function Account() {
   return <>
   <S.AdminContainer>
     <S.AdminContent>
-      <S.Title>신규 계정 관리</S.Title>
+      <S.Title>계정 관리</S.Title>
       <AccountBox />
     </S.AdminContent>
   </S.AdminContainer>
