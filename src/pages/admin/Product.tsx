@@ -1,9 +1,7 @@
-import {useState } from "react";
+import { useState } from "react";
 import * as S from "../../styles/admin/Product.styles";
 import ProductBox from "../../components/admin/ProductBox";
 import ProductModal from "../../components/admin/ProductModal";
-
-
 
 export default function Product() {
   const [onModal, setOnModal] = useState(false);
@@ -27,10 +25,7 @@ export default function Product() {
           <ProductBox />
         </S.AdminContent>
       </S.AdminContainer>
-      {onModal && (
-        <ProductModal setOnModal={setOnModal} isModify={false}/>
-        
-      )}
+      {onModal && <ProductModal setOnModal={setOnModal} isModify={false} />}
     </>
   );
 }

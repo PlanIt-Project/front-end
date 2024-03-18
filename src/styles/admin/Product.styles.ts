@@ -126,6 +126,7 @@ export const ModalContent = styled.div`
   width: 100%;
   margin-left: 80px;
 `;
+
 export const ContentName = styled.span`
   font-size: var(--font-size-400);
 `;
@@ -146,26 +147,29 @@ export const ContentInput = styled.input<{
     color: var(--white-color-700);
     font-size: var(--font-size-600);
     font-weight: 600;
-  };
+  }
   &:focus {
     outline: none;
-    outline: 1px solid var(--main-color-500);;
-  };
+    outline: 1px solid var(--main-color-500);
+  }
 `;
 
 export const InputText = styled.span`
   font-size: var(--font-size-500);
 `;
+
 export const InputContainer = styled.div`
   width: 300px;
   display: flex;
   align-items: center;
   gap: 5px;
 `;
+
 export const ButtonContainer = styled.div`
   display: flex;
   gap: 100px;
-`
+`;
+
 export const ModalButton = styled(CommonButton)`
   color: white;
   width: 100px;

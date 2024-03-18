@@ -44,7 +44,7 @@ export default function ProductBox() {
           ))}
         </S.ContentContainer>
       </S.ManageBox>
-      {onModal && <ProductModal setOnModal={setOnModal} isModify={true}/>}
+      {onModal && <ProductModal setOnModal={setOnModal} isModify={true} />}
     </>
   );
 }

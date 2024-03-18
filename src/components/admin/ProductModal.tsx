@@ -8,8 +8,8 @@ const type = [
   { label: "이용권", value: "이용권" },
 ];
 
-export default function ProductModal({ setOnModal,isModify }: IProductModal) {
-// TODO zustand로 수정, 등록시에 isModify 관리, react-hook-form 사용
+export default function ProductModal({ setOnModal, isModify }: IProductModal) {
+  // TODO zustand로 수정, 등록시에 isModify 관리, react-hook-form 사용
   const [boxOpen, setBoxOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("패키지");
   const TypeSelectRef = useRef<HTMLDivElement>(null);
@@ -18,11 +18,11 @@ export default function ProductModal({ setOnModal,isModify }: IProductModal) {
     setOnModal(false);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (isModify) {
-        console.log("modify")
+      console.log("modify");
     }
-  },[])
+  }, []);
   return (
     <S.Overlay>
       <S.Modal>
@@ -64,7 +64,7 @@ export default function ProductModal({ setOnModal,isModify }: IProductModal) {
         <S.ModalContent>
           <S.ContentName>가격</S.ContentName>
           <S.InputContainer>
-            <S.ContentInput $width={250} placeholder="100000"/>
+            <S.ContentInput $width={250} placeholder="100000" />
             <S.InputText>원</S.InputText>
           </S.InputContainer>
         </S.ModalContent>
