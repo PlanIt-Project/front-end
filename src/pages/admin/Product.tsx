@@ -13,6 +13,7 @@ export default function Product() {
   const [boxOpen, setBoxOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("패키지");
   const TypeSelectRef = useRef<HTMLDivElement>(null);
+
   const onClickMakeButton = () => {
     setOnModal(!onModal);
   };

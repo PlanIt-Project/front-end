@@ -15,9 +15,11 @@ export default function Menu({ login }: Ilogin) {
   const handleMoveToMenu = (path: string) => {
     navigate(path);
   };
+
   const handleMenu = () => {
     setonMenu(!onMenu);
   };
+
   return (
     <>
       {menuList.map((menu: any, index: number) => (
