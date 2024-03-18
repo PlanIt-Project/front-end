@@ -48,7 +48,7 @@ export const NameBar = styled.div`
   color: white;
   border-radius: 20px 20px 0 0;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   justify-items: center;
   align-items: center;
   margin-top: 30px;
@@ -63,18 +63,25 @@ export const ContentContainer = styled.ul`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const ContentBar = styled.li`
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   justify-items: center;
   align-items: center;
+  width: 1020px;
   padding: 15px 0;
 `;
+
 export const Content = styled.span`
-  font-size: var(--font-size-500);
+  font-size: var(--font-size-600);
 `;
+
 export const ModifyButton = styled(CommonButton)`
   width: 80px;
   height: 20px;

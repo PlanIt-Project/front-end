@@ -21,6 +21,10 @@ export const PRODUCT_NAMES = [
     },
     {
       id: 6,
+      value: "판매 여부",
+    },
+    {
+      id: 7,
       value: "상품수정",
     },
   ];
