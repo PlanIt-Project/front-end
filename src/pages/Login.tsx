@@ -3,6 +3,7 @@ import { CommonInput, CommonButton } from "../styles/globalStyles";
 import { useNavigate } from "react-router";
 import { LoginSignUpContainer } from "../styles/LoginSignUp.style";
 import { useState, ChangeEvent } from "react";
+import { LoginService } from "../api/services/Main.services";
 
 export default function Login() {
   const [email, setEmail] = useState<string>("abcd");
@@ -28,6 +29,10 @@ export default function Login() {
     }
   };
 
+  const handleLogin = async () => {
+    const res = await LoginService({ email, password });
+  };
+
   return (
     <LoginPageContainer>
       <h1>LOGIN</h1>
@@ -49,7 +54,7 @@ export default function Login() {
         onChange={handleChange}
         value={password}
       ></CommonInput>
-      <LoginButton>로그인</LoginButton>
+      <LoginButton onClick={handleLogin}>로그인</LoginButton>
       <p onClick={goToSignUp}>회원가입</p>
     </LoginPageContainer>
   );
