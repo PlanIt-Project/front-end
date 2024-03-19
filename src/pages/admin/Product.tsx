@@ -39,6 +39,12 @@ export default function Product() {
 
           <ProductBox />
         </S.AdminContent>
+        <Pagenation
+          page={page}
+          totalPage={10}
+          setPage={setPage}
+          name={"admin/product"}
+        />
       </S.AdminContainer>
       {onModal && <ProductModal setOnModal={setOnModal} />}
     </>

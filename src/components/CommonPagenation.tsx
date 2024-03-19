@@ -20,14 +20,14 @@ export default function Pagenation({
   const [currPage, setCurrPage] = useState<number>(page);
   const navigate = useNavigate();
 
-  let firstNum = currPage - (currPage % 5) + 1;
-
+  const firstNum = currPage - (((currPage - 1) % 5) + 1) + 1;
+  console.log(firstNum)
   return (
     <Container>
       <Button
         onClick={() => {
           setPage(page - 1);
-          setCurrPage(page - 2);
+          setCurrPage(page - 1);
           navigate(`/${name}/${page - 1}`);
         }}
         disabled={page === 1}
@@ -51,12 +51,12 @@ export default function Pagenation({
       <Button
         onClick={() => {
           setPage(page + 1);
-          setCurrPage(page);
+          setCurrPage(page+1);
           navigate(`/${name}/${page + 1}`);
         }}
         disabled={page === totalPage}
       >
-        <Svg src={leftArrow}/>
+        <Svg src={rightArrow}/>
       </Button>
     </Container>
   );
@@ -85,8 +85,9 @@ const Button = styled.button<{ $current?: string | null }>`
   &:hover {
     background-color: #919eab;
     color: #c4cdd5;
-    border: none;
   }
 `;
 
-const Svg = styled.img``
+const Svg = styled.img`
+    width: 9px;
+`
