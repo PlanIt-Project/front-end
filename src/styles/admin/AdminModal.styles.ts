@@ -37,6 +37,7 @@ export const ModalContent = styled.div`
 
 export const ContentName = styled.span`
   font-size: var(--font-size-400);
+  font-weight: 600;
 `;
 
 export const ContentInput = styled.input<{

@@ -29,7 +29,7 @@ export default function Product() {
           <ProductBox />
         </S.AdminContent>
       </S.AdminContainer>
-      {onModal && <ProductModal setOnModal={setOnModal} isModify={false} />}
+      {onModal && <ProductModal setOnModal={setOnModal} />}
     </>
   );
 }

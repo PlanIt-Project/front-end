@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import * as S from "../../styles/admin/AdminModal.styles";
 import CommonSelectBox from "../../components/CommonSelectBox";
 import { IProductModal } from "../../types/admin/Product.types";
@@ -8,8 +8,8 @@ const type = [
   { label: "이용권", value: "이용권" },
 ];
 
-export default function ProductModal({ setOnModal, isModify }: IProductModal) {
-  // TODO zustand로 수정, 등록시에 isModify 관리, react-hook-form 사용
+export default function ProductModal({ setOnModal }: IProductModal) {
+  // TODO react-hook-form 사용
   const [boxOpen, setBoxOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("패키지");
   const TypeSelectRef = useRef<HTMLDivElement>(null);
@@ -18,11 +18,6 @@ export default function ProductModal({ setOnModal, isModify }: IProductModal) {
     setOnModal(false);
   };
 
-  useEffect(() => {
-    if (isModify) {
-      console.log("modify");
-    }
-  }, []);
   return (
     <S.Overlay>
       <S.Modal>
@@ -69,7 +64,7 @@ export default function ProductModal({ setOnModal, isModify }: IProductModal) {
           </S.InputContainer>
         </S.ModalContent>
         <S.ButtonContainer>
-          <S.ModalButton>{isModify ? "수정" : "등록"}</S.ModalButton>
+          <S.ModalButton>등록</S.ModalButton>
           <S.ModalButton
             onClick={() => {
               onClickClose();
