@@ -76,6 +76,10 @@ export const ContentBar = styled.li<{ $nameNumber?: number }>`
   align-items: center;
   width: 1020px;
   padding: 15px 0;
+  &:hover{
+    background-color: var(--main-color-200);
+    cursor: pointer;
+  }
 `;
 
 export const Content = styled.span`
