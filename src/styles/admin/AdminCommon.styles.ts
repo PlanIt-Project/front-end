@@ -3,7 +3,9 @@ import { CommonButton } from "../globalStyles";
 
 export const AdminContainer = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 `;
 
 export const AdminContent = styled.div`
