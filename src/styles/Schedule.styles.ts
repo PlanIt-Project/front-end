@@ -251,3 +251,59 @@ export const Time = styled.div<{ $disabled: boolean; $isSelected: boolean }>`
     height: 120%;
   }
 `;
+
+export const ReservationGridContainer = styled.div`
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 20px;
+  row-gap: 50px;
+  padding: 10px;
+
+  @media screen and (max-width: ${breakPoints.medium}px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+`;
+
+export const ReservationGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: calc(100% - 40px);
+  height: 200px;
+  padding: 10px;
+  border: 1px solid var(--main-color-500);
+  border-radius: 10px;
+`;
+
+export const ReservationTitle = styled.div`
+  font-size: var(--font-size-400);
+  font-weight: 700;
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    font-size: var(--font-size-500);
+  }
+`;
+
+export const ReservationContents = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--font-size-600);
+
+  > span {
+    &.strong {
+      font-weight: 700;
+    }
+  }
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    font-size: var(--font-size-700);
+  }
+`;
