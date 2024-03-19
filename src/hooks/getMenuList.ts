@@ -30,7 +30,7 @@ class AdminMenuFactory implements MenuFactory {
       { label: "계정 관리", path: "/admin/account" },
       { label: "트레이너 관리", path: "/admin/trainer" },
       { label: "배너 관리", path: "/admin/banner" },
-      { label: "상품 관리", path: "/admin/product" },
+      { label: "상품 관리", path: "/admin/product/1" },
       { label: "이용권 관리", path: "/admin/program" },
       { label: "승인 요청 관리", path: "/admin/adminRequest" },
     ];
