@@ -1,19 +1,23 @@
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import styled from "styled-components";
 
 export default function TabMenu() {
-  const [currentTab, setCurrentTab] = useState("/trainer/reservation");
-
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [currentTab, setCurrentTab] = useState(location.pathname);
+
+  useEffect(() => {
+    setCurrentTab(location.pathname);
+  }, [location.pathname]);
+
   const handleTab = (e: MouseEvent<HTMLButtonElement>) => {
     const target = e.target as HTMLButtonElement;
-    setCurrentTab(target.value);
+    const newPath = target.value;
 
-    if (location.pathname !== target.value) {
-      navigate(target.value);
+    if (location.pathname !== newPath) {
+      navigate(newPath);
     }
   };
 
