@@ -2,14 +2,19 @@ import styled from "styled-components";
 import { CommonInput, CommonButton } from "../styles/globalStyles";
 import { LoginSignUpContainer } from "../styles/LoginSignUp.style";
 import { useState } from "react";
+import { SignUpService } from "../api/services/Login.services";
+import { useNavigate } from "react-router";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordConfirm, setPasswordConfirm] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [birth, setBirth] = useState<string>("");
   const [number, setNumber] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
 
   const handleSignUp = () => {
     if (password !== passwordConfirm) {
@@ -19,6 +24,10 @@ export default function Login() {
       alert("모든 항목을 입력해주세요");
     }
     // TO DO signup api 추가
+    (async () => {
+      await SignUpService({ email, password, name, birth, number, address });
+    })();
+    navigate("/login");
   };
 
   return (
@@ -114,6 +123,18 @@ export default function Login() {
           }}
         ></SignUpInput>
       </SignUpColumn>
+      <SignUpColumn>
+        <p>주소</p>
+        <SignUpInput
+          type="text"
+          placeholder="주소를 입력해 주세요"
+          required
+          value={address}
+          onChange={(e) => {
+            setAddress(e.target.value);
+          }}
+        ></SignUpInput>
+      </SignUpColumn>
       <SignUpButton onClick={handleSignUp}>회원가입</SignUpButton>
     </SignUpContainer>
   );
@@ -135,6 +156,7 @@ const SignUpButton = styled(CommonButton)`
 
 const SignUpInput = styled(CommonInput)`
   width: 300px;
+  color: black;
 `;
 
 const SignUpColumn = styled.div`
