@@ -25,9 +25,36 @@ export const Title = styled.h1`
   font-weight: 600;
 `;
 
-export const MakeButton = styled(CommonButton)`
+export const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
   align-self: flex-end;
+  gap: 80px;
   margin-right: 100px;
+`
+
+export const SelectButton = styled.select`
+  height: 55px;
+  width: 150px;
+  padding-left: 20px;
+  border-radius: 10px;
+  border: 1px solid var(--white-color-400);
+  font-size: var(--font-size-600);
+  font-weight: 600;
+  color: #595959;
+  &:focus{
+    outline: none;
+    outline: 2px solid var(--main-color-300);
+  }
+`
+export const SelectOption = styled.option`
+  font-weight: 600;
+  color: #595959;
+  height: 50px;
+`
+
+export const MakeButton = styled(CommonButton)`
+  
   color: white;
   width: 100px;
   font-size: var(--font-size-500);

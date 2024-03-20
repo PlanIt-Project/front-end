@@ -14,7 +14,7 @@ export const Overlay = styled.div`
   align-items: center;
 `;
 
-export const Modal = styled.div`
+export const Modal = styled.form`
   width: 550px;
   height: fit-content;
   background: var(--background-color-100);
@@ -24,6 +24,12 @@ export const Modal = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 40px;
+`;
+
+export const ModalTitle = styled.div`
+  font-size: var(--font-size-300);
+  font-weight: 600;
+  margin-bottom: 10px;
 `;
 
 export const ModalContent = styled.div`
@@ -55,7 +61,7 @@ export const ContentInput = styled.input<{
   ::placeholder {
     color: var(--white-color-700);
     font-size: var(--font-size-600);
-    font-weight: 600;
+    font-weight: 700;
   }
   &:focus {
     outline: none;
@@ -74,6 +80,27 @@ export const InputContainer = styled.div`
   gap: 5px;
 `;
 
+export const ContentSelect = styled.select`
+  height: 40px;
+  width: 290px;
+  padding-left: 20px;
+  border-radius: 30px;
+  border: 1px solid var(--main-color-400);
+  font-size: var(--font-size-600);
+  text-align: center;
+  background: none;
+  &:focus {
+    outline: none;
+    outline: 1px solid var(--main-color-500);
+  }
+`;
+
+export const ContentOption = styled.option`
+  font-weight: 600;
+  color: #595959;
+  height: 50px;
+`;
+
 export const ButtonContainer = styled.div`
   display: flex;
   gap: 100px;
@@ -88,5 +115,3 @@ export const ModalButton = styled(CommonButton)`
     background-color: var(--main-color-300);
   }
 `;
-
-
