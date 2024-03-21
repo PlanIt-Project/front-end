@@ -3,12 +3,13 @@ import { CommonInput, CommonButton } from "../styles/globalStyles";
 import { useNavigate } from "react-router";
 import { LoginSignUpContainer } from "../styles/LoginSignUp.style";
 import { useState, ChangeEvent } from "react";
+import { LoginService } from "../api/services/Login.services";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState<string>("abcd");
   const [password, setPassword] = useState<string>("dddd");
-
-  const navigate = useNavigate();
 
   const goToSignUp = () => {
     navigate("/signUp");
@@ -26,6 +27,20 @@ export default function Login() {
       default:
         break;
     }
+  };
+
+  const handleLogin = () => {
+    (async () => {
+      try {
+        const res = await LoginService({ email, password });
+        const { accessToken, refreshToken } = res;
+        localStorage.setItem("access", accessToken);
+        localStorage.setItem("refresh", refreshToken);
+        navigate("/main");
+      } catch (error) {
+        console.error("로그인 실패:", error);
+      }
+    })();
   };
 
   return (
@@ -49,7 +64,7 @@ export default function Login() {
         onChange={handleChange}
         value={password}
       ></CommonInput>
-      <LoginButton>로그인</LoginButton>
+      <LoginButton onClick={handleLogin}>로그인</LoginButton>
       <p onClick={goToSignUp}>회원가입</p>
     </LoginPageContainer>
   );
