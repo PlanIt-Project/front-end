@@ -64,7 +64,7 @@ export const router = createBrowserRouter([
               { path: "/admin/account", element: <Account /> },
               { path: "/admin/trainer", element: <Trainer /> },
               { path: "/admin/banner", element: <Banner /> },
-              { path: "/admin/product", element: <Product /> },
+              { path: "/admin/product/:pageId", element: <Product /> },
               { path: "/admin/program", element: <Program /> },
               { path: "/admin/adminRequest", element: <AdminRequest /> },
             ],
