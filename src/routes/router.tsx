@@ -40,7 +40,8 @@ export const router = createBrowserRouter([
             path: "/user",
             element: <UserRoute />,
             children: [
-              { path: "/user/ticket", element: <UserTicket /> },
+              { path: "/user/ticket/available", element: <UserTicket /> },
+              { path: "/user/ticket/expired", element: <UserTicket /> },
               { path: "/user/schedule", element: <UserSchedule /> },
               { path: "/user/reservation", element: <UserReservation /> },
               {
@@ -64,7 +65,7 @@ export const router = createBrowserRouter([
               { path: "/admin/account", element: <Account /> },
               { path: "/admin/trainer", element: <Trainer /> },
               { path: "/admin/banner", element: <Banner /> },
-              { path: "/admin/product", element: <Product /> },
+              { path: "/admin/product/:pageId", element: <Product /> },
               { path: "/admin/program", element: <Program /> },
               { path: "/admin/adminRequest", element: <AdminRequest /> },
             ],

@@ -7,7 +7,7 @@ class UserMenuFactory implements MenuFactory {
   public createMenuList() {
     return [
       { label: "PlanIt?", path: "/about" },
-      { label: "이용권", path: "/user/ticket" },
+      { label: "이용권", path: "/user/ticket/available" },
       { label: "스케줄", path: "/user/schedule" },
     ];
   }
@@ -27,10 +27,10 @@ class TrainerMenuFactory implements MenuFactory {
 class AdminMenuFactory implements MenuFactory {
   public createMenuList() {
     return [
-      { label: "신규 계정 관리", path: "/admin/account" },
+      { label: "계정 관리", path: "/admin/account" },
       { label: "트레이너 관리", path: "/admin/trainer" },
       { label: "배너 관리", path: "/admin/banner" },
-      { label: "상품 관리", path: "/admin/product" },
+      { label: "상품 관리", path: "/admin/product/1" },
       { label: "이용권 관리", path: "/admin/program" },
       { label: "승인 요청 관리", path: "/admin/adminRequest" },
     ];

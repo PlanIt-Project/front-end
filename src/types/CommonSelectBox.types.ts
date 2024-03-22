@@ -11,7 +11,7 @@ export interface ICommonSelectBoxProps {
   setIsSelectBoxOpen: Dispatch<SetStateAction<boolean>>;
   selectedOption: string;
   setSelectedOption: Dispatch<SetStateAction<string>>;
-  optionList: IOptionList[];
+  optionList: any[];
   width?: number;
   height?: number;
 }
