@@ -39,6 +39,7 @@ export const OptionContainer = styled.div<{
   display: flex;
   flex-direction: column;
   width: ${(props) => (props.$width ? `${props.$width}px` : "100%")};
+  padding: 5px 10px;
   border: 1px solid var(--main-color-500);
   border-top: none;
   border-radius: 0 0 10px 10px;

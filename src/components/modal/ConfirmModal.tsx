@@ -1,4 +1,4 @@
-import * as S from "../../styles/ConfirmModal.styles";
+import * as S from "../../styles/modal/ConfirmModal.styles";
 import { IConfirmModalProps } from "../../types/ConfirmModal.types";
 
 export default function ConfirmModal({
