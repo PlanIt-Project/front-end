@@ -9,7 +9,7 @@ export const HeaderContainer = styled.header`
   width: calc(100% - 20px);
   height: 80px;
   background-color: #f6ffff;
-  z-index: 2;
+  z-index: 100;
 `;
 
 export const LogoContainer = styled.div`
