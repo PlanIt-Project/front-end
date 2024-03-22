@@ -3,7 +3,7 @@ import * as S from "../../styles/admin/AdminCommon.styles";
 import ProductBox from "../../components/admin/ProductBox";
 import ProductModal from "../../components/admin/ProductModal";
 import { useParams } from "react-router-dom";
-import Pagenation from "../../components/CommonPagination";
+import Pagination from "../../components/CommonPagination";
 
 // TO DO, Modal과 Detail 컴포넌트로 분리
 // Modal은 등록 관련해서 사용
@@ -39,7 +39,7 @@ export default function Product() {
           
           <ProductBox />
         </S.AdminContent>
-        <Pagenation
+        <Pagination
           page={page}
           totalPage={10}
           setPage={setPage}

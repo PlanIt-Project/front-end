@@ -4,19 +4,19 @@ import styled from "styled-components";
 import leftArrow from "./../assets/svg/icon_small-left-arrow.svg"
 import rightArrow from "./../assets/svg/icon_small-right-arrow.svg"
 
-interface IPagenation {
+interface IPagination {
   page: number;
   totalPage: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
   name: string;
 }
 
-export default function Pagenation({
+export default function Pagination({
   page,
   totalPage,
   setPage,
   name,
-}: IPagenation) {
+}: IPagination) {
   const [currPage, setCurrPage] = useState<number>(page);
   const navigate = useNavigate();
 
