@@ -39,7 +39,7 @@ export default function Product() {
 
           <ProductBox />
         </S.AdminContent>
-        <Pagenation
+        <Pagination
           page={page}
           totalPage={10}
           setPage={setPage}
