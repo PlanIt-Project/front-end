@@ -7,7 +7,7 @@ class UserMenuFactory implements MenuFactory {
   public createMenuList() {
     return [
       { label: "PlanIt?", path: "/about" },
-      { label: "이용권", path: "/user/ticket" },
+      { label: "이용권", path: "/user/ticket/available" },
       { label: "스케줄", path: "/user/schedule" },
     ];
   }

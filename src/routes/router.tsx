@@ -40,7 +40,8 @@ export const router = createBrowserRouter([
             path: "/user",
             element: <UserRoute />,
             children: [
-              { path: "/user/ticket", element: <UserTicket /> },
+              { path: "/user/ticket/available", element: <UserTicket /> },
+              { path: "/user/ticket/expired", element: <UserTicket /> },
               { path: "/user/schedule", element: <UserSchedule /> },
               { path: "/user/reservation", element: <UserReservation /> },
               {
