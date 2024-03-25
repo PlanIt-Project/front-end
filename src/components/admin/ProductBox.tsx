@@ -3,26 +3,34 @@ import {
   PRODUCT_CONTENTS,
   PRODUCT_NAMES,
 } from "../../constants/Admin.constants";
-import * as S from "../../styles/admin/Product.styles";
-import ProductModal from "./ProductModal";
+import * as S from "../../styles/admin/AdminCommon.styles";
+import ProductDetail from "./ProductDetail";
 
 export default function ProductBox() {
-  const [onModal, setOnModal] = useState(false);
-
-  const onClickModifyButton = () => {
-    setOnModal(!onModal);
+  const [onDetail, setOnDetail] = useState<boolean>(false);
+  const [detailId, setDetailId] = useState<number>(0);
+  const onClickModifyButton = (id:number) => {
+    setOnDetail(!onDetail);
+    setDetailId(id);
   };
+
   return (
     <>
       <S.ManageBox>
-        <S.NameBar>
+        <S.NameBar $nameNumber={6}>
           {PRODUCT_NAMES.map((name) => (
             <S.Name key={name.id}>{name.value}</S.Name>
           ))}
         </S.NameBar>
         <S.ContentContainer>
           {PRODUCT_CONTENTS.map((content) => (
-            <S.ContentBar key={content.id}>
+            <S.ContentBar
+              key={content.id}
+              $nameNumber={6}
+              onClick={() => {
+                onClickModifyButton(content.id);
+              }}
+            >
               <S.Content key={"id"}>{content.id}</S.Content>
               <S.Content key={"name"}>{content.name}</S.Content>
               <S.Content key={"type"}>{content.type}</S.Content>
@@ -33,18 +41,11 @@ export default function ProductBox() {
               </S.Content>
               <S.Content key={"price"}>{content.price} 원</S.Content>
               <S.Content key={"saleOrNot"}>{content.saleOrNot}</S.Content>
-              <S.ModifyButton
-                onClick={() => {
-                  onClickModifyButton();
-                }}
-              >
-                수정
-              </S.ModifyButton>
             </S.ContentBar>
           ))}
         </S.ContentContainer>
       </S.ManageBox>
-      {onModal && <ProductModal setOnModal={setOnModal} isModify={true} />}
+      {onDetail && <ProductDetail setOnDetail={setOnDetail} id={detailId}/>}
     </>
   );
 }
