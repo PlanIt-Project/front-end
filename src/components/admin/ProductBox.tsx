@@ -46,6 +46,7 @@ export default function ProductBox() {
         </S.ContentContainer>
       </S.ManageBox>
       {onDetail && <ProductDetail setOnDetail={setOnDetail} id={detailId}/>}
+      
     </>
   );
 }

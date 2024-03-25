@@ -59,6 +59,8 @@ export const MakeButton = styled(CommonButton)`
   width: 100px;
   font-size: var(--font-size-500);
   background-color: var(--main-color-400);
+  align-self: flex-end;
+  margin-right: 120px;
   &:hover {
     background-color: var(--main-color-300);
   }
