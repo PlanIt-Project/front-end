@@ -3,13 +3,15 @@ import { CommonInput, CommonButton } from "../styles/globalStyles";
 import { useNavigate } from "react-router";
 import { LoginSignUpContainer } from "../styles/LoginSignUp.style";
 import { useState, ChangeEvent } from "react";
-import { LoginService } from "../api/services/Login.services";
+import { getLogin } from "../hooks/queries/login/getLogin";
 
 export default function Login() {
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState<string>("abcd");
   const [password, setPassword] = useState<string>("dddd");
+
+  const { mutate: loginMutate } = getLogin(email, password);
+
+  const navigate = useNavigate();
 
   const goToSignUp = () => {
     navigate("/signUp");
@@ -30,17 +32,8 @@ export default function Login() {
   };
 
   const handleLogin = () => {
-    (async () => {
-      try {
-        const res = await LoginService({ email, password });
-        const { accessToken, refreshToken } = res;
-        localStorage.setItem("access", accessToken);
-        localStorage.setItem("refresh", refreshToken);
-        navigate("/main");
-      } catch (error) {
-        console.error("로그인 실패:", error);
-      }
-    })();
+    loginMutate();
+    navigate("/main");
   };
 
   return (
