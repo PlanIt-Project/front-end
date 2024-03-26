@@ -1,25 +1,67 @@
 import * as S from "../../styles/modal/TicketRegisterModal.styles";
-import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import CommonSelectBox from "../CommonSelectBox";
+import { getTicketList } from "../../hooks/queries/ticket/getTicketList";
+import { ITicketContent } from "../../types/ticket/TicketList.types";
+import { getTrainerList } from "../../hooks/queries/ticket/getTrainerList";
+import { ITrainerContent } from "../../types/ticket/TrainerList.types";
+import dayjs from "dayjs";
+import { registerProgram } from "../../hooks/queries/ticket/registerProgram";
 
 interface ITicketRegisterModalProps {
   setIsRegisterModalOpen: Dispatch<SetStateAction<boolean>>;
+  setIsToastOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function TicketRegisterModal({
   setIsRegisterModalOpen,
+  setIsToastOpen,
 }: ITicketRegisterModalProps) {
   const [isProductSelectBoxOpen, setIsProductSelectBoxOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState("");
-  const [productList] = useState([{ value: "1", label: "테스트" }]);
+  const [selectedProduct, setSelectedProduct] = useState<number>(0);
+  const [productList, setProductList] = useState<ITicketContent[]>([]);
   const [isTrainerSelectBoxOpen, setIsTrainerSelectBoxOpen] = useState(false);
-  const [selectedTrainer, setSelectedTrainer] = useState("");
-  const [trainerList] = useState([{ value: "1", label: "테스트" }]);
+  const [selectedTrainer, setSelectedTrainer] = useState<number>(0);
+  const [trainerList, setTrainerList] = useState<ITrainerContent[]>([]);
   const [isDateFocus, setIsDateFocus] = useState(false);
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(
+    dayjs().format("YYYY-MM-DD"),
+  );
 
   const productSelectBoxRef = useRef<HTMLDivElement>(null);
   const trainerSelectBoxRef = useRef<HTMLDivElement>(null);
+
+  const { data: ticketData } = getTicketList();
+  const { data: trainerData } = getTrainerList();
+
+  const { mutate: registerProgramMutate } = registerProgram(
+    selectedProduct,
+    selectedTrainer,
+    selectedDate,
+    setIsRegisterModalOpen,
+    setIsToastOpen,
+  );
+
+  useEffect(() => {
+    if (ticketData) {
+      setProductList(ticketData.content);
+      setSelectedProduct(ticketData.content[0].id);
+    }
+  }, [ticketData]);
+
+  useEffect(() => {
+    if (trainerData) {
+      setTrainerList(trainerData.content);
+      setSelectedTrainer(trainerData.content[0].id);
+    }
+  }, [trainerData]);
 
   const handleCloseModal = () => {
     setIsRegisterModalOpen(false);
@@ -35,6 +77,10 @@ export default function TicketRegisterModal({
 
   const handleDate = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedDate(e.target.value);
+  };
+
+  const handleRegister = () => {
+    registerProgramMutate();
   };
 
   return (
@@ -78,7 +124,7 @@ export default function TicketRegisterModal({
             $isDateFocus={isDateFocus}
           />
         </S.LabelSelectContainer>
-        <S.RegisterButton>등록하기</S.RegisterButton>
+        <S.RegisterButton onClick={handleRegister}>등록하기</S.RegisterButton>
       </S.Container>
     </S.Background>
   );

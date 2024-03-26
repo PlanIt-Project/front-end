@@ -5,15 +5,18 @@ export interface IProgramContent {
   productName: string;
   remainedNumber: number;
   startAt: string;
-  endAt: string;
+  endAt: null | string;
   suspendAt: null | string;
   resumeAt: null | string;
   status: string;
-  member: {
+  member: null | {
     id: number;
     name: string;
   };
-  employee: null | string;
+  employee: null | {
+    id: number;
+    name: string;
+  };
 }
 
 export interface IProgramData {
