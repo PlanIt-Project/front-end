@@ -23,6 +23,10 @@ export const PRODUCT_NAMES = [
     id: 6,
     value: "판매 여부",
   },
+  {
+    id: 7,
+    value: "판매 설정",
+  },
 ];
 
 export const PRODUCT_CONTENTS = [
@@ -98,42 +102,7 @@ export const PRODUCT_CONTENTS = [
     price: 170000,
     saleOrNot: "판매중지",
   },
-  {
-    id: 9,
-    name: "헬스 이용권 3개월",
-    type: "시설이용",
-    period: "3개월",
-    number: 0,
-    price: 170000,
-    saleOrNot: "판매중지",
-  },
-  {
-    id: 10,
-    name: "헬스 이용권 3개월",
-    type: "시설이용",
-    period: "3개월",
-    number: 0,
-    price: 170000,
-    saleOrNot: "판매중지",
-  },
-  {
-    id: 11,
-    name: "헬스 이용권 3개월",
-    type: "시설이용",
-    period: "3개월",
-    number: 0,
-    price: 170000,
-    saleOrNot: "판매중지",
-  },
-  {
-    id: 12,
-    name: "헬스 이용권 3개월",
-    type: "시설이용",
-    period: "3개월",
-    number: 0,
-    price: 170000,
-    saleOrNot: "판매중지",
-  },
+  
 ];
 
 export const ACCOUNT_NAMES = [

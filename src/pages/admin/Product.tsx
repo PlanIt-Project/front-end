@@ -1,7 +1,7 @@
 import { useState } from "react";
 import * as S from "../../styles/admin/AdminCommon.styles";
 import ProductBox from "../../components/admin/ProductBox";
-import ProductModal from "../../components/admin/ProductModal";
+import ProductMakeModal from "../../components/admin/ProductMakeModal";
 import { useParams } from "react-router-dom";
 import Pagination from "../../components/CommonPagination";
 
@@ -38,7 +38,7 @@ export default function Product() {
           name={"admin/product"}
         />
       </S.AdminContainer>
-      {onModal && <ProductModal setOnModal={setOnModal} />}
+      {onModal && <ProductMakeModal setOnModal={setOnModal} />}
     </>
   );
 }

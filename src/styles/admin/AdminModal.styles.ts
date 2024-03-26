@@ -40,6 +40,14 @@ export const ModalContent = styled.div`
   width: 100%;
   margin-left: 80px;
 `;
+ 
+export const ModalGrid = styled.div`
+  display: grid;
+  grid-template-columns: 80px 150px 150px;
+  row-gap: 20px;
+  justify-items: center;
+  align-items: center;
+`
 
 export const ContentName = styled.span`
   font-size: var(--font-size-400);
@@ -115,3 +123,40 @@ export const ModalButton = styled(CommonButton)`
     background-color: var(--main-color-300);
   }
 `;
+
+export const CloseButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 100px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: var(--font-size-500);
+  background-color: var(--main-color-400);
+  &:hover {
+    background-color: var(--main-color-300);
+  }
+`
+
+export const LittleModal = styled.div`
+  width: 400px;
+  height: fit-content;
+  background: var(--background-color-100);
+  border-radius: 20px;
+  padding: 50px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+`;
+
+export const LittleModalTitle = styled.div`
+  font-weight: 600;
+  font-size: var(--font-size-400);
+`;
+
+export const LittleModalText = styled.div`
+  font-size: var(--font-size-400);
+`;
+

@@ -69,23 +69,3 @@ export const DetailButton = styled(CommonButton)`
   }
 `;
 
-export const LittleModal = styled.div`
-  width: 400px;
-  height: fit-content;
-  background: var(--background-color-100);
-  border-radius: 20px;
-  padding: 50px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-`;
-
-export const LittleModalTitle = styled.div`
-  font-weight: 600;
-  font-size: var(--font-size-400);
-`;
-
-export const LittleModalText = styled.div`
-  font-size: var(--font-size-400);
-`;

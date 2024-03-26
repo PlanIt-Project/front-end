@@ -49,12 +49,12 @@ export default function TrainerBox() {
                   onClickModifyButton();
                 }}
               >
-                권한설정
+                설정
               </S.ModifyButton>
             </S.ContentBar>
           ))}
         </S.ContentContainer>
-        {onModal && <TrainerModal setOnModal={setOnModal}/>}
+        {onModal && <TrainerModal setOnModal={setOnModal} />}
         {onDetail && <TrainerDetail setOnDetail={setOnDetail} id={detailId} />}
       </S.ManageBox>
     </>

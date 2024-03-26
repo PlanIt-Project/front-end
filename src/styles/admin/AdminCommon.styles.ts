@@ -108,7 +108,7 @@ export const ContentBar = styled.li<{ $nameNumber?: number }>`
   justify-items: center;
   align-items: center;
   width: 1020px;
-  padding: 15px 0;
+  height: 70px;
   &:hover {
     background-color: var(--main-color-200);
     cursor: pointer;
@@ -117,6 +117,7 @@ export const ContentBar = styled.li<{ $nameNumber?: number }>`
 
 export const ContentHover = styled.div<{ $nameNumber?: number }>`
   width: 100%;
+  height: 100%;
   display: grid;
   grid-template-columns: ${(props) =>
     props.$nameNumber ? `repeat(${props.$nameNumber}, 1fr)` : `repeat(6, 1fr)`};
