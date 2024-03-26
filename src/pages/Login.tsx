@@ -4,6 +4,9 @@ import { useNavigate } from "react-router";
 import { LoginSignUpContainer } from "../styles/LoginSignUp.style";
 import { useState, ChangeEvent } from "react";
 import { getLogin } from "../hooks/queries/login/getLogin";
+import googleicon from "../assets/GoogleIcon.svg";
+import kakaoicon from "../assets/KakaoIcon.svg";
+import navericon from "../assets/NaverIcon.svg";
 
 export default function Login() {
   const [email, setEmail] = useState<string>("abcd");
@@ -59,11 +62,28 @@ export default function Login() {
       ></CommonInput>
       <LoginButton onClick={handleLogin}>로그인</LoginButton>
       <p onClick={goToSignUp}>회원가입</p>
+      <div>
+        <img src={googleicon} />
+        <img src={kakaoicon} />
+        <img src={navericon} />
+      </div>
     </LoginPageContainer>
   );
 }
 
-const LoginPageContainer = styled(LoginSignUpContainer)``;
+const LoginPageContainer = styled(LoginSignUpContainer)`
+  p {
+    font-size: 2rem;
+  }
+  div {
+    display: flex;
+    gap: 3rem;
+
+    img {
+      cursor: pointer;
+    }
+  }
+`;
 
 const LoginButton = styled(CommonButton)`
   background: white;
