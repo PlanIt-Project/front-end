@@ -1,3 +1,5 @@
+import { IMemberData } from "../types/Login.types";
+
 interface MenuFactory {
   createMenuList: () => Array<{ label: string; path: string }>;
 }
@@ -38,17 +40,17 @@ class AdminMenuFactory implements MenuFactory {
 }
 
 // getMenuList 함수
-export const getMenuList = (login: any) => {
+export const getMenuList = (user: IMemberData | null) => {
   let factory: MenuFactory;
 
-  switch (login.user) {
-    case "user":
+  switch (user?.role) {
+    case "MEMBER":
       factory = new UserMenuFactory();
       break;
-    case "trainer":
+    case "TRAINER":
       factory = new TrainerMenuFactory();
       break;
-    case "admin":
+    case "ADMIN":
       factory = new AdminMenuFactory();
       break;
     default:
