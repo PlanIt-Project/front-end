@@ -2,34 +2,34 @@ import { IPageable } from "./Pageable.types";
 
 export interface ITicketContent {
   id: number;
-  productName: string;
-  remainedNumber: number;
-  startAt: string;
-  endAt: string;
-  suspendAt: null | string;
-  resumeAt: null | string;
-  status: string;
-  member: {
-    id: number;
-    name: string;
-  };
-  employee: null | string;
+  name: string;
+  number: number;
+  period: string;
+  price: number;
+  sellingType: string;
+  type: string;
 }
 
-export interface ITicketList {
+export interface ITicketData {
   content: ITicketContent[];
-  pageable: IPageable;
-  last: boolean;
-  totalPages: number;
-  totalElements: number;
+  empty: boolean;
   first: boolean;
-  size: number;
+  last: boolean;
   number: number;
+  numberOfElements: number;
+  pageable: IPageable;
+  size: number;
   sort: {
     empty: boolean;
     unsorted: boolean;
     sorted: boolean;
   };
-  numberOfElements: number;
-  empty: boolean;
+  totalElements: number;
+  totalPages: number;
+}
+
+export interface ITicketList {
+  code: number;
+  message: string;
+  data: ITicketData;
 }
