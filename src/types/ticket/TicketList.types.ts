@@ -1,4 +1,4 @@
-import { IPageable } from "./Pageable.types";
+import { IPageable } from "../Pageable.types";
 
 export interface ITicketContent {
   id: number;
