@@ -1,73 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TabMenu from "../../components/TabMenu";
 import * as S from "../../styles/Ticket.styles";
 import ModalPortal from "../../components/modal/ModalPortal";
 import TicketRegisterModal from "../../components/modal/TicketRegisterModal";
+import { getProgramList } from "../../hooks/queries/ticket/getProgramList";
+import { IProgramContent } from "../../types/ticket/ProgramList.types";
+import { useLocation } from "react-router";
+import ToastNotification from "../../components/modal/ToastNotification";
 
 export default function UserTicket() {
-  const ticketList = [
-    {
-      id: 114,
-      productName: "회원권 1달",
-      remainedNumber: 0,
-      startAt: "2024-03-18",
-      endAt: "2024-04-17",
-      suspendAt: null,
-      resumeAt: null,
-      status: "IN_PROGRESS",
-      member: {
-        id: 253,
-        name: "member1",
-      },
-      employee: null,
-    },
-    {
-      id: 115,
-      productName: "회원권 1달",
-      remainedNumber: 0,
-      startAt: "2024-03-18",
-      endAt: "2024-04-17",
-      suspendAt: null,
-      resumeAt: null,
-      status: "IN_PROGRESS",
-      member: {
-        id: 253,
-        name: "member1",
-      },
-      employee: null,
-    },
-    {
-      id: 116,
-      productName: "회원권 1달",
-      remainedNumber: 0,
-      startAt: "2024-03-18",
-      endAt: "2024-04-17",
-      suspendAt: null,
-      resumeAt: null,
-      status: "IN_PROGRESS",
-      member: {
-        id: 253,
-        name: "member1",
-      },
-      employee: null,
-    },
-    {
-      id: 117,
-      productName: "회원권 1달",
-      remainedNumber: 0,
-      startAt: "2024-03-18",
-      endAt: "2024-04-17",
-      suspendAt: null,
-      resumeAt: null,
-      status: "IN_PROGRESS",
-      member: {
-        id: 253,
-        name: "member1",
-      },
-      employee: null,
-    },
-  ];
+  const [ticketList, setTicketList] = useState<IProgramContent[]>([]);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [programOption, setProgramOption] = useState<"VALID" | "ALL">("VALID");
+  const [isToastOpen, setIsToastOpen] = useState(false);
+
+  const location = useLocation();
+
+  const { data } = getProgramList(programOption);
+
+  useEffect(() => {
+    location.pathname.includes("available")
+      ? setProgramOption("VALID")
+      : setProgramOption("ALL");
+  }, [location]);
+
+  useEffect(() => {
+    if (data) setTicketList(data.content);
+  }, [data]);
 
   const handleOpenModal = () => {
     setIsRegisterModalOpen(true);
@@ -83,11 +42,9 @@ export default function UserTicket() {
         {ticketList.map((ticket) => (
           <S.Grid key={ticket.id}>
             <S.ProductName>{ticket.productName}</S.ProductName>
-            <S.Date>{`${ticket.startAt} \u200B~\u200B ${ticket.endAt}`}</S.Date>
+            <S.Date>{`${ticket.startAt} \u200B~\u200B ${ticket.endAt === null ? "" : ticket.endAt}`}</S.Date>
             <S.Date>
-              <span className="strong">{ticket.remainedNumber} 일 남음</span>
-              <span>/</span>
-              <span>총 {ticket.suspendAt} 일</span>
+              <span>총 {ticket.remainedNumber} 회 남음</span>
             </S.Date>
           </S.Grid>
         ))}
@@ -97,8 +54,16 @@ export default function UserTicket() {
         <ModalPortal>
           <TicketRegisterModal
             setIsRegisterModalOpen={setIsRegisterModalOpen}
+            setIsToastOpen={setIsToastOpen}
           />
         </ModalPortal>
+      )}
+      {isToastOpen && (
+        <ToastNotification
+          contents="등록 요청이 완료되었습니다."
+          isToastOpen={isToastOpen}
+          setIsToastOpen={setIsToastOpen}
+        />
       )}
     </S.Container>
   );
