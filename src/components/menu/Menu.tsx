@@ -2,11 +2,13 @@ import { getMenuList } from "../../hooks/getMenuList";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import * as S from "../../styles/menu/Menu.styles";
-import { ILogin } from "../../types/Login.types";
+import { useAuthStore } from "../../stores/authStore";
 
-export default function Menu({ login }: { login: ILogin }) {
+export default function Menu() {
   const [onMenu, setonMenu] = useState<boolean>(false);
-  const menuList = getMenuList(login);
+  const { user } = useAuthStore((state) => state);
+
+  const menuList = getMenuList(user);
   const navigate = useNavigate();
 
   const handleMoveToMenu = (path: string) => {
