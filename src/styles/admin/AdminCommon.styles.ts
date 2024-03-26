@@ -31,7 +31,7 @@ export const ButtonContainer = styled.div`
   align-self: flex-end;
   gap: 80px;
   margin-right: 100px;
-`
+`;
 
 export const SelectButton = styled.select`
   height: 55px;
@@ -42,19 +42,18 @@ export const SelectButton = styled.select`
   font-size: var(--font-size-600);
   font-weight: 600;
   color: #595959;
-  &:focus{
+  &:focus {
     outline: none;
     outline: 2px solid var(--main-color-300);
   }
-`
+`;
 export const SelectOption = styled.option`
   font-weight: 600;
   color: #595959;
   height: 50px;
-`
+`;
 
 export const MakeButton = styled(CommonButton)`
-  
   color: white;
   width: 100px;
   font-size: var(--font-size-500);
@@ -80,7 +79,8 @@ export const NameBar = styled.div<{ $nameNumber?: number }>`
   color: white;
   border-radius: 20px 20px 0 0;
   display: grid;
-  grid-template-columns: ${props => props.$nameNumber ? `repeat(${props.$nameNumber}, 1fr)` : `repeat(7, 1fr)`};
+  grid-template-columns: ${(props) =>
+    props.$nameNumber ? `repeat(${props.$nameNumber}, 1fr)` : `repeat(7, 1fr)`};
   justify-items: center;
   align-items: center;
   margin-top: 30px;
@@ -103,15 +103,25 @@ export const ContentContainer = styled.ul`
 
 export const ContentBar = styled.li<{ $nameNumber?: number }>`
   display: grid;
-  grid-template-columns: ${props => props.$nameNumber ? `repeat(${props.$nameNumber}, 1fr)` : `repeat(7, 1fr)`};
+  grid-template-columns: ${(props) =>
+    props.$nameNumber ? `${props.$nameNumber}fr 1fr` : `6fr 1fr`};
   justify-items: center;
   align-items: center;
   width: 1020px;
   padding: 15px 0;
-  &:hover{
+  &:hover {
     background-color: var(--main-color-200);
     cursor: pointer;
   }
+`;
+
+export const ContentHover = styled.div<{ $nameNumber?: number }>`
+  width: 100%;
+  display: grid;
+  grid-template-columns: ${(props) =>
+    props.$nameNumber ? `repeat(${props.$nameNumber}, 1fr)` : `repeat(6, 1fr)`};
+  justify-items: center;
+  align-items: center;
 `;
 
 export const Content = styled.span`
