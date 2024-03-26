@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { CommonInput, CommonButton } from "../styles/globalStyles";
 import { LoginSignUpContainer } from "../styles/LoginSignUp.style";
 import { useState } from "react";
-import { SignUpService } from "../api/services/Login.services";
 import { useNavigate } from "react-router";
+import { SignUpService } from "../api/services/SignUp.services";
 
 export default function Login() {
   const navigate = useNavigate();
