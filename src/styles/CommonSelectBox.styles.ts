@@ -40,11 +40,12 @@ export const OptionContainer = styled.div<{
   flex-direction: column;
   width: ${(props) => (props.$width ? `${props.$width}px` : "100%")};
   padding: 5px 10px;
+  max-height: 180px;
+  overflow-y: scroll;
   border: 1px solid var(--main-color-500);
   border-top: none;
   border-radius: 0 0 10px 10px;
   background-color: var(--white-color-100);
-  overflow: hidden;
   z-index: 2;
 `;
 
