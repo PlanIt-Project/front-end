@@ -17,7 +17,7 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (res) => {
-    return res.data.data;
+    return res.data;
   },
 
   (err) => {
