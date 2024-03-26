@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
 import * as S from "../../styles/admin/AdminModal.styles";
 import { withExceptionCapturing } from "../../hooks/withExceptionCapturing";
+import { IModal } from "../../types/admin/Admin.types";
 
-export default function TrainerModal() {
+export default function TrainerModal({ setOnModal }: IModal) {
   const { handleSubmit} = useForm();
 
   const onValid = (data: any) => {

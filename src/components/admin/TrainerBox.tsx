@@ -54,7 +54,7 @@ export default function TrainerBox() {
             </S.ContentBar>
           ))}
         </S.ContentContainer>
-        {onModal && <TrainerModal />}
+        {onModal && <TrainerModal setOnModal={setOnModal}/>}
         {onDetail && <TrainerDetail setOnDetail={setOnDetail} id={detailId} />}
       </S.ManageBox>
     </>

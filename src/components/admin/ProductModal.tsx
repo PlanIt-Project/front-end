@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import * as S from "../../styles/admin/AdminModal.styles";
-import { IProductModal } from "../../types/admin/Product.types";
 import { useForm } from "react-hook-form";
+import { IModal } from "../../types/admin/Admin.types";
 
 function withExceptionCapturing<S, T extends any[]>(fn: (...rest: T) => Promise<S>) {
   return (...args: T) => {
@@ -11,7 +11,7 @@ function withExceptionCapturing<S, T extends any[]>(fn: (...rest: T) => Promise<
   };
 }
 
-export default function ProductModal({ setOnModal }: IProductModal) {
+export default function ProductModal({ setOnModal }: IModal) {
   // TODO react-hook-form 사용
   const { register,handleSubmit , setValue } = useForm();
 

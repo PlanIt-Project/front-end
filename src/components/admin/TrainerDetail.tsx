@@ -8,7 +8,7 @@ export default function TrainerDetail({ setOnDetail, id }: IDetail) {
   return (
     <S.Overlay>
       <S.Detail>
-        <S.DetailTitle>상품 상세</S.DetailTitle>
+        <S.DetailTitle>트레이너 상세</S.DetailTitle>
         <S.DetailContent>
           <S.DetailName>이름:</S.DetailName>
           <S.DetailText>개인레슨 3개월{id}</S.DetailText>
