@@ -76,6 +76,16 @@ export const Grid = styled.div`
   }
 `;
 
+export const ProductType = styled.div`
+  display: flex;
+  padding: 0 15px;
+  width: calc(100% - 30px);
+  font-size: var(--font-size-600);
+  font-weight: 700;
+  color: var(--white-color-700);
+  margin: -20px 0;
+`;
+
 export const ProductName = styled.p`
   font-size: var(--font-size-400);
   font-weight: 700;

@@ -2,6 +2,7 @@ import * as S from "../styles/CommonSelectBox.styles";
 import { ICommonSelectBoxProps } from "../types/CommonSelectBox.types";
 import DownArrow from "../assets/icon_down-arrow.png";
 import UpArrow from "../assets/icon_up-arrow.png";
+import { useEffect, useState } from "react";
 
 export default function CommonSelectBox({
   selectBoxRef,
@@ -13,11 +14,19 @@ export default function CommonSelectBox({
   width,
   height,
 }: ICommonSelectBoxProps) {
+  const [selectedOptionName, setSelectedOptionName] = useState("");
+
+  useEffect(() => {
+    setSelectedOptionName(
+      optionList.find((option) => option.id === selectedOption)?.name || "",
+    );
+  }, [selectedOption, optionList]);
+
   const handleOpenSelectBox = () => {
     setIsSelectBoxOpen(!isSelectBoxOpen);
   };
 
-  const handleSelectValue = (value: string) => {
+  const handleSelectValue = (value: number) => {
     setSelectedOption(value);
   };
 
@@ -29,7 +38,7 @@ export default function CommonSelectBox({
       $height={height}
       onClick={handleOpenSelectBox}
     >
-      <p>{selectedOption}</p>
+      <p>{selectedOptionName}</p>
       <S.ArrowIcon>
         <img
           src={isSelectBoxOpen ? UpArrow : DownArrow}
@@ -41,13 +50,13 @@ export default function CommonSelectBox({
         <S.OptionContainer $isSelectBoxOpen={isSelectBoxOpen} $width={width}>
           {optionList.map((option) => (
             <S.Option
-              key={option.value}
+              key={option.id}
               $height={height}
               onClick={() => {
-                handleSelectValue(option.value);
+                handleSelectValue(option.id);
               }}
             >
-              {option.label}
+              {option.name}
             </S.Option>
           ))}
         </S.OptionContainer>
