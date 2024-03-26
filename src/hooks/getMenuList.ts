@@ -54,7 +54,8 @@ export const getMenuList = (user: IMemberData | null) => {
       factory = new AdminMenuFactory();
       break;
     default:
-      throw new Error("유저 타입이 없습니다.");
+      factory = new UserMenuFactory();
+      break;
   }
 
   return factory.createMenuList();
