@@ -39,9 +39,9 @@ instance.interceptors.response.use(
       response: { status },
     } = error;
 
-    const originalRequest = config;
-
     console.log("찍힘?");
+
+    const originalRequest = config;
 
     if (status === 401 && !originalRequest._retry) {
       console.log("찍힘2?");
