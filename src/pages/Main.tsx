@@ -4,24 +4,18 @@ import { setVH } from "../utils/setVH";
 import { throttle } from "../utils/throttle";
 import { dragFn } from "../utils/dragFn";
 import { getBannerList } from "../hooks/queries/getBannerList";
+import { getTrainerList } from "../hooks/queries/ticket/getTrainerList";
+import { ITrainerContent } from "../types/ticket/TrainerList.types";
 
 export default function Main() {
-  const trainerList = [
-    { id: "1", imgUrl: "", info: "설명" },
-    { id: "2", imgUrl: "", info: "설명" },
-    { id: "3", imgUrl: "", info: "" },
-    { id: "4", imgUrl: "", info: "" },
-    { id: "5", imgUrl: "", info: "" },
-    { id: "6", imgUrl: "", info: "" },
-    { id: "7", imgUrl: "", info: "" },
-  ];
-
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
+  const [trainerList, setTrainerList] = useState<ITrainerContent[]>([]);
 
   const trainerScrollRef = useRef<HTMLDivElement>(null);
 
   const list = getBannerList();
+  const { data } = getTrainerList();
 
   useEffect(() => {
     console.log("list", list);
@@ -31,6 +25,10 @@ export default function Main() {
     window.addEventListener("resize", setVH);
     setVH();
   }, []);
+
+  useEffect(() => {
+    if (data) setTrainerList(data?.content);
+  }, [data]);
 
   const dragFunction = dragFn(
     trainerScrollRef,
@@ -56,10 +54,13 @@ export default function Main() {
         >
           {trainerList.map((trainer) => (
             <S.Grid key={trainer.id}>
-              <S.ImageContainer>
-                <img src={trainer.imgUrl} />
-              </S.ImageContainer>
-              <S.InfoContainer>{trainer.info}</S.InfoContainer>
+              <S.ImageNameContainer>
+                <S.ImageContainer>
+                  {/* <img src={trainer.imgUrl} /> */}
+                </S.ImageContainer>
+                <S.Name>{trainer.name}</S.Name>
+              </S.ImageNameContainer>
+              <S.InfoContainer>{trainer.trainerMessage}</S.InfoContainer>
             </S.Grid>
           ))}
         </S.ContentsContainer>

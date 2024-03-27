@@ -69,9 +69,19 @@ export const Grid = styled.div`
   }
 `;
 
-export const ImageContainer = styled.div`
+export const ImageNameContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
   width: 35%;
-  height: 50%;
+  height: 60%;
+`;
+
+export const ImageContainer = styled.div`
+  width: 100%;
+  height: 80%;
   border-radius: 50%;
   overflow: hidden;
   border: 1px solid gray;
@@ -80,6 +90,11 @@ export const ImageContainer = styled.div`
     width: 25%;
     height: 30%;
   }
+`;
+
+export const Name = styled.p`
+  font-size: var(--font-size-500);
+  font-weight: 700;
 `;
 
 export const InfoContainer = styled.div`
