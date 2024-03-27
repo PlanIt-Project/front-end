@@ -1,68 +1,31 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ItemGrid from "../../components/schedule/ItemGrid";
 import * as S from "../../styles/Schedule.styles";
-import { IItemList } from "../../types/UserReservation.types";
 import { dragFn } from "../../utils/dragFn";
 import { throttle } from "../../utils/throttle";
 import Calendar from "../../components/schedule/Calendar";
 import { TODAY } from "../../constants/Calendar.constants";
 import Time from "../../components/schedule/Time";
+import { IProgramContent } from "../../types/ticket/ProgramList.types";
+import { getProgramList } from "../../hooks/queries/ticket/getProgramList";
 
 export default function UserReservation() {
-  const itemList: IItemList[] = [
-    {
-      id: "1",
-      name: "개인 레슨 3개월",
-      startDate: "2024.03.14",
-      endDate: "2024.06.13",
-      trainer: "홍길동",
-    },
-    {
-      id: "2",
-      name: "개인 레슨 3개월",
-      startDate: "2024.03.14",
-      endDate: "2024.06.13",
-      trainer: "홍길동",
-    },
-    {
-      id: "3",
-      name: "헬스장 이용권",
-      startDate: "2024.03.14",
-      endDate: "2024.06.13",
-      trainer: "",
-    },
-    {
-      id: "4",
-      name: "헬스장 이용권",
-      startDate: "2024.03.14",
-      endDate: "2024.06.13",
-      trainer: "",
-    },
-    {
-      id: "5",
-      name: "개인 레슨 3개월",
-      startDate: "2024.03.14",
-      endDate: "2024.06.13",
-      trainer: "홍길동",
-    },
-    {
-      id: "6",
-      name: "개인 레슨 3개월",
-      startDate: "2024.03.14",
-      endDate: "2024.06.13",
-      trainer: "홍길동",
-    },
-  ];
-
   const unavailableTimes = ["6:00", "14:00", "18:00"];
 
+  const [programList, setProgramList] = useState<IProgramContent[]>([]);
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
   const [selectedDay, setSelectedDay] = useState(TODAY);
-  const [selectedItem, setSelectedItem] = useState("");
+  const [selectedItem, setSelectedItem] = useState<number | null>();
   const [selectedTime, setSelectedTime] = useState("");
 
   const itemScrollRef = useRef<HTMLDivElement>(null);
+
+  const { data } = getProgramList("VALID");
+
+  useEffect(() => {
+    if (data) setProgramList(data.content);
+  }, [data]);
 
   const dragFunction = dragFn(
     itemScrollRef,
@@ -74,7 +37,7 @@ export default function UserReservation() {
 
   const throttleDragMove = throttle(dragFunction.handleDragMove, 50);
 
-  const handleClickItem = (id: string) => {
+  const handleClickItem = (id: number) => {
     setSelectedItem(id);
   };
 
@@ -99,7 +62,7 @@ export default function UserReservation() {
         onMouseUp={dragFunction.handleDragEnd}
         onMouseLeave={dragFunction.handleDragEnd}
       >
-        {itemList.map((item) => (
+        {programList.map((item) => (
           <ItemGrid
             key={item.id}
             item={item}

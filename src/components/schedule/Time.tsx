@@ -15,7 +15,7 @@ export default function Time({
     <>
       <S.Title className="reservation">
         {dayjs(selectedDay).year()}년 {dayjs(selectedDay).month() + 1}월{" "}
-        {dayjs(selectedDay).day()}일
+        {dayjs(selectedDay).date()}일
       </S.Title>
       <S.TimeTitleContainer>
         <S.TimeTitle>오전</S.TimeTitle>

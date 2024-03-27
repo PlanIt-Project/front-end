@@ -62,7 +62,7 @@ export default function TrainerReservation() {
       <S.BottomContainer>
         <S.Title className="reservation">
           {dayjs(selectedDay).year()}년 {dayjs(selectedDay).month() + 1}월{" "}
-          {dayjs(selectedDay).day()}일 스케줄
+          {dayjs(selectedDay).date()}일 스케줄
         </S.Title>
         <S.ReservationGridContainer>
           {itemList.map((item) => (
