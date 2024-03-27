@@ -58,7 +58,23 @@ export default function TicketRegisterModal({
 
   useEffect(() => {
     if (trainerData) {
-      setTrainerList(trainerData.content);
+      const trainerListWithRandom: ITrainerContent[] = [];
+      const randomOption: ITrainerContent = {
+        id: -1,
+        email: "",
+        name: "랜덤",
+        phone_number: "",
+        birth: "",
+        address: "",
+        role: "TRAINER",
+        career: "",
+        trainerMessage: null,
+      };
+
+      trainerListWithRandom.push(...trainerData.content);
+      trainerListWithRandom.push(randomOption);
+
+      setTrainerList(trainerListWithRandom);
       setSelectedTrainer(trainerData.content[0].id);
     }
   }, [trainerData]);
