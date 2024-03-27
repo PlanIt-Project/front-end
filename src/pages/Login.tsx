@@ -7,12 +7,20 @@ import { getLogin } from "../hooks/queries/login/getLogin";
 import googleicon from "../assets/GoogleIcon.svg";
 import kakaoicon from "../assets/KakaoIcon.svg";
 import navericon from "../assets/NaverIcon.svg";
+import ToastNotification from "../components/modal/ToastNotification";
 
 export default function Login() {
   const [email, setEmail] = useState<string>("abcd");
   const [password, setPassword] = useState<string>("dddd");
+  const [isToastOpen, setIsToastOpen] = useState(false);
+  const [loginError, setLoginError] = useState("");
 
-  const { mutate: loginMutate } = getLogin(email, password);
+  const { mutate: loginMutate } = getLogin(
+    email,
+    password,
+    setIsToastOpen,
+    setLoginError,
+  );
 
   const navigate = useNavigate();
 
@@ -36,38 +44,47 @@ export default function Login() {
 
   const handleLogin = () => {
     loginMutate();
-    navigate("/main");
   };
 
   return (
-    <LoginPageContainer>
-      <h1>LOGIN</h1>
-      <CommonInput
-        id="eamil"
-        type="email"
-        name="email"
-        placeholder="Email"
-        required
-        onChange={handleChange}
-        value={email}
-      ></CommonInput>
-      <CommonInput
-        id="password"
-        type="password"
-        name="password"
-        placeholder="Password"
-        required
-        onChange={handleChange}
-        value={password}
-      ></CommonInput>
-      <LoginButton onClick={handleLogin}>로그인</LoginButton>
-      <p onClick={goToSignUp}>회원가입</p>
-      <div>
-        <img src={googleicon} />
-        <img src={kakaoicon} />
-        <img src={navericon} />
-      </div>
-    </LoginPageContainer>
+    <>
+      <LoginPageContainer>
+        <h1>LOGIN</h1>
+        <CommonInput
+          id="eamil"
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+          onChange={handleChange}
+          value={email}
+        ></CommonInput>
+        <CommonInput
+          id="password"
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+          onChange={handleChange}
+          value={password}
+        ></CommonInput>
+        <LoginButton onClick={handleLogin}>로그인</LoginButton>
+        <p onClick={goToSignUp}>회원가입</p>
+        <div>
+          <img src={googleicon} />
+          <img src={kakaoicon} />
+          <img src={navericon} />
+        </div>
+      </LoginPageContainer>
+
+      {isToastOpen && (
+        <ToastNotification
+          contents={loginError}
+          isToastOpen={isToastOpen}
+          setIsToastOpen={setIsToastOpen}
+        />
+      )}
+    </>
   );
 }
 

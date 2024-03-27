@@ -1,5 +1,5 @@
 import { ILoginResponse, IMemberResponse } from "../../types/Login.types";
-import { instance } from "../instance";
+import { instance, refreshInstance } from "../instance";
 
 export const loginService = async (
   email: string,
@@ -14,7 +14,7 @@ export const loginService = async (
 export const getRefreshTokenService = async (
   refreshToken: string,
 ): Promise<ILoginResponse> => {
-  return await instance.get("/member/refresh", {
+  return await refreshInstance.get("/member/refresh", {
     headers: {
       Authorization: `Bearer ${refreshToken}`,
     },

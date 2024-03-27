@@ -4,6 +4,12 @@ interface MenuFactory {
   createMenuList: () => Array<{ label: string; path: string }>;
 }
 
+class BasicMenuFactory implements MenuFactory {
+  public createMenuList() {
+    return [{ label: "PlanIt?", path: "/about" }];
+  }
+}
+
 // UserMenuFactory 클래스
 class UserMenuFactory implements MenuFactory {
   public createMenuList() {
@@ -54,7 +60,7 @@ export const getMenuList = (user: IMemberData | null) => {
       factory = new AdminMenuFactory();
       break;
     default:
-      factory = new UserMenuFactory();
+      factory = new BasicMenuFactory();
       break;
   }
 
