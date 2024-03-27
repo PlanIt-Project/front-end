@@ -78,7 +78,7 @@ export default function UserReservation() {
     setSelectedItem(id);
   };
 
-  const handleClickDay = (day: Date) => {
+  const handleClickDay = (day: string) => {
     setSelectedDay(day);
   };
 

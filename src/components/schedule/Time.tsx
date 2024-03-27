@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { OPEN_TIME } from "../../constants/OpenTime.constants";
 import * as S from "../../styles/Schedule.styles";
 import { ITimeProps } from "../../types/Time.types";
@@ -13,8 +14,8 @@ export default function Time({
   return (
     <>
       <S.Title className="reservation">
-        {selectedDay.getFullYear()}년 {selectedDay.getMonth() + 1}월{" "}
-        {selectedDay.getDate()}일
+        {dayjs(selectedDay).year()}년 {dayjs(selectedDay).month() + 1}월{" "}
+        {dayjs(selectedDay).day()}일
       </S.Title>
       <S.TimeTitleContainer>
         <S.TimeTitle>오전</S.TimeTitle>

@@ -4,6 +4,7 @@ import Calendar from "../../components/schedule/Calendar";
 import { useState } from "react";
 import { TODAY } from "../../constants/Calendar.constants";
 import { ITrainerReservationList } from "../../types/TrainerReservation.types";
+import dayjs from "dayjs";
 
 export default function TrainerReservation() {
   const itemList: ITrainerReservationList[] = [
@@ -46,7 +47,7 @@ export default function TrainerReservation() {
   ];
   const [selectedDay, setSelectedDay] = useState(TODAY);
 
-  const handleClickDay = (day: Date) => {
+  const handleClickDay = (day: string) => {
     setSelectedDay(day);
   };
 
@@ -60,8 +61,8 @@ export default function TrainerReservation() {
       </S.CalendarContainer>
       <S.BottomContainer>
         <S.Title className="reservation">
-          {selectedDay.getFullYear()}년 {selectedDay.getMonth() + 1}월{" "}
-          {selectedDay.getDate()}일 스케줄
+          {dayjs(selectedDay).year()}년 {dayjs(selectedDay).month() + 1}월{" "}
+          {dayjs(selectedDay).day()}일 스케줄
         </S.Title>
         <S.ReservationGridContainer>
           {itemList.map((item) => (
