@@ -14,11 +14,13 @@ export const loginService = async (
 export const getRefreshTokenService = async (
   refreshToken: string,
 ): Promise<ILoginResponse> => {
-  return await refreshInstance.get("/member/refresh", {
+  const response = await refreshInstance.get("/member/refresh", {
     headers: {
       Authorization: `Bearer ${refreshToken}`,
     },
   });
+
+  return response.data;
 };
 
 export const getUserInfoService = async (): Promise<IMemberResponse> => {
