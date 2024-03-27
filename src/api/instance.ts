@@ -62,6 +62,12 @@ instance.interceptors.response.use(
           originalRequest._retry = true;
 
           return await instance(originalRequest);
+        } else {
+          useAuthStore.setState({
+            accessToken: "",
+            refreshToken: "",
+            user: null,
+          });
         }
       } catch (error) {
         console.log(error);
