@@ -29,7 +29,7 @@ export const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   align-self: flex-end;
-  gap: 80px;
+  gap: 50px;
   margin-right: 100px;
 `;
 
@@ -58,8 +58,6 @@ export const MakeButton = styled(CommonButton)`
   width: 100px;
   font-size: var(--font-size-500);
   background-color: var(--main-color-400);
-  align-self: flex-end;
-  margin-right: 120px;
   &:hover {
     background-color: var(--main-color-300);
   }

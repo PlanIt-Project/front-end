@@ -16,6 +16,13 @@ export default function Program() {
       <S.AdminContainer>
         <S.AdminContent>
           <S.Title>이용권 관리</S.Title>
+          <S.ButtonContainer>
+            <S.SelectButton>
+              <S.SelectOption>모든 이용권</S.SelectOption>
+              <S.SelectOption>진행중</S.SelectOption>
+              <S.SelectOption>진행중지</S.SelectOption>
+            </S.SelectButton>
+          </S.ButtonContainer>
           <ProgramBox />
         </S.AdminContent>
         <Pagination

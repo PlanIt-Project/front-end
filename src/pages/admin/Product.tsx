@@ -22,13 +22,20 @@ export default function Product() {
       <S.AdminContainer>
         <S.AdminContent>
           <S.Title>상품관리</S.Title>
-          <S.MakeButton
-            onClick={() => {
-              onClickMakeButton();
-            }}
-          >
-            상품추가
-          </S.MakeButton>
+          <S.ButtonContainer>
+            <S.SelectButton>
+              <S.SelectOption>판매중</S.SelectOption>
+              <S.SelectOption>판매중지</S.SelectOption>
+            </S.SelectButton>
+            <S.MakeButton
+              onClick={() => {
+                onClickMakeButton();
+              }}
+            >
+              상품추가
+            </S.MakeButton>
+          </S.ButtonContainer>
+
           <ProductBox />
         </S.AdminContent>
         <Pagination
