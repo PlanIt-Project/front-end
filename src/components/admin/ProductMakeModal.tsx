@@ -12,7 +12,6 @@ function withExceptionCapturing<S, T extends any[]>(fn: (...rest: T) => Promise<
 }
 
 export default function ProductMakeModal({ setOnModal }: IModal) {
-  // TODO react-hook-form 사용
   const { register,handleSubmit , setValue } = useForm();
 
   const onClickClose = () => {

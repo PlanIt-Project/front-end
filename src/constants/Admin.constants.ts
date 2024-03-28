@@ -210,3 +210,49 @@ export const TRAINER_CONTENTS = [
     gender: "여",
   },
 ]
+
+export const PROGRAM_NAMES = [
+  {
+    id: 1,
+    value: "id",
+  },
+  {
+    id: 2,
+    value: "이름",
+  },
+  {
+    id: 3,
+    value: "남은 횟수",
+  },
+  {
+    id: 4,
+    value: "시작/종료 일자",
+  },
+  {
+    id: 5,
+    value: "정지/재시작 일자",
+  },
+  {
+    id: 6,
+    value: "이용권 상태",
+  },
+  {
+    id: 7,
+    value: "상태 설정",
+  },
+];
+
+export const PROGRAM_CONTENTS = [
+  {
+    id: 1,
+    name: "그룹레슨 3개월",
+    remainNumber:10,
+    startAt : "2024-03-20",
+    endAt : "2024-06-24",
+    suspendAt : "2024-05-01",
+    resumeAt : "",
+    status : "일시 정지",
+  },
+  
+  
+];

@@ -129,6 +129,11 @@ export const Content = styled.span`
   font-size: var(--font-size-600);
 `;
 
+export const DateContent = styled.span`
+  display: flex;
+  flex-direction: column;
+`
+
 export const ModifyButton = styled(CommonButton)`
   width: 80px;
   height: 20px;

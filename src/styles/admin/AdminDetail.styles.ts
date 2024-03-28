@@ -38,11 +38,11 @@ export const DetailContent = styled.div`
   align-self: flex-start;
   gap: 50px;
   width: 100%;
-  margin-left: 110px;
+  margin-left: 70px;
 `;
 
 export const DetailName = styled.span`
-  width: 100px;
+  width: 150px;
   text-align: center;
   font-size: var(--font-size-400);
   font-weight: 600;
@@ -53,6 +53,16 @@ export const DetailText = styled.span`
   width: 230px;
   text-align: center;
 `;
+
+export const DetailDateColumn = styled.span`
+  display: flex;
+  flex-direction: column;
+`
+
+export const DetailDateRow = styled.span`
+  display: flex;
+  flex-direction: row;
+`
 
 export const ButtonContainer = styled.div`
   display: flex;
