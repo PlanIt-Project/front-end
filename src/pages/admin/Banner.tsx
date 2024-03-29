@@ -35,7 +35,7 @@ export default function Banner() {
           page={page}
           totalPage={10}
           setPage={setPage}
-          name={"admin/product"}
+          name={"admin/banner"}
         />
       </S.AdminContainer>
       {onModal && <BannerMakeModal setOnModal={setOnModal} />}

@@ -26,7 +26,7 @@ export default function AdminRequest() {
           page={page}
           totalPage={10}
           setPage={setPage}
-          name={"admin/program"}
+          name={"admin/adminRequest"}
         />
       </S.AdminContainer>
      

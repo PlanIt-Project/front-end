@@ -20,7 +20,7 @@ export default function Trainer() {
           page={page}
           totalPage={10}
           setPage={setPage}
-          name={"admin/product"}
+          name={"admin/trainer"}
         />
       </S.AdminContainer>
     </>
