@@ -14,8 +14,8 @@ export const Overlay = styled.div`
   align-items: center;
 `;
 
-export const Detail = styled.div`
-  width: 550px;
+export const Detail = styled.div<{ $width?: number }>`
+  width: ${props => props.$width ? `${props.$width}px` : "550px"};
   height: fit-content;
   background: var(--background-color-100);
   border-radius: 20px;
@@ -25,6 +25,8 @@ export const Detail = styled.div`
   align-items: center;
   gap: 40px;
 `;
+
+
 
 export const DetailTitle = styled.div`
     font-size: var(--font-size-300);
@@ -53,6 +55,13 @@ export const DetailText = styled.span`
   width: 230px;
   text-align: center;
 `;
+
+export const DetailImage = styled.img`
+  width: 400px;
+  height: 200px;
+  border-radius: 10px;
+  background-color: aliceblue;
+`
 
 export const DetailDateColumn = styled.span`
   display: flex;

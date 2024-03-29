@@ -21,7 +21,7 @@ export default function Product() {
     <>
       <S.AdminContainer>
         <S.AdminContent>
-          <S.Title>상품관리</S.Title>
+          <S.Title>상품 관리</S.Title>
           <S.ButtonContainer>
             <S.SelectButton>
               <S.SelectOption>판매중</S.SelectOption>
@@ -32,7 +32,7 @@ export default function Product() {
                 onClickMakeButton();
               }}
             >
-              상품추가
+              상품 추가
             </S.MakeButton>
           </S.ButtonContainer>
 

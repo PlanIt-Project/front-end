@@ -311,6 +311,36 @@ export const REQUEST_CONTENTS = [
     member:"홍길동",
     trainer:"길동홍"
   },
-  
-  
+];
+
+export const BANNER_NAMES = [
+  {
+    id: 1,
+    value: "id",
+  },
+  {
+    id: 2,
+    value: "배너 제목",
+  },
+  {
+    id: 3,
+    value: "등록일자",
+  },
+  {
+    id: 4,
+    value: "노출 여부",
+  },
+  {
+    id: 5,
+    value: "배너 수정",
+  },
+];
+
+export const BANNER_CONTENTS = [
+  {
+    id: 1,
+    name:"오픈 이벤트",
+    date:"2023-02-01",
+    view:"Y"
+  },
 ];

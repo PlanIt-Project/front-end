@@ -38,7 +38,7 @@ export default function AccountBox() {
                   onClickModifyButton();
                 }}
               >
-                권한설정
+                설정
               </S.ModifyButton>
             </S.ContentBar>
           ))}
