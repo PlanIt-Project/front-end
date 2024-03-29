@@ -1,3 +1,5 @@
+export type IStatus = "RESERVED" | "POSSIBLE" | "FINISHED";
+
 export interface ITrainerReservationData {
   id: number;
   member: null | string;
@@ -9,7 +11,7 @@ export interface ITrainerReservationData {
   programName: null | string;
   reservationTime: string;
   programTime: null | string;
-  status: "RESERVED" | "POSSIBLE" | "FINISHED";
+  status: IStatus;
 }
 
 export interface ITrainerReservationResponse {
@@ -21,5 +23,5 @@ export interface ITrainerReservationResponse {
 export interface IFilteredTimeList {
   id: number;
   reservationTime: string;
-  status: "RESERVED" | "POSSIBLE" | "FINISHED";
+  status: IStatus;
 }

@@ -10,6 +10,7 @@ import { IProgramContent } from "../../types/ticket/ProgramList.types";
 import { getProgramList } from "../../hooks/queries/ticket/getProgramList";
 import { getTrainerReservation } from "../../hooks/queries/reservation/getTrainerReservation";
 import { IFilteredTimeList } from "../../types/reservation/TrainerReservation.types";
+import { filterTimesByStatus } from "../../utils/filterTimeByStatus";
 
 export default function UserReservation() {
   const [programList, setProgramList] = useState<IProgramContent[]>([]);
@@ -47,35 +48,16 @@ export default function UserReservation() {
         }),
       );
 
-      const filteredUnavailableTimes = filteredData
-        .filter(({ status }) => status === "FINISHED")
-        .map((data) => {
-          const time = new Date(data.reservationTime).toLocaleTimeString(
-            "en-GB",
-            {
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: false,
-            },
-          );
-
-          return { id: data.id, reservationTime: time, status: data.status };
-        });
+      const filteredUnavailableTimes = filterTimesByStatus(
+        filteredData,
+        "FINISHED",
+      );
       setUnavailableTimes(filteredUnavailableTimes);
 
-      const filteredReservedTimes = filteredData
-        .filter(({ status }) => status === "RESERVED")
-        .map((data) => {
-          const time = new Date(data.reservationTime).toLocaleTimeString(
-            "en-GB",
-            {
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: false,
-            },
-          );
-          return { id: data.id, reservationTime: time, status: data.status };
-        });
+      const filteredReservedTimes = filterTimesByStatus(
+        filteredData,
+        "RESERVED",
+      );
       setReservedTimes(filteredReservedTimes);
     }
   }, [trainerReservationData]);
