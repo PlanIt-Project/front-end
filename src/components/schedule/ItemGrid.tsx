@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { IItemList } from "../../types/UserReservation.types";
 import { breakPoints } from "../../styles/breakPoints";
+import { IProgramContent } from "../../types/ticket/ProgramList.types";
 
 interface IItemGridProps {
-  item: IItemList;
+  item: IProgramContent;
   isSelected: boolean;
-  onClickItem: (id: string) => void;
+  onClickItem: (id: number) => void;
 }
 
 export default function ItemGrid({
@@ -20,15 +20,11 @@ export default function ItemGrid({
       }}
       $isSelected={isSelected}
     >
-      <Title>{item.name}</Title>
+      <Title>{item.productName}</Title>
       <Contents>
-        {item.startDate} ~ {item.endDate}
+        {item.startAt} ~ {item.endAt}
       </Contents>
-      <Contents>
-        <span className="strong">90일 남음</span> <span> / </span>{" "}
-        <span> 총 90일</span>
-      </Contents>
-      <Contents>{item.trainer}</Contents>
+      <Contents>{item.employee?.name}</Contents>
     </Container>
   );
 }

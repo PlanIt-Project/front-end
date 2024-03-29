@@ -1,4 +1,4 @@
 export interface ICalendarProps {
-  selectedDay: Date;
-  handleClickDay: (day: Date) => void;
+  selectedDay: string;
+  handleClickDay: (day: string) => void;
 }

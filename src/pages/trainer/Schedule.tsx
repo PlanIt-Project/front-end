@@ -11,7 +11,7 @@ export default function TrainerSchedule() {
   const [selectedDay, setSelectedDay] = useState(TODAY);
   const [selectedTime, setSelectedTime] = useState("");
 
-  const handleClickDay = (day: Date) => {
+  const handleClickDay = (day: string) => {
     setSelectedDay(day);
   };
 
