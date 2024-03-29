@@ -1,35 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Calendar from "../../components/schedule/Calendar";
 import * as S from "../../styles/Schedule.styles";
 import { TODAY } from "../../constants/Calendar.constants";
 import { useNavigate } from "react-router";
 import ModalPortal from "../../components/modal/ModalPortal";
 import ConfirmModal from "../../components/modal/ConfirmModal";
+import { getUserSchedule } from "../../hooks/queries/reservation/getUserSchedule";
+import dayjs from "dayjs";
+import { IUserScheduleData } from "../../types/reservation/UserReservation.types";
 
 export default function UserSchedule() {
-  const scheduleList = [
-    {
-      id: "1",
-      trainer: "홍길동",
-      time: "오전 11:00 ~ 11:50",
-      item: "개인 레슨 3개월",
-    },
-    {
-      id: "2",
-      trainer: "홍길동",
-      time: "오전 11:00 ~ 11:50",
-      item: "개인 레슨 3개월",
-    },
-    {
-      id: "3",
-      trainer: "홍길동",
-      time: "오전 11:00 ~ 11:50",
-      item: "개인 레슨 3개월",
-    },
-  ];
-
   const [selectedDay, setSelectedDay] = useState(TODAY);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [userSchedule, setUserSchedule] = useState<IUserScheduleData[]>();
+
+  const { data } = getUserSchedule(selectedDay);
+
+  useEffect(() => {
+    if (data) setUserSchedule(data[selectedDay]);
+  }, [data]);
 
   const navigate = useNavigate();
 
@@ -38,11 +27,11 @@ export default function UserSchedule() {
   };
 
   // NOTE 날짜 선택
-  const handleClickDay = (day: Date) => {
+  const handleClickDay = (day: string) => {
     setSelectedDay(day);
   };
 
-  const handleMoveToEdit = (id: string) => {
+  const handleMoveToEdit = (id: number) => {
     navigate(`/user/reservation/${id}`);
   };
 
@@ -63,17 +52,17 @@ export default function UserSchedule() {
         </S.CalendarContainer>
         <S.BottomContainer>
           <S.Title>
-            {selectedDay.getFullYear()}년 {selectedDay.getMonth() + 1}월{" "}
-            {selectedDay.getDate()}일 예약 내역
+            {dayjs(selectedDay).year()}년 {dayjs(selectedDay).month() + 1}월{" "}
+            {dayjs(selectedDay).date()}일 예약 내역
           </S.Title>
-          {scheduleList ? (
-            scheduleList.map((schedule) => (
+          {userSchedule ? (
+            userSchedule.map((schedule) => (
               <S.ReservationContainer key={schedule.id}>
                 <S.LeftContainer>
                   <S.InfoContainer>
-                    <p>{schedule.trainer}</p>
-                    <p>{schedule.time}</p>
-                    <p>이용권 : {schedule.item}</p>
+                    <p>{schedule.employee.name}</p>
+                    <p>{schedule.reservationTime}</p>
+                    <p>이용권 : {schedule.programName}</p>
                   </S.InfoContainer>
                 </S.LeftContainer>
                 <S.RightContainer>

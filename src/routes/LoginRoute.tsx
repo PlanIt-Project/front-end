@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { Navigate, Outlet } from "react-router";
+import { useAuthStore } from "../stores/authStore";
 
 export default function LoginRoute() {
-  // TODO 로그인 연결 시 zustand로 대체 필요
-  const login = useState(true);
+  const { user } = useAuthStore((state) => state);
 
-  return !login ? <Navigate to="/login" /> : <Outlet />;
+  return !user?.role ? <Navigate to="/login" /> : <Outlet />;
 }
