@@ -142,3 +142,16 @@ export const ModifyButton = styled(CommonButton)`
     background-color: var(--main-color-300);
   }
 `;
+
+export const DisableButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  width: 80px;
+  height: 20px;
+  padding: 10px;
+  font-size: var(--font-size-500);
+  color: white;
+  background-color: var(--white-color-700);
+`

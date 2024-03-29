@@ -256,3 +256,61 @@ export const PROGRAM_CONTENTS = [
   
   
 ];
+
+export const REQUEST_NAMES = [
+  {
+    id: 1,
+    value: "id",
+  },
+  {
+    id: 2,
+    value: "등록 일자",
+  },
+  {
+    id: 3,
+    value: "상품명",
+  },
+  {
+    id: 4,
+    value: "회원",
+  },
+  {
+    id: 5,
+    value: "트레이너",
+  },
+  {
+    id: 6,
+    value: "결제 금액",
+  },
+  {
+    id: 7,
+    value: "상태",
+  },
+  {
+    id: 8,
+    value: "등록 설정",
+  },
+];
+
+export const REQUEST_CONTENTS = [
+  {
+    id: 1,
+    registrationAt:"2012-01-01",
+    status:"승인 대기 중",
+    totalPrice:140000,
+    productName:"개인레슨 3개월",
+    member:"홍길동",
+    trainer:"길동홍"
+  },
+  {
+    id: 2,
+    registrationAt:"2012-01-01",
+    status:"취소됨",
+    totalPrice:280000,
+    productName:"개인레슨 6개월",
+    member:"홍길동",
+    trainer:"길동홍"
+  },
+  
+  
+];
