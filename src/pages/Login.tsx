@@ -4,13 +4,10 @@ import { useNavigate } from "react-router";
 import { LoginSignUpContainer } from "../styles/LoginSignUp.style";
 import { useState, ChangeEvent } from "react";
 import { getLogin } from "../hooks/queries/login/getLogin";
-<<<<<<< HEAD
-=======
 import googleicon from "../assets/GoogleIcon.svg";
 import kakaoicon from "../assets/KakaoIcon.svg";
 import navericon from "../assets/NaverIcon.svg";
 import ToastNotification from "../components/modal/ToastNotification";
->>>>>>> 2f401cd28126a553131463197c5bb02d92d1094e
 
 export default function Login() {
   const [email, setEmail] = useState<string>("abcd");
@@ -24,10 +21,6 @@ export default function Login() {
     setIsToastOpen,
     setLoginError,
   );
-
-  const navigate = useNavigate();
-
-  const { mutate: loginMutate } = getLogin(email, password);
 
   const navigate = useNavigate();
 
@@ -51,10 +44,6 @@ export default function Login() {
 
   const handleLogin = () => {
     loginMutate();
-<<<<<<< HEAD
-    navigate("/main");
-=======
->>>>>>> 2f401cd28126a553131463197c5bb02d92d1094e
   };
 
   return (
