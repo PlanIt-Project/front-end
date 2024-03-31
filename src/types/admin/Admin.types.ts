@@ -1,14 +1,12 @@
 import { Dispatch, SetStateAction } from "react";
 
-export interface IProductModal {
+export interface IModal {
   setOnModal: Dispatch<SetStateAction<boolean>>;
+  id?:number;
 }
 
-export interface IProductDetail {
+export interface IDetail {
   setOnDetail:Dispatch<SetStateAction<boolean>>;
   id: number;
 }
 
-export interface IAccountModal {
-  setOnModal: Dispatch<SetStateAction<boolean>>;
-}
