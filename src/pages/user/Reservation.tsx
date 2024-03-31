@@ -8,24 +8,59 @@ import { TODAY } from "../../constants/Calendar.constants";
 import Time from "../../components/schedule/Time";
 import { IProgramContent } from "../../types/ticket/ProgramList.types";
 import { getProgramList } from "../../hooks/queries/ticket/getProgramList";
+import { getTrainerReservation } from "../../hooks/queries/reservation/getTrainerReservation";
+import { IFilteredTimeList } from "../../types/reservation/TrainerReservation.types";
+import { filterTimesByStatus } from "../../utils/filterTimeByStatus";
 
 export default function UserReservation() {
-  const unavailableTimes = ["6:00", "14:00", "18:00"];
-
   const [programList, setProgramList] = useState<IProgramContent[]>([]);
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
   const [selectedDay, setSelectedDay] = useState(TODAY);
-  const [selectedItem, setSelectedItem] = useState<number | null>();
+  const [selectedItem, setSelectedItem] = useState<number>(-1);
+  const [unavailableTimes, setUnavailableTimes] = useState<IFilteredTimeList[]>(
+    [],
+  );
+  const [reservedTimes, setReservedTimes] = useState<IFilteredTimeList[]>([]);
   const [selectedTime, setSelectedTime] = useState("");
 
   const itemScrollRef = useRef<HTMLDivElement>(null);
 
-  const { data } = getProgramList("VALID");
+  const { data: programListData } = getProgramList("VALID");
+  const { data: trainerReservationData } = getTrainerReservation(
+    selectedItem,
+    selectedDay,
+  );
 
+  // NOTE 프로그램 리스트
   useEffect(() => {
-    if (data) setProgramList(data.content);
-  }, [data]);
+    if (programListData) setProgramList(programListData.content);
+  }, [programListData]);
+
+  // NOTE 트레이너 시간 리스트
+  useEffect(() => {
+    if (trainerReservationData) {
+      const filteredData = trainerReservationData.data.map(
+        ({ id, reservationTime, status }) => ({
+          id,
+          reservationTime,
+          status,
+        }),
+      );
+
+      const filteredUnavailableTimes = filterTimesByStatus(
+        filteredData,
+        "FINISHED",
+      );
+      setUnavailableTimes(filteredUnavailableTimes);
+
+      const filteredReservedTimes = filterTimesByStatus(
+        filteredData,
+        "RESERVED",
+      );
+      setReservedTimes(filteredReservedTimes);
+    }
+  }, [trainerReservationData]);
 
   const dragFunction = dragFn(
     itemScrollRef,
@@ -46,7 +81,16 @@ export default function UserReservation() {
   };
 
   const isTimeAvailable = (time: string) => {
-    return !unavailableTimes.includes(time);
+    // 예약 불가능한 시간들을 포함하는 배열에서 주어진 시간과 일치하는 항목을 찾는다
+    const isUnavailable = unavailableTimes.some(
+      (t) => t.reservationTime === time,
+    );
+
+    // 이미 예약된 시간들을 포함하는 배열에서 주어진 시간과 일치하는 항목을 찾는다
+    const isReserved = reservedTimes.some((t) => t.reservationTime === time);
+
+    // 주어진 시간이 unavailableTimes 또는 reservedTimes 배열에 없으면 해당 시간은 예약 가능
+    return !isUnavailable && !isReserved;
   };
 
   const handleClickTime = (time: string) => {
