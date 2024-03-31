@@ -21,12 +21,8 @@ export default function UserReservation() {
   const [selectedDay, setSelectedDay] = useState(TODAY);
   const [selectedItem, setSelectedItem] = useState<number>(-1);
   const [availableTimes, setAvailableTimes] = useState<IFilteredTimeList[]>([]);
-  const [unavailableTimes, setUnavailableTimes] = useState<IFilteredTimeList[]>(
-    [],
-  );
-  const [reservedTimes, setReservedTimes] = useState<IFilteredTimeList[]>([]);
   const [selectedTime, setSelectedTime] = useState("");
-  const [selectedProgramId, setSelectedProgramId] = useState<number>(-1);
+  const [reservationId, setReservationId] = useState<number>(-1);
   const [isToastOpen, setIsToastOpen] = useState(false);
 
   const itemScrollRef = useRef<HTMLDivElement>(null);
@@ -38,8 +34,8 @@ export default function UserReservation() {
   );
 
   const { mutate: userReservationMutate } = registerUserReservation(
+    reservationId,
     selectedItem,
-    selectedProgramId,
     setIsToastOpen,
   );
 
@@ -63,18 +59,6 @@ export default function UserReservation() {
         "POSSIBLE",
       );
       setAvailableTimes(filteredAvailableTimes);
-
-      const filteredUnavailableTimes = filterTimesByStatus(
-        filteredData,
-        "FINISHED",
-      );
-      setUnavailableTimes(filteredUnavailableTimes);
-
-      const filteredReservedTimes = filterTimesByStatus(
-        filteredData,
-        "RESERVED",
-      );
-      setReservedTimes(filteredReservedTimes);
     }
   }, [trainerReservationData]);
 
@@ -97,13 +81,10 @@ export default function UserReservation() {
   };
 
   const getTimeStatus = (time: string) => {
-    if (unavailableTimes.some((t) => t.reservationTime === time)) {
-      return "unavailable";
-    }
-    if (reservedTimes.some((t) => t.reservationTime === time)) {
-      return "reserved";
-    }
-    return "available";
+    const isTimeAvailable = availableTimes.some(
+      (t) => t.reservationTime === time,
+    );
+    return isTimeAvailable ? "available" : "unavailable";
   };
 
   const handleClickTime = (time: string) => {
@@ -112,14 +93,14 @@ export default function UserReservation() {
     const program = availableTimes.find((p) => p.reservationTime === time);
 
     if (program) {
-      setSelectedProgramId(program.id);
+      setReservationId(program.id);
     } else {
-      setSelectedProgramId(-1);
+      setReservationId(-1);
     }
   };
 
   const handleRegister = () => {
-    if (selectedProgramId !== -1) userReservationMutate();
+    if (reservationId !== -1) userReservationMutate();
   };
 
   return (

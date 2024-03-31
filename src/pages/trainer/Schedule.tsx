@@ -10,21 +10,17 @@ export default function TrainerSchedule() {
 
   const [selectedDay, setSelectedDay] = useState(TODAY);
   const [selectedTime, setSelectedTime] = useState("");
-  const [unavailableTimes] = useState<any>([]);
-  const [reservedTimes] = useState<any>([]);
+  const [availableTimes] = useState<any[]>([]);
 
   const handleClickDay = (day: string) => {
     setSelectedDay(day);
   };
 
   const getTimeStatus = (time: string) => {
-    if (unavailableTimes.some((t: any) => t.reservationTime === time)) {
-      return "unavailable";
-    }
-    if (reservedTimes.some((t: any) => t.reservationTime === time)) {
-      return "reserved";
-    }
-    return "available";
+    const isTimeAvailable = availableTimes.some(
+      (t) => t.reservationTime === time,
+    );
+    return isTimeAvailable ? "available" : "unavailable";
   };
 
   const handleClickTime = (time: string) => {
