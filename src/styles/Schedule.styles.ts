@@ -233,7 +233,10 @@ export const TimeContainer = styled.div`
   }
 `;
 
-export const Time = styled.div<{ $disabled: boolean; $isSelected: boolean }>`
+export const Time = styled.div<{
+  $status: "unavailable" | "available" | "reserved";
+  $isSelected: boolean;
+}>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -241,10 +244,18 @@ export const Time = styled.div<{ $disabled: boolean; $isSelected: boolean }>`
   font-size: var(--font-size-400);
   height: 150%;
   padding: 0 2px;
-  color: ${(props) => props.$disabled && "var(--white-color-600)"};
+  color: ${(props) =>
+    props.$status === "unavailable"
+      ? "var(--white-color-600)"
+      : props.$status === "reserved"
+        ? "var(--white-color-700)"
+        : "var(--white-color-800)"};
   background-color: ${(props) => props.$isSelected && "var(--main-color-200)"};
   border-radius: 50%;
-  cursor: ${(props) => (props.$disabled ? "not-allowed" : "pointer")};
+  cursor: ${(props) =>
+    props.$status === "unavailable" || props.$status === "reserved"
+      ? "not-allowed"
+      : "pointer"};
 
   @media screen and (max-width: ${breakPoints.small}px) {
     font-size: var(--font-size-600);
