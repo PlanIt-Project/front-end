@@ -106,7 +106,17 @@ export const Day = styled.div`
   }
 
   &.otherMonth {
-    color: var(--white-color-500);
+    color: var(--white-color-700);
     cursor: default;
+  }
+
+  &.pastDay {
+    color: var(--white-color-400);
+    cursor: not-allowed;
+  }
+
+  &.otherMonthBeforeToday {
+    color: var(--white-color-400);
+    cursor: not-allowed;
   }
 `;

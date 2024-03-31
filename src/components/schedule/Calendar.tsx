@@ -59,22 +59,24 @@ export default function Calendar({
     return calendarDays.map((day: string, index: number) => {
       const dayObject = dayjs(day);
       const isCurrentMonth = dayObject.month() === dayjs(currentMonth).month();
-      const today = dayjs().format("YYYY-MM-DD");
+      const isBeforeToday = dayObject.isBefore(TODAY, "day");
 
-      const dayClass = !isCurrentMonth
-        ? "otherMonth"
-        : day < today
-          ? "prevDay"
-          : "futureDay";
+      let dayClass = "futureDay";
 
-      const selectedDayClass = isSameDay(day, selectedDay) ? "choiceDay" : "";
+      if (isCurrentMonth) {
+        dayClass = isBeforeToday ? "pastDay" : "futureDay";
+      } else {
+        dayClass = isBeforeToday ? "otherMonthBeforeToday" : "otherMonth";
+      }
+
+      if (isSameDay(day, selectedDay)) dayClass = "choiceDay";
 
       return (
         <S.CalendarDay key={index}>
           <S.Day
-            className={`${dayClass} ${selectedDayClass}`}
+            className={`${dayClass}`}
             onClick={() => {
-              if (isCurrentMonth) {
+              if (isCurrentMonth && !isBeforeToday) {
                 handleClickDay(dayObject.format("YYYY-MM-DD"));
               }
             }}
