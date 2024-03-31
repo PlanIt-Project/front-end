@@ -6,17 +6,25 @@ import { TODAY } from "../../constants/Calendar.constants";
 import Time from "../../components/schedule/Time";
 
 export default function TrainerSchedule() {
-  const unavailableTimes = ["6:00", "14:00", "18:00"];
+  // const unavailableTimes = ["6:00", "14:00", "18:00"];
 
   const [selectedDay, setSelectedDay] = useState(TODAY);
   const [selectedTime, setSelectedTime] = useState("");
+  const [unavailableTimes] = useState<any>([]);
+  const [reservedTimes] = useState<any>([]);
 
   const handleClickDay = (day: string) => {
     setSelectedDay(day);
   };
 
-  const isTimeAvailable = (time: string) => {
-    return !unavailableTimes.includes(time);
+  const getTimeStatus = (time: string) => {
+    if (unavailableTimes.some((t: any) => t.reservationTime === time)) {
+      return "unavailable";
+    }
+    if (reservedTimes.some((t: any) => t.reservationTime === time)) {
+      return "reserved";
+    }
+    return "available";
   };
 
   const handleClickTime = (time: string) => {
@@ -35,7 +43,7 @@ export default function TrainerSchedule() {
         <Time
           selectedDay={selectedDay}
           selectedTime={selectedTime}
-          isTimeAvailable={isTimeAvailable}
+          getTimeStatus={getTimeStatus}
           handleClickTime={handleClickTime}
         />
         <S.ReservationButton>설정하기</S.ReservationButton>

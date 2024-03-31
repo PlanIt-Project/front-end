@@ -23,8 +23,12 @@ export interface IMemberData {
   birth: string;
   address: string;
   role: "ADMIN" | "TRAINER" | "MEMBER";
-  trainerInfo: null | string;
-  id: null | string;
+  trainerInfo: {
+    id: number;
+    career: string;
+    trainerMessage: null | string;
+  };
+  id: null | number;
 }
 
 export interface IMemberResponse {

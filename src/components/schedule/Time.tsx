@@ -6,7 +6,7 @@ import { ITimeProps } from "../../types/Time.types";
 export default function Time({
   selectedDay,
   selectedTime,
-  isTimeAvailable,
+  getTimeStatus,
   handleClickTime,
 }: ITimeProps) {
   const { morningTimes, afternoonTimes, eveningTimes } = OPEN_TIME();
@@ -23,7 +23,7 @@ export default function Time({
           {morningTimes.map((morning, index) => (
             <S.Time
               key={index}
-              $disabled={!isTimeAvailable(morning)}
+              $status={getTimeStatus(morning)}
               $isSelected={selectedTime === morning}
               onClick={() => {
                 handleClickTime(morning);
@@ -40,7 +40,7 @@ export default function Time({
           {afternoonTimes.map((afternoon, index) => (
             <S.Time
               key={index}
-              $disabled={!isTimeAvailable(afternoon)}
+              $status={getTimeStatus(afternoon)}
               $isSelected={selectedTime === afternoon}
               onClick={() => {
                 handleClickTime(afternoon);
@@ -57,7 +57,7 @@ export default function Time({
           {eveningTimes.map((evening, index) => (
             <S.Time
               key={index}
-              $disabled={!isTimeAvailable(evening)}
+              $status={getTimeStatus(evening)}
               $isSelected={selectedTime === evening}
               onClick={() => {
                 handleClickTime(evening);

@@ -26,7 +26,7 @@ class TrainerMenuFactory implements MenuFactory {
   public createMenuList() {
     return [
       { label: "PlanIt?", path: "/about" },
-      { label: "스케줄", path: "/trainer/schedule" },
+      { label: "스케줄", path: "/trainer/reservation" },
     ];
   }
 }

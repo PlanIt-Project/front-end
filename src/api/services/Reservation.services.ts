@@ -1,3 +1,4 @@
+import { IRegisterUserReservationResponse } from "../../hooks/queries/reservation/registerUserReservation";
 import { ITrainerReservationResponse } from "../../types/reservation/TrainerReservation.types";
 import { IUserScheduleResponse } from "../../types/reservation/UserReservation.types";
 import { instance } from "../instance";
@@ -14,5 +15,14 @@ export const getTrainerReservationService = async (
 ): Promise<ITrainerReservationResponse> => {
   return await instance.get(`/reservation/trainer/${trainerId}`, {
     params: { date },
+  });
+};
+
+export const registerUserReservationService = async (
+  reservationId: number,
+  programId: number,
+): Promise<IRegisterUserReservationResponse> => {
+  return await instance.post(`/reservation/${reservationId}`, {
+    programId,
   });
 };
