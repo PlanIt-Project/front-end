@@ -19,6 +19,14 @@ export default function Menu() {
     setonMenu(!onMenu);
   };
 
+  const handleLogout = () => {
+    useAuthStore.setState({
+      accessToken: "",
+      refreshToken: "",
+      user: null,
+    });
+  };
+
   return (
     <>
       {menuList.map((menu: any, index: number) => (
@@ -47,7 +55,7 @@ export default function Menu() {
             <S.Infomation>홍길동</S.Infomation>
             <S.ProfileButtons>
               <S.Button>수정하기</S.Button>
-              <S.Button>로그아웃</S.Button>
+              <S.Button onClick={handleLogout}>로그아웃</S.Button>
             </S.ProfileButtons>
           </S.ProfileMenu>
         </S.Overlay>
