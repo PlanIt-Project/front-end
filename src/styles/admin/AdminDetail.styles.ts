@@ -14,8 +14,8 @@ export const Overlay = styled.div`
   align-items: center;
 `;
 
-export const Detail = styled.div`
-  width: 550px;
+export const Detail = styled.div<{ $width?: number }>`
+  width: ${props => props.$width ? `${props.$width}px` : "550px"};
   height: fit-content;
   background: var(--background-color-100);
   border-radius: 20px;
@@ -25,6 +25,8 @@ export const Detail = styled.div`
   align-items: center;
   gap: 40px;
 `;
+
+
 
 export const DetailTitle = styled.div`
     font-size: var(--font-size-300);
@@ -38,11 +40,11 @@ export const DetailContent = styled.div`
   align-self: flex-start;
   gap: 50px;
   width: 100%;
-  margin-left: 110px;
+  margin-left: 70px;
 `;
 
 export const DetailName = styled.span`
-  width: 100px;
+  width: 150px;
   text-align: center;
   font-size: var(--font-size-400);
   font-weight: 600;
@@ -53,6 +55,23 @@ export const DetailText = styled.span`
   width: 230px;
   text-align: center;
 `;
+
+export const DetailImage = styled.img`
+  width: 400px;
+  height: 200px;
+  border-radius: 10px;
+  background-color: aliceblue;
+`
+
+export const DetailDateColumn = styled.span`
+  display: flex;
+  flex-direction: column;
+`
+
+export const DetailDateRow = styled.span`
+  display: flex;
+  flex-direction: row;
+`
 
 export const ButtonContainer = styled.div`
   display: flex;
@@ -69,23 +88,3 @@ export const DetailButton = styled(CommonButton)`
   }
 `;
 
-export const LittleModal = styled.div`
-  width: 400px;
-  height: fit-content;
-  background: var(--background-color-100);
-  border-radius: 20px;
-  padding: 50px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-`;
-
-export const LittleModalTitle = styled.div`
-  font-weight: 600;
-  font-size: var(--font-size-400);
-`;
-
-export const LittleModalText = styled.div`
-  font-size: var(--font-size-400);
-`;
