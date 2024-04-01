@@ -43,7 +43,7 @@ export default function UserReservation() {
 
   // NOTE 수정 페이지
   useEffect(() => {
-    if (params) {
+    if (params.reservationId && params.programId) {
       const reservationId = Number(params.reservationId);
       const programId = Number(params.programId);
       const reservation = params.reservationTime;
