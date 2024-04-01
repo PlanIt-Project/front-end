@@ -31,8 +31,14 @@ export default function UserSchedule() {
     setSelectedDay(day);
   };
 
-  const handleMoveToEdit = (id: number) => {
-    navigate(`/user/reservation/${id}`);
+  const handleMoveToEdit = (
+    reservationId: number,
+    programId: number,
+    reservationTime: string,
+  ) => {
+    navigate(
+      `/user/reservation/${reservationId}/${programId}/${reservationTime}`,
+    );
   };
 
   const handleCancel = () => {
@@ -68,7 +74,11 @@ export default function UserSchedule() {
                 <S.RightContainer>
                   <S.ChangeDeleteButton
                     onClick={() => {
-                      handleMoveToEdit(schedule.id);
+                      handleMoveToEdit(
+                        schedule.id,
+                        schedule.programId,
+                        schedule.reservationTime,
+                      );
                     }}
                   >
                     변경하기

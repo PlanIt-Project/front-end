@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
               { path: "/user/schedule", element: <UserSchedule /> },
               { path: "/user/reservation", element: <UserReservation /> },
               {
-                path: "/user/reservation/:reservationId",
+                path: "/user/reservation/:reservationId/:programId/:reservationTime",
                 element: <UserReservation />,
               },
             ],
