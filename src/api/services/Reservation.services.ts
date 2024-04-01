@@ -1,3 +1,4 @@
+import { ICancelUserReservationResponse } from "../../hooks/queries/reservation/cancelUserReservation";
 import { IRegisterUserReservationResponse } from "../../hooks/queries/reservation/registerUserReservation";
 import { ITrainerReservationResponse } from "../../types/reservation/TrainerReservation.types";
 import { IUserScheduleResponse } from "../../types/reservation/UserReservation.types";
@@ -25,4 +26,10 @@ export const registerUserReservationService = async (
   return await instance.post(`/reservation/${reservationId}`, {
     programId,
   });
+};
+
+export const cancelUserReservationService = async (
+  reservationId: number,
+): Promise<ICancelUserReservationResponse> => {
+  return await instance.delete(`/reservation/${reservationId}`);
 };
