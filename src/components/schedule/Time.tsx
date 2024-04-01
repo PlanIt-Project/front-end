@@ -9,7 +9,7 @@ export default function Time({
   getTimeStatus,
   handleClickTime,
 }: ITimeProps) {
-  const { morningTimes, afternoonTimes, eveningTimes } = OPEN_TIME();
+  const { dawnTimes, morningTimes, afternoonTimes, nightTimes } = OPEN_TIME();
 
   return (
     <>
@@ -17,6 +17,23 @@ export default function Time({
         {dayjs(selectedDay).year()}년 {dayjs(selectedDay).month() + 1}월{" "}
         {dayjs(selectedDay).date()}일
       </S.Title>
+      <S.TimeTitleContainer>
+        <S.TimeTitle>새벽</S.TimeTitle>
+        <S.TimeContainer>
+          {dawnTimes.map((dawn, index) => (
+            <S.Time
+              key={index}
+              $status={getTimeStatus(dawn)}
+              $isSelected={selectedTime === dawn}
+              onClick={() => {
+                handleClickTime(dawn);
+              }}
+            >
+              {dawn}
+            </S.Time>
+          ))}
+        </S.TimeContainer>
+      </S.TimeTitleContainer>
       <S.TimeTitleContainer>
         <S.TimeTitle>오전</S.TimeTitle>
         <S.TimeContainer>
@@ -52,18 +69,18 @@ export default function Time({
         </S.TimeContainer>
       </S.TimeTitleContainer>
       <S.TimeTitleContainer>
-        <S.TimeTitle>저녁</S.TimeTitle>
+        <S.TimeTitle>밤</S.TimeTitle>
         <S.TimeContainer>
-          {eveningTimes.map((evening, index) => (
+          {nightTimes.map((night, index) => (
             <S.Time
               key={index}
-              $status={getTimeStatus(evening)}
-              $isSelected={selectedTime === evening}
+              $status={getTimeStatus(night)}
+              $isSelected={selectedTime === night}
               onClick={() => {
-                handleClickTime(evening);
+                handleClickTime(night);
               }}
             >
-              {evening}
+              {night}
             </S.Time>
           ))}
         </S.TimeContainer>
