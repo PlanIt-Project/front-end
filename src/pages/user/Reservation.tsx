@@ -113,6 +113,8 @@ export default function UserReservation() {
   };
 
   const handleClickTime = (time: string) => {
+    if (getTimeStatus(time) === "unavailable") return;
+
     setSelectedTime(time);
 
     const program = availableTimes.find((p) => p.reservationTime === time);
