@@ -13,6 +13,7 @@ import { IFilteredTimeList } from "../../types/reservation/TrainerReservation.ty
 import { filterTimesByStatus } from "../../utils/filterTimeByStatus";
 import { registerUserReservation } from "../../hooks/queries/reservation/registerUserReservation";
 import ToastNotification from "../../components/modal/ToastNotification";
+import { useNavigate } from "react-router";
 
 export default function UserReservation() {
   const [programList, setProgramList] = useState<IProgramContent[]>([]);
@@ -33,11 +34,10 @@ export default function UserReservation() {
     selectedDay,
   );
 
-  const { mutate: userReservationMutate } = registerUserReservation(
-    reservationId,
-    selectedItem,
-    setIsToastOpen,
-  );
+  const { mutate: userReservationMutate, isSuccess: isRegisterSuccess } =
+    registerUserReservation(reservationId, selectedItem, setIsToastOpen);
+
+  const navigate = useNavigate();
 
   // NOTE 프로그램 리스트
   useEffect(() => {
@@ -61,6 +61,12 @@ export default function UserReservation() {
       setAvailableTimes(filteredAvailableTimes);
     }
   }, [trainerReservationData]);
+
+  useEffect(() => {
+    if (!isToastOpen && isRegisterSuccess) {
+      navigate("/user/schedule");
+    }
+  });
 
   const dragFunction = dragFn(
     itemScrollRef,
