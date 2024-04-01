@@ -11,6 +11,17 @@ export default function Time({
 }: ITimeProps) {
   const { dawnTimes, morningTimes, afternoonTimes, nightTimes } = OPEN_TIME();
 
+  const getSelectedTimeType = (
+    selectedTime: string | string[],
+    timeBoundary: string,
+  ) => {
+    if (typeof selectedTime === "string") {
+      return selectedTime === timeBoundary;
+    } else {
+      return selectedTime.includes(timeBoundary);
+    }
+  };
+
   return (
     <>
       <S.Title className="reservation">
@@ -24,7 +35,7 @@ export default function Time({
             <S.Time
               key={index}
               $status={getTimeStatus(dawn)}
-              $isSelected={selectedTime === dawn}
+              $isSelected={getSelectedTimeType(selectedTime, dawn)}
               onClick={() => {
                 handleClickTime(dawn);
               }}
@@ -41,7 +52,7 @@ export default function Time({
             <S.Time
               key={index}
               $status={getTimeStatus(morning)}
-              $isSelected={selectedTime === morning}
+              $isSelected={getSelectedTimeType(selectedTime, morning)}
               onClick={() => {
                 handleClickTime(morning);
               }}
@@ -58,7 +69,7 @@ export default function Time({
             <S.Time
               key={index}
               $status={getTimeStatus(afternoon)}
-              $isSelected={selectedTime === afternoon}
+              $isSelected={getSelectedTimeType(selectedTime, afternoon)}
               onClick={() => {
                 handleClickTime(afternoon);
               }}
@@ -75,7 +86,7 @@ export default function Time({
             <S.Time
               key={index}
               $status={getTimeStatus(night)}
-              $isSelected={selectedTime === night}
+              $isSelected={getSelectedTimeType(selectedTime, night)}
               onClick={() => {
                 handleClickTime(night);
               }}
