@@ -10,6 +10,7 @@ import dayjs from "dayjs";
 import { IUserScheduleData } from "../../types/reservation/UserReservation.types";
 import ToastNotification from "../../components/modal/ToastNotification";
 import { cancelUserReservation } from "../../hooks/queries/reservation/cancelUserReservation";
+import { getTimeWithLabel } from "../../utils/getTimeWithLabel";
 
 export default function UserSchedule() {
   const [selectedDay, setSelectedDay] = useState(TODAY);
@@ -77,7 +78,7 @@ export default function UserSchedule() {
                 <S.LeftContainer>
                   <S.InfoContainer>
                     <p>{schedule.employee.name}</p>
-                    <p>{schedule.reservationTime}</p>
+                    <p>{getTimeWithLabel(schedule.reservationTime)}</p>
                     <p>이용권 : {schedule.programName}</p>
                   </S.InfoContainer>
                 </S.LeftContainer>

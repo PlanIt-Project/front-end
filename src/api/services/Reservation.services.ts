@@ -6,8 +6,11 @@ import { instance } from "../instance";
 
 export const getUserScheduleService = async (
   date: string,
+  option?: string,
 ): Promise<IUserScheduleResponse> => {
-  return await instance.get("/reservation", { params: { date } });
+  return await instance.get("/reservation", {
+    params: { date, option: option ?? "ALL" },
+  });
 };
 
 export const getTrainerReservationService = async (
