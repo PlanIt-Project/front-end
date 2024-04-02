@@ -9,10 +9,57 @@ export const Container = styled.div`
   height: calc((var(--vh, 1vh) * 100) - 90px);
 `;
 
-export const Banner = styled.div`
+export const BannerContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 40%;
   border: 1px solid gray;
+  overflow: hidden;
+`;
+
+export const BannerLeftArrow = styled.button<{ $disabled: boolean }>`
+  position: absolute;
+  left: 1%;
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: var(--white-color-600);
+  opacity: ${(props) => props.$disabled && "0.4"};
+  cursor: ${(props) => (props.$disabled ? "not-allowed" : "pointer")};
+  z-index: 2;
+`;
+
+export const BannerRightArrow = styled.button<{ $disabled: boolean }>`
+  position: absolute;
+  right: 1%;
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: var(--white-color-600);
+  opacity: ${(props) => props.$disabled && "0.4"};
+  cursor: ${(props) => (props.$disabled ? "not-allowed" : "pointer")};
+  z-index: 2;
+`;
+
+export const ArrowIcon = styled.img`
+  width: 80%;
+  height: 80%;
+`;
+
+export const Banner = styled.div<{ $translateX: number }>`
+  min-width: 100%;
+  height: 100%;
+  transform: ${(props) => `translateX(-${props.$translateX}%)`};
 `;
 
 export const TrainerContainer = styled.div`
