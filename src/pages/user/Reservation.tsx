@@ -13,6 +13,8 @@ import { IFilteredTimeList } from "../../types/reservation/TrainerReservation.ty
 import { filterTimesByStatus } from "../../utils/filterTimeByStatus";
 import { registerUserReservation } from "../../hooks/queries/reservation/registerUserReservation";
 import ToastNotification from "../../components/modal/ToastNotification";
+import { useNavigate, useParams } from "react-router";
+import dayjs from "dayjs";
 
 export default function UserReservation() {
   const [programList, setProgramList] = useState<IProgramContent[]>([]);
@@ -21,12 +23,8 @@ export default function UserReservation() {
   const [selectedDay, setSelectedDay] = useState(TODAY);
   const [selectedItem, setSelectedItem] = useState<number>(-1);
   const [availableTimes, setAvailableTimes] = useState<IFilteredTimeList[]>([]);
-  const [unavailableTimes, setUnavailableTimes] = useState<IFilteredTimeList[]>(
-    [],
-  );
-  const [reservedTimes, setReservedTimes] = useState<IFilteredTimeList[]>([]);
   const [selectedTime, setSelectedTime] = useState("");
-  const [selectedProgramId, setSelectedProgramId] = useState<number>(-1);
+  const [reservationId, setReservationId] = useState<number>(-1);
   const [isToastOpen, setIsToastOpen] = useState(false);
 
   const itemScrollRef = useRef<HTMLDivElement>(null);
@@ -37,11 +35,27 @@ export default function UserReservation() {
     selectedDay,
   );
 
-  const { mutate: userReservationMutate } = registerUserReservation(
-    selectedItem,
-    selectedProgramId,
-    setIsToastOpen,
-  );
+  const { mutate: userReservationMutate, isSuccess: isRegisterSuccess } =
+    registerUserReservation(reservationId, selectedItem, setIsToastOpen);
+
+  const navigate = useNavigate();
+  const params = useParams();
+
+  // NOTE 수정 페이지
+  useEffect(() => {
+    if (params.reservationId && params.programId) {
+      const reservationId = Number(params.reservationId);
+      const programId = Number(params.programId);
+      const reservation = params.reservationTime;
+      const reservationDate = dayjs(reservation).format("YYYY-MM-DD");
+      const reservationTime = dayjs(reservation).format("HH:mm");
+
+      setReservationId(reservationId);
+      setSelectedItem(programId);
+      setSelectedDay(reservationDate);
+      setSelectedTime(reservationTime);
+    }
+  }, [params]);
 
   // NOTE 프로그램 리스트
   useEffect(() => {
@@ -63,20 +77,15 @@ export default function UserReservation() {
         "POSSIBLE",
       );
       setAvailableTimes(filteredAvailableTimes);
-
-      const filteredUnavailableTimes = filterTimesByStatus(
-        filteredData,
-        "FINISHED",
-      );
-      setUnavailableTimes(filteredUnavailableTimes);
-
-      const filteredReservedTimes = filterTimesByStatus(
-        filteredData,
-        "RESERVED",
-      );
-      setReservedTimes(filteredReservedTimes);
     }
   }, [trainerReservationData]);
+
+  // NOTE 예약 성공 시 navigate
+  useEffect(() => {
+    if (!isToastOpen && isRegisterSuccess) {
+      navigate("/user/schedule");
+    }
+  });
 
   const dragFunction = dragFn(
     itemScrollRef,
@@ -97,29 +106,28 @@ export default function UserReservation() {
   };
 
   const getTimeStatus = (time: string) => {
-    if (unavailableTimes.some((t) => t.reservationTime === time)) {
-      return "unavailable";
-    }
-    if (reservedTimes.some((t) => t.reservationTime === time)) {
-      return "reserved";
-    }
-    return "available";
+    const isTimeAvailable = availableTimes.some(
+      (t) => t.reservationTime === time,
+    );
+    return isTimeAvailable ? "available" : "unavailable";
   };
 
   const handleClickTime = (time: string) => {
+    if (getTimeStatus(time) === "unavailable") return;
+
     setSelectedTime(time);
 
     const program = availableTimes.find((p) => p.reservationTime === time);
 
     if (program) {
-      setSelectedProgramId(program.id);
+      setReservationId(program.id);
     } else {
-      setSelectedProgramId(-1);
+      setReservationId(-1);
     }
   };
 
   const handleRegister = () => {
-    if (selectedProgramId !== -1) userReservationMutate();
+    if (reservationId !== -1) userReservationMutate();
   };
 
   return (

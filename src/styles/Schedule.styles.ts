@@ -234,7 +234,7 @@ export const TimeContainer = styled.div`
 `;
 
 export const Time = styled.div<{
-  $status: "unavailable" | "available" | "reserved";
+  $status: "unavailable" | "available";
   $isSelected: boolean;
 }>`
   display: flex;
@@ -247,15 +247,11 @@ export const Time = styled.div<{
   color: ${(props) =>
     props.$status === "unavailable"
       ? "var(--white-color-600)"
-      : props.$status === "reserved"
-        ? "var(--white-color-700)"
-        : "var(--white-color-800)"};
+      : "var(--white-color-800)"};
   background-color: ${(props) => props.$isSelected && "var(--main-color-200)"};
   border-radius: 50%;
   cursor: ${(props) =>
-    props.$status === "unavailable" || props.$status === "reserved"
-      ? "not-allowed"
-      : "pointer"};
+    props.$status === "unavailable" ? "not-allowed" : "pointer"};
 
   @media screen and (max-width: ${breakPoints.small}px) {
     font-size: var(--font-size-600);
