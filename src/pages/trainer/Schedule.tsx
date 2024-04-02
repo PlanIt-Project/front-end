@@ -9,7 +9,7 @@ export default function TrainerSchedule() {
   // const unavailableTimes = ["6:00", "14:00", "18:00"];
 
   const [selectedDay, setSelectedDay] = useState(TODAY);
-  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedTimes, setSelectedTimes] = useState<string[]>([]);
   const [availableTimes] = useState<any[]>([]);
 
   const handleClickDay = (day: string) => {
@@ -24,7 +24,13 @@ export default function TrainerSchedule() {
   };
 
   const handleClickTime = (time: string) => {
-    setSelectedTime(time);
+    setSelectedTimes((prevSelectedTimes) => {
+      if (prevSelectedTimes.includes(time)) {
+        return prevSelectedTimes.filter((t) => t !== time);
+      } else {
+        return [...prevSelectedTimes, time];
+      }
+    });
   };
 
   return (
@@ -38,7 +44,7 @@ export default function TrainerSchedule() {
       <S.BottomContainer className="reservation">
         <Time
           selectedDay={selectedDay}
-          selectedTime={selectedTime}
+          selectedTime={selectedTimes}
           getTimeStatus={getTimeStatus}
           handleClickTime={handleClickTime}
         />
