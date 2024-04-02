@@ -1,7 +1,5 @@
 import { useState } from "react";
-import {
-  PROGRAM_NAMES,
-} from "../../constants/Admin.constants";
+import { PROGRAM_NAMES } from "../../constants/Admin.constants";
 import * as S from "../../styles/admin/AdminCommon.styles";
 import ProgramDetail from "./ProgramDetail";
 import ProgramModal from "./ProgramModal";
@@ -22,7 +20,35 @@ export default function ProgramBox() {
     setDetailId(id);
   };
 
-  
+  const statusToKor = (status: string): string => {
+    let kor = "";
+    switch (status) {
+      case "NOT_STARTED":
+        kor = "등록 전";
+        break;
+      case "IN_PROGRESS":
+        kor = "진행 중";
+        break;
+      case "SUSPEND":
+        kor = "일시 정지";
+        break;
+      case "REFUND":
+        kor = "환불";
+        break;
+      case "EXPIRED":
+        kor = "만료";
+        break;
+      default:
+        kor = "알 수 없음";
+        break;
+    }
+    return kor;
+  };
+
+  const skipNull = (date:string):string => {
+    if(date === null) return "미정"
+    else return date
+  }
 
   return (
     <>
@@ -47,18 +73,18 @@ export default function ProgramBox() {
                   {content.remainedNumber}
                 </S.Content>
                 <S.DateContent>
-                  <S.Content key={"startAt"}>{`${content.startAt}/`}</S.Content>
-                  <S.Content key={"endAt"}>{`${content.endAt}`}</S.Content>
+                  <S.Content key={"startAt"}>{skipNull(content.startAt)}/</S.Content>
+                  <S.Content key={"endAt"}>{skipNull(content.endAt)}</S.Content>
                 </S.DateContent>
                 <S.DateContent>
                   <S.Content
                     key={"suspendAt"}
-                  >{`${content.suspendAt}/`}</S.Content>
+                  >{skipNull(content.suspendAt)}/</S.Content>
                   <S.Content
                     key={"resumeAt"}
-                  >{`${content.resumeAt}`}</S.Content>
+                  >{skipNull(content.resumeAt)}</S.Content>
                 </S.DateContent>
-                <S.Content key={"status"}>{content.status}</S.Content>
+                <S.Content key={"status"}>{statusToKor(content.status)}</S.Content>
               </S.ContentHover>
               <S.ModifyButton
                 onClick={() => {

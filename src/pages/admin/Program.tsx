@@ -20,9 +20,8 @@ export default function Program() {
 
   useEffect(() => {
     if (data) {
-      setProgramContent(data);
+      setProgramContent(data.content);
     }
-    console.log("data", data);
   }, [data]);
 
   return (
@@ -46,7 +45,7 @@ export default function Program() {
         </S.AdminContent>
         <Pagination
           page={page}
-          totalPage={10}
+          totalPage={Number(data?.totalPages)}
           setPage={setPage}
           name={"admin/program"}
         />
