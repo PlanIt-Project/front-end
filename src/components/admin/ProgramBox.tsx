@@ -6,18 +6,22 @@ import ProgramModal from "./ProgramModal";
 import { useAdminProgramStore } from "../../stores/adminProgramStore";
 
 export default function ProgramBox() {
-  const [onModal, setOnModal] = useState(false);
+  const [onModal, setOnModal] = useState<boolean>(false);
+  const [modalId, setModalId] = useState<number>(0);
   const [onDetail, setOnDetail] = useState<boolean>(false);
   const [detailId, setDetailId] = useState<number>(0);
+  const [status, setStatus] = useState<string>("");
   const { programContent } = useAdminProgramStore();
+
   const onSetDetail = (id: number) => {
     setOnDetail(!onDetail);
     setDetailId(id);
   };
 
-  const onClickModifyButton = (id: number) => {
+  const onClickModifyButton = (id: number, status: string) => {
     setOnModal(!onModal);
-    setDetailId(id);
+    setModalId(id);
+    setStatus(status);
   };
 
   const statusToKor = (status: string): string => {
@@ -45,10 +49,15 @@ export default function ProgramBox() {
     return kor;
   };
 
-  const skipNull = (date:string):string => {
-    if(date === null) return "미정"
-    else return date
-  }
+  const skipNull = (date: string): string => {
+    if (date === null) return "미정";
+    else return date;
+  };
+
+  const statusOnModal = (status: string) => {
+    if (status === "IN_PROGRESS" || status === "SUSPEND") return true;
+    else return false;
+  };
 
   return (
     <>
@@ -73,32 +82,40 @@ export default function ProgramBox() {
                   {content.remainedNumber}
                 </S.Content>
                 <S.DateContent>
-                  <S.Content key={"startAt"}>{skipNull(content.startAt)}/</S.Content>
+                  <S.Content key={"startAt"}>
+                    {skipNull(content.startAt)}/
+                  </S.Content>
                   <S.Content key={"endAt"}>{skipNull(content.endAt)}</S.Content>
                 </S.DateContent>
                 <S.DateContent>
-                  <S.Content
-                    key={"suspendAt"}
-                  >{skipNull(content.suspendAt)}/</S.Content>
-                  <S.Content
-                    key={"resumeAt"}
-                  >{skipNull(content.resumeAt)}</S.Content>
+                  <S.Content key={"suspendAt"}>
+                    {skipNull(content.suspendAt)}/
+                  </S.Content>
+                  <S.Content key={"resumeAt"}>
+                    {skipNull(content.resumeAt)}
+                  </S.Content>
                 </S.DateContent>
-                <S.Content key={"status"}>{statusToKor(content.status)}</S.Content>
+                <S.Content key={"status"}>
+                  {statusToKor(content.status)}
+                </S.Content>
               </S.ContentHover>
-              <S.ModifyButton
-                onClick={() => {
-                  onClickModifyButton(content.id);
-                }}
-              >
-                설정
-              </S.ModifyButton>
+              {statusOnModal(content.status) ? (
+                <S.ModifyButton
+                  onClick={() => {
+                    onClickModifyButton(content.id, content.status);
+                  }}
+                >
+                  설정
+                </S.ModifyButton>
+              ) : (
+                <S.DisableButton>설정</S.DisableButton>
+              )}
             </S.ContentBar>
           ))}
         </S.ContentContainer>
       </S.ManageBox>
       {onDetail && <ProgramDetail setOnDetail={setOnDetail} id={detailId} />}
-      {onModal && <ProgramModal setOnModal={setOnModal} id={detailId} />}
+      {onModal && <ProgramModal setOnModal={setOnModal} id={modalId} status={status}/>}
     </>
   );
 }

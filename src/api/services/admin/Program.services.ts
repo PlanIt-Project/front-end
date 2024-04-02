@@ -1,4 +1,4 @@
-import { IAdminProgramResponse } from "../../../types/admin/Admin.program.types";
+import { IAdminProgramResponse, IAdminProgramStatusResponse } from "../../../types/admin/Admin.program.types";
 import { instance } from "../../instance";
 
 export const getAdminProgramServices = async (
@@ -8,3 +8,11 @@ export const getAdminProgramServices = async (
     params: { option },
   });
 };
+
+export const getAdminChangeProgramStatusServices = async (
+  programId: number,
+  isSuspended: boolean
+) : Promise<IAdminProgramStatusResponse> => {
+  return await instance.put(`/admin/program/${programId}/${isSuspended ? "resume" : "suspend"}`);
+};
+

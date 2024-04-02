@@ -44,3 +44,10 @@ interface IUser {
 }
 
 type IStatus = "NOT_STARTED" | "IN_PROGRESS" | "SUSPEND" | "REFUND" | "EXPIRED";
+
+export interface IAdminProgramStatusResponse {
+  message: string;
+  code: number;
+  data: string;
+};
+

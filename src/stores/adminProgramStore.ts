@@ -12,3 +12,4 @@ export const useAdminProgramStore = create<IAdminProgramStore>((set) => ({
     set({programContent:content});
   },
 }));
+
