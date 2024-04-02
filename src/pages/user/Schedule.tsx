@@ -55,7 +55,11 @@ export default function UserSchedule() {
           </S.ReservationButton>
         </S.TopContainer>
         <S.CalendarContainer>
-          <Calendar selectedDay={selectedDay} handleClickDay={handleClickDay} />
+          <Calendar
+            selectedDay={selectedDay}
+            handleClickDay={handleClickDay}
+            isAllowClick={true}
+          />
         </S.CalendarContainer>
         <S.BottomContainer>
           <S.Title>
