@@ -6,12 +6,7 @@ export const getBannerList = () => {
     queryKey: ["getBannerList"],
     queryFn: async () => {
       const response = await getBannerListService();
-
-      if (response.status !== 200) {
-        throw new Error("error");
-      }
-
-      return response;
+      return response.data;
     },
   });
 };
