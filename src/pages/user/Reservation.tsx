@@ -13,8 +13,7 @@ import { IFilteredTimeList } from "../../types/reservation/TrainerReservation.ty
 import { filterTimesByStatus } from "../../utils/filterTimeByStatus";
 import { registerUserReservation } from "../../hooks/queries/reservation/registerUserReservation";
 import ToastNotification from "../../components/modal/ToastNotification";
-import { useNavigate, useParams } from "react-router";
-import dayjs from "dayjs";
+import { useNavigate } from "react-router";
 
 export default function UserReservation() {
   const [programList, setProgramList] = useState<IProgramContent[]>([]);
@@ -39,23 +38,6 @@ export default function UserReservation() {
     registerUserReservation(reservationId, selectedItem, setIsToastOpen);
 
   const navigate = useNavigate();
-  const params = useParams();
-
-  // NOTE 수정 페이지
-  useEffect(() => {
-    if (params.reservationId && params.programId) {
-      const reservationId = Number(params.reservationId);
-      const programId = Number(params.programId);
-      const reservation = params.reservationTime;
-      const reservationDate = dayjs(reservation).format("YYYY-MM-DD");
-      const reservationTime = dayjs(reservation).format("HH:mm");
-
-      setReservationId(reservationId);
-      setSelectedItem(programId);
-      setSelectedDay(reservationDate);
-      setSelectedTime(reservationTime);
-    }
-  }, [params]);
 
   // NOTE 프로그램 리스트
   useEffect(() => {

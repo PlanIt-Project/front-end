@@ -115,8 +115,8 @@ export const Day = styled.div`
     cursor: not-allowed;
   }
 
-  &.otherMonthBeforeToday {
-    color: var(--white-color-400);
-    cursor: not-allowed;
+  &.pastDayClickable {
+    color: var(--white-color-800);
+    cursor: pointer;
   }
 `;

@@ -56,7 +56,7 @@ export const ArrowIcon = styled.img`
   height: 80%;
 `;
 
-export const Banner = styled.div<{ $translateX: number }>`
+export const Banner = styled.img<{ $translateX: number }>`
   min-width: 100%;
   height: 100%;
   transform: ${(props) => `translateX(-${props.$translateX}%)`};

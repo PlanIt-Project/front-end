@@ -8,11 +8,12 @@ import { getTrainerList } from "../hooks/queries/ticket/getTrainerList";
 import { ITrainerContent } from "../types/ticket/TrainerList.types";
 import LeftArrowIcon from "../assets/icon_left-arrow.png";
 import RightArrowIcon from "../assets/icon_right-arrow.png";
+import { IBannerListData } from "../types/BannerList.types";
 
 export default function Main() {
-  const bannerList = ["img1", "img2", "img3"];
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
+  const [bannerList, setBannerList] = useState<IBannerListData[]>([]);
   const [trainerList, setTrainerList] = useState<ITrainerContent[]>([]);
   const [currentBannerIndex, setCurrentBannerIndex] = useState(0);
 
@@ -27,7 +28,7 @@ export default function Main() {
   }, []);
 
   useEffect(() => {
-    console.log("bannerData", bannerData);
+    if (bannerData) setBannerList(bannerData);
   }, [bannerData]);
 
   useEffect(() => {
@@ -65,14 +66,19 @@ export default function Main() {
         >
           <S.ArrowIcon src={LeftArrowIcon} />
         </S.BannerLeftArrow>
-        {bannerList.map((el, index) => (
-          <S.Banner key={index} $translateX={currentBannerIndex * 100}>
-            {el}
-          </S.Banner>
+        {bannerList.map((el) => (
+          <S.Banner
+            key={el.id}
+            src={el.imagePath}
+            $translateX={currentBannerIndex * 100}
+          />
         ))}
         <S.BannerRightArrow
           onClick={handleRightArrowClick}
-          $disabled={currentBannerIndex === bannerList.length - 1}
+          $disabled={
+            currentBannerIndex === bannerList.length - 1 ||
+            bannerList.length - 1 !== 0
+          }
         >
           <S.ArrowIcon src={RightArrowIcon} />
         </S.BannerRightArrow>
