@@ -151,7 +151,7 @@ export const RightContainer = styled.div`
 
   @media screen and (max-width: ${breakPoints.small}px) {
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
   }
 `;
 
