@@ -1,19 +1,17 @@
 import { useState } from "react";
 import {
-  PROGRAM_CONTENTS,
   PROGRAM_NAMES,
 } from "../../constants/Admin.constants";
 import * as S from "../../styles/admin/AdminCommon.styles";
 import ProgramDetail from "./ProgramDetail";
 import ProgramModal from "./ProgramModal";
-import { useProgramOptionStore } from "../../stores/programStore";
+import { useAdminProgramStore } from "../../stores/adminProgramStore";
 
 export default function ProgramBox() {
   const [onModal, setOnModal] = useState(false);
   const [onDetail, setOnDetail] = useState<boolean>(false);
   const [detailId, setDetailId] = useState<number>(0);
-  const { option } = useProgramOptionStore();
-
+  const { programContent } = useAdminProgramStore();
   const onSetDetail = (id: number) => {
     setOnDetail(!onDetail);
     setDetailId(id);
@@ -24,7 +22,8 @@ export default function ProgramBox() {
     setDetailId(id);
   };
 
-  console.log(option)
+  
+
   return (
     <>
       <S.ManageBox>
@@ -34,7 +33,7 @@ export default function ProgramBox() {
           ))}
         </S.NameBar>
         <S.ContentContainer>
-          {PROGRAM_CONTENTS.map((content) => (
+          {programContent.map((content) => (
             <S.ContentBar key={content.id} $nameNumber={6}>
               <S.ContentHover
                 $nameNumber={6}
@@ -43,9 +42,9 @@ export default function ProgramBox() {
                 }}
               >
                 <S.Content key={"id"}>{content.id}</S.Content>
-                <S.Content key={"name"}>{content.name}</S.Content>
-                <S.Content key={"remainNumber"}>
-                  {content.remainNumber}
+                <S.Content key={"productName"}>{content.productName}</S.Content>
+                <S.Content key={"remainedNumber"}>
+                  {content.remainedNumber}
                 </S.Content>
                 <S.DateContent>
                   <S.Content key={"startAt"}>{`${content.startAt}/`}</S.Content>

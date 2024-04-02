@@ -7,7 +7,7 @@ export interface IAdminProgramResponse {
   last: boolean;
   number: number;
   numberOfElements: number;
-  pageable: IPageable;
+  pageable?: IPageable;
   size: number;
   totalElements: number;
   totalPages: number;

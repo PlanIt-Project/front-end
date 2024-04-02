@@ -4,7 +4,7 @@ import { IAdminProgramResponse } from "../../../types/admin/Admin.program.types"
 
 
 export const getAdminProgram = (option:string) => {
-    return useQuery<IAdminProgramResponse>({
+    return useQuery<IAdminProgramResponse, Error>({
       queryKey: ["getAdminProgram", option],
       queryFn: async ():Promise<IAdminProgramResponse> => {
         const response = await getAdminProgramServices(option);

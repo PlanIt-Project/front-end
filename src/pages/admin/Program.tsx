@@ -1,20 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "../../styles/admin/AdminCommon.styles";
 import { useParams } from "react-router-dom";
 import Pagination from "../../components/CommonPagination";
 import ProgramBox from "../../components/admin/ProgramBox";
-import { useProgramOptionStore } from "../../stores/programStore";
+import { getAdminProgram } from "../../hooks/queries/admin/getPrograms";
+import { useAdminProgramStore } from "../../stores/adminProgramStore";
 
 export default function Program() {
   const param = useParams();
   const [page, setPage] = useState(Number(param.pageId));
-  const {option ,setOption} = useProgramOptionStore();
+  const [option, setOption] = useState<string>("VALID");
+  const { setProgramContent } = useAdminProgramStore();
 
-  const onChangeOption = (e:React.ChangeEvent<HTMLSelectElement>) => {
-    setOption(e.target.value)
-  }
+  const onChangeOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setOption(e.target.value);
+  };
 
-  
+  const { data } = getAdminProgram(option);
+
+  useEffect(() => {
+    if(data?.content) {
+      setProgramContent(data.content)
+    };
+  }, [option]);
+
   return (
     <>
       <S.AdminContainer>
