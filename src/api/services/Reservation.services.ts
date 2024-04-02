@@ -36,3 +36,13 @@ export const cancelUserReservationService = async (
 ): Promise<ICancelUserReservationResponse> => {
   return await instance.delete(`/reservation/${reservationId}`);
 };
+
+export const registerTrainerScheduleService = async (
+  reservationDate: string,
+  reservationTimes: string[],
+) => {
+  return await instance.put("/reservation/change/", {
+    reservationDate,
+    reservationTimes,
+  });
+};
