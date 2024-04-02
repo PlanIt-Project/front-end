@@ -41,16 +41,6 @@ export default function UserSchedule() {
     setSelectedDay(day);
   };
 
-  const handleMoveToEdit = (
-    reservationId: number,
-    programId: number,
-    reservationTime: string,
-  ) => {
-    navigate(
-      `/user/reservation/${reservationId}/${programId}/${reservationTime}`,
-    );
-  };
-
   const handleCancel = (reservationId: number) => {
     setIsConfirmModalOpen(true);
     setCancelId(reservationId);
@@ -65,7 +55,11 @@ export default function UserSchedule() {
           </S.ReservationButton>
         </S.TopContainer>
         <S.CalendarContainer>
-          <Calendar selectedDay={selectedDay} handleClickDay={handleClickDay} />
+          <Calendar
+            selectedDay={selectedDay}
+            handleClickDay={handleClickDay}
+            isAllowClick={true}
+          />
         </S.CalendarContainer>
         <S.BottomContainer>
           <S.Title>
@@ -83,17 +77,6 @@ export default function UserSchedule() {
                   </S.InfoContainer>
                 </S.LeftContainer>
                 <S.RightContainer>
-                  <S.ChangeDeleteButton
-                    onClick={() => {
-                      handleMoveToEdit(
-                        schedule.id,
-                        schedule.programId,
-                        schedule.reservationTime,
-                      );
-                    }}
-                  >
-                    변경하기
-                  </S.ChangeDeleteButton>
                   <S.ChangeDeleteButton
                     onClick={() => {
                       handleCancel(schedule.id);

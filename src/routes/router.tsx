@@ -44,10 +44,6 @@ export const router = createBrowserRouter([
               { path: "/user/ticket/expired", element: <UserTicket /> },
               { path: "/user/schedule", element: <UserSchedule /> },
               { path: "/user/reservation", element: <UserReservation /> },
-              {
-                path: "/user/reservation/:reservationId/:programId/:reservationTime",
-                element: <UserReservation />,
-              },
             ],
           },
           {
@@ -67,7 +63,10 @@ export const router = createBrowserRouter([
               { path: "/admin/banner/:pageId", element: <Banner /> },
               { path: "/admin/product/:pageId", element: <Product /> },
               { path: "/admin/program/:pageId", element: <Program /> },
-              { path: "/admin/adminRequest/:pageId", element: <AdminRequest /> },
+              {
+                path: "/admin/adminRequest/:pageId",
+                element: <AdminRequest />,
+              },
             ],
           },
         ],

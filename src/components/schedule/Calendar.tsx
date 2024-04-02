@@ -9,6 +9,7 @@ import dayjs from "dayjs";
 export default function Calendar({
   selectedDay,
   handleClickDay,
+  isAllowClick = false,
 }: ICalendarProps) {
   const [currentMonth, setCurrentMonth] = useState(TODAY);
 
@@ -61,22 +62,34 @@ export default function Calendar({
       const isCurrentMonth = dayObject.month() === dayjs(currentMonth).month();
       const isBeforeToday = dayObject.isBefore(TODAY, "day");
 
-      let dayClass = "futureDay";
+      let dayClass = "";
 
-      if (isCurrentMonth) {
-        dayClass = isBeforeToday ? "pastDay" : "futureDay";
-      } else {
-        dayClass = isBeforeToday ? "otherMonthBeforeToday" : "otherMonth";
+      // 현재 월의 과거 날짜 처리
+      if (isCurrentMonth && isBeforeToday) {
+        dayClass = isAllowClick ? "pastDayClickable" : "pastDay";
       }
 
-      if (isSameDay(day, selectedDay)) dayClass = "choiceDay";
+      // 다른 달의 과거 날짜 처리
+      if (!isCurrentMonth && isBeforeToday) {
+        dayClass = "pastDay";
+      }
+
+      // 현재 월이 아닌 날짜 처리
+      if (!isCurrentMonth) {
+        dayClass = "otherMonth";
+      }
+
+      // 사용자가 선택한 날짜 처리
+      if (isSameDay(day, selectedDay)) {
+        dayClass = "choiceDay";
+      }
 
       return (
         <S.CalendarDay key={index}>
           <S.Day
             className={`${dayClass}`}
             onClick={() => {
-              if (isCurrentMonth && !isBeforeToday) {
+              if (isCurrentMonth && (!isBeforeToday || isAllowClick)) {
                 handleClickDay(dayObject.format("YYYY-MM-DD"));
               }
             }}
