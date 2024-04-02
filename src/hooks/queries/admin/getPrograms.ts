@@ -1,15 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAdminProgramServices } from "../../../api/services/admin/Program.services";
-import { IAdminProgramResponse } from "../../../types/admin/Admin.program.types";
+import { IAdminProgramContent } from "../../../types/admin/Admin.program.types";
 
+export const getAdminProgram = (option: string) => {
+  return useQuery<IAdminProgramContent[], Error>({
+    queryKey: ["getAdminProgram", option],
+    queryFn: async (): Promise<IAdminProgramContent[]> => {
+      const response = await getAdminProgramServices(option);
 
-export const getAdminProgram = (option:string) => {
-    return useQuery<IAdminProgramResponse, Error>({
-      queryKey: ["getAdminProgram", option],
-      queryFn: async ():Promise<IAdminProgramResponse> => {
-        const response = await getAdminProgramServices(option);
-  
-        return response;
-      }
-    });
-  };
+      return response.data.content;
+    },
+  });
+};

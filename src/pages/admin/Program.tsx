@@ -19,10 +19,11 @@ export default function Program() {
   const { data } = getAdminProgram(option);
 
   useEffect(() => {
-    if(data?.content) {
-      setProgramContent(data.content)
-    };
-  }, [option]);
+    if (data) {
+      setProgramContent(data);
+    }
+    console.log("data", data);
+  }, [data]);
 
   return (
     <>

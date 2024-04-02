@@ -1,6 +1,6 @@
 export type IOption = "VALID" | "ALL" | "INVALID";
 
-export interface IAdminProgramResponse {
+export interface IAdminProgramData {
   content: IAdminProgramContent[];
   empty: boolean;
   first: boolean;
@@ -11,6 +11,12 @@ export interface IAdminProgramResponse {
   size: number;
   totalElements: number;
   totalPages: number;
+}
+
+export interface IAdminProgramResponse {
+  message: string;
+  code: number;
+  data: IAdminProgramData;
 }
 
 interface IPageable {
