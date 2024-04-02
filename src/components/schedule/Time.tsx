@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { OPEN_TIME } from "../../constants/OpenTime.constants";
 import * as S from "../../styles/Schedule.styles";
 import { ITimeProps } from "../../types/Time.types";
@@ -5,7 +6,7 @@ import { ITimeProps } from "../../types/Time.types";
 export default function Time({
   selectedDay,
   selectedTime,
-  isTimeAvailable,
+  getTimeStatus,
   handleClickTime,
 }: ITimeProps) {
   const { morningTimes, afternoonTimes, eveningTimes } = OPEN_TIME();
@@ -13,8 +14,8 @@ export default function Time({
   return (
     <>
       <S.Title className="reservation">
-        {selectedDay.getFullYear()}년 {selectedDay.getMonth() + 1}월{" "}
-        {selectedDay.getDate()}일
+        {dayjs(selectedDay).year()}년 {dayjs(selectedDay).month() + 1}월{" "}
+        {dayjs(selectedDay).date()}일
       </S.Title>
       <S.TimeTitleContainer>
         <S.TimeTitle>오전</S.TimeTitle>
@@ -22,7 +23,7 @@ export default function Time({
           {morningTimes.map((morning, index) => (
             <S.Time
               key={index}
-              $disabled={!isTimeAvailable(morning)}
+              $status={getTimeStatus(morning)}
               $isSelected={selectedTime === morning}
               onClick={() => {
                 handleClickTime(morning);
@@ -39,7 +40,7 @@ export default function Time({
           {afternoonTimes.map((afternoon, index) => (
             <S.Time
               key={index}
-              $disabled={!isTimeAvailable(afternoon)}
+              $status={getTimeStatus(afternoon)}
               $isSelected={selectedTime === afternoon}
               onClick={() => {
                 handleClickTime(afternoon);
@@ -56,7 +57,7 @@ export default function Time({
           {eveningTimes.map((evening, index) => (
             <S.Time
               key={index}
-              $disabled={!isTimeAvailable(evening)}
+              $status={getTimeStatus(evening)}
               $isSelected={selectedTime === evening}
               onClick={() => {
                 handleClickTime(evening);

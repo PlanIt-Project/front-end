@@ -1,13 +1,13 @@
 import { useState } from "react";
 import {
-  PRODUCT_CONTENTS,
-  PRODUCT_NAMES,
+  PROGRAM_CONTENTS,
+  PROGRAM_NAMES,
 } from "../../constants/Admin.constants";
 import * as S from "../../styles/admin/AdminCommon.styles";
-import ProductDetail from "./ProductDetail";
-import ProductModal from "./ProductModal";
+import ProgramDetail from "./ProgramDetail";
+import ProgramModal from "./ProgramModal";
 
-export default function ProductBox() {
+export default function ProgramBox() {
   const [onModal, setOnModal] = useState(false);
   const [onDetail, setOnDetail] = useState<boolean>(false);
   const [detailId, setDetailId] = useState<number>(0);
@@ -17,20 +17,21 @@ export default function ProductBox() {
     setDetailId(id);
   };
 
-  const onClickModifyButton = () => {
+  const onClickModifyButton = (id: number) => {
     setOnModal(!onModal);
+    setDetailId(id);
   };
 
   return (
     <>
       <S.ManageBox>
         <S.NameBar $nameNumber={7}>
-          {PRODUCT_NAMES.map((name) => (
+          {PROGRAM_NAMES.map((name) => (
             <S.Name key={name.id}>{name.value}</S.Name>
           ))}
         </S.NameBar>
         <S.ContentContainer>
-          {PRODUCT_CONTENTS.map((content) => (
+          {PROGRAM_CONTENTS.map((content) => (
             <S.ContentBar key={content.id} $nameNumber={6}>
               <S.ContentHover
                 $nameNumber={6}
@@ -40,18 +41,20 @@ export default function ProductBox() {
               >
                 <S.Content key={"id"}>{content.id}</S.Content>
                 <S.Content key={"name"}>{content.name}</S.Content>
-                <S.Content key={"type"}>{content.type}</S.Content>
-                <S.Content key={"period/number"}>
-                  {content.type === "패키지"
-                    ? `${content.period}/${content.number}회`
-                    : `${content.period}`}
-                </S.Content>
-                <S.Content key={"price"}>{content.price} 원</S.Content>
-                <S.Content key={"saleOrNot"}>{content.saleOrNot}</S.Content>
+                <S.Content key={"remainNumber"}>{content.remainNumber}</S.Content>
+                <S.DateContent>
+                    <S.Content key={"startAt"}>{`${content.startAt}/`}</S.Content>
+                    <S.Content key={"endAt"}>{`${content.endAt}`}</S.Content>
+                </S.DateContent>
+                <S.DateContent>
+                    <S.Content key={"suspendAt"}>{`${content.suspendAt}/`}</S.Content>
+                    <S.Content key={"resumeAt"}>{`${content.resumeAt}`}</S.Content>
+                </S.DateContent>
+                <S.Content key={"status"}>{content.status}</S.Content>
               </S.ContentHover>
               <S.ModifyButton
                 onClick={() => {
-                  onClickModifyButton();
+                  onClickModifyButton(content.id);
                 }}
               >
                 설정
@@ -60,8 +63,8 @@ export default function ProductBox() {
           ))}
         </S.ContentContainer>
       </S.ManageBox>
-      {onDetail && <ProductDetail setOnDetail={setOnDetail} id={detailId} />}
-      {onModal && <ProductModal setOnModal={setOnModal}/>}
+      {onDetail && <ProgramDetail setOnDetail={setOnDetail} id={detailId} />}
+      {onModal && <ProgramModal setOnModal={setOnModal} id={detailId}/>}
     </>
   );
 }

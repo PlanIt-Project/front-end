@@ -1,13 +1,13 @@
 import { useState } from "react";
 import {
-  PRODUCT_CONTENTS,
-  PRODUCT_NAMES,
+    BANNER_CONTENTS,
+    BANNER_NAMES,
 } from "../../constants/Admin.constants";
 import * as S from "../../styles/admin/AdminCommon.styles";
-import ProductDetail from "./ProductDetail";
-import ProductModal from "./ProductModal";
+import BannerDetail from "./BannerDetail";
+import BannerModal from "./BannerModal";
 
-export default function ProductBox() {
+export default function BannerBox() {
   const [onModal, setOnModal] = useState(false);
   const [onDetail, setOnDetail] = useState<boolean>(false);
   const [detailId, setDetailId] = useState<number>(0);
@@ -24,30 +24,24 @@ export default function ProductBox() {
   return (
     <>
       <S.ManageBox>
-        <S.NameBar $nameNumber={7}>
-          {PRODUCT_NAMES.map((name) => (
+        <S.NameBar $nameNumber={5}>
+          {BANNER_NAMES.map((name) => (
             <S.Name key={name.id}>{name.value}</S.Name>
           ))}
         </S.NameBar>
         <S.ContentContainer>
-          {PRODUCT_CONTENTS.map((content) => (
-            <S.ContentBar key={content.id} $nameNumber={6}>
+          {BANNER_CONTENTS.map((content) => (
+            <S.ContentBar key={content.id} $nameNumber={4}>
               <S.ContentHover
-                $nameNumber={6}
+                $nameNumber={4}
                 onClick={() => {
                   onSetDetail(content.id);
                 }}
               >
                 <S.Content key={"id"}>{content.id}</S.Content>
                 <S.Content key={"name"}>{content.name}</S.Content>
-                <S.Content key={"type"}>{content.type}</S.Content>
-                <S.Content key={"period/number"}>
-                  {content.type === "패키지"
-                    ? `${content.period}/${content.number}회`
-                    : `${content.period}`}
-                </S.Content>
-                <S.Content key={"price"}>{content.price} 원</S.Content>
-                <S.Content key={"saleOrNot"}>{content.saleOrNot}</S.Content>
+                <S.Content key={"date"}>{content.date}</S.Content>
+                <S.Content key={"view"}>{content.view}</S.Content>
               </S.ContentHover>
               <S.ModifyButton
                 onClick={() => {
@@ -60,8 +54,8 @@ export default function ProductBox() {
           ))}
         </S.ContentContainer>
       </S.ManageBox>
-      {onDetail && <ProductDetail setOnDetail={setOnDetail} id={detailId} />}
-      {onModal && <ProductModal setOnModal={setOnModal}/>}
+      {onDetail && <BannerDetail setOnDetail={setOnDetail} id={detailId} />}
+      {onModal && <BannerModal setOnModal={setOnModal}/>}
     </>
   );
 }

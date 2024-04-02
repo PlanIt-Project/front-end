@@ -1,17 +1,12 @@
-import { useState } from "react";
 import * as S from "../../styles/admin/AdminDetail.styles";
-import { IProductDetail } from "../../types/admin/Product.types";
+import { IDetail } from "../../types/admin/Admin.types";
 
-export default function ProductDetail({ setOnDetail, id }: IProductDetail) {
-  const [onLittleModal, setOnLittleModal] = useState<boolean>(false);
+export default function ProductDetail({ setOnDetail, id }: IDetail) {
 
   const onCloseButton = () => {
     setOnDetail(false);
   };
 
-  const onChangeStatus = () => {
-    setOnLittleModal(!onLittleModal);
-  };
   return (
     <>
       <S.Overlay>
@@ -44,13 +39,6 @@ export default function ProductDetail({ setOnDetail, id }: IProductDetail) {
           <S.ButtonContainer>
             <S.DetailButton
               onClick={() => {
-                onChangeStatus();
-              }}
-            >
-              판매 상태 변경
-            </S.DetailButton>
-            <S.DetailButton
-              onClick={() => {
                 onCloseButton();
               }}
             >
@@ -59,27 +47,6 @@ export default function ProductDetail({ setOnDetail, id }: IProductDetail) {
           </S.ButtonContainer>
         </S.Detail>
       </S.Overlay>
-      {onLittleModal && (
-        <S.Overlay>
-          <S.LittleModal>
-            <S.LittleModalTitle>판매 상태를 변경 하시겠습니까?</S.LittleModalTitle>
-            <S.LittleModalText>{"판매중 => 판매 중지"}</S.LittleModalText>
-            <S.ButtonContainer>
-            <S.DetailButton
-            >
-              변경
-            </S.DetailButton>
-            <S.DetailButton
-              onClick={() => {
-                onChangeStatus();
-              }}
-            >
-              취소
-            </S.DetailButton>
-          </S.ButtonContainer>
-          </S.LittleModal>
-        </S.Overlay>
-      )}
     </>
   );
 }
