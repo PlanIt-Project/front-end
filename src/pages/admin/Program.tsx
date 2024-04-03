@@ -16,13 +16,13 @@ export default function Program() {
     setOption(e.target.value);
   };
 
-  const { data } = getAdminProgram(option);
+  const { data } = getAdminProgram(page - 1, 8, option);
 
   useEffect(() => {
     if (data) {
       setProgramContent(data.content);
     }
-    console.log(data)
+    console.log(data);
   }, [data]);
 
   return (
