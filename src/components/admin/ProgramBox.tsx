@@ -3,19 +3,24 @@ import { PROGRAM_NAMES } from "../../constants/Admin.constants";
 import * as S from "../../styles/admin/AdminCommon.styles";
 import ProgramDetail from "./ProgramDetail";
 import ProgramModal from "./ProgramModal";
-import { useAdminProgramStore } from "../../stores/adminProgramStore";
+import {
+  useAdminProgramDetailStore,
+  useAdminProgramStore,
+} from "../../stores/adminProgramStore";
+import { IAdminProgramContent } from "../../types/admin/Admin.program.types";
+import { skipNull, statusToKor } from "../../utils/adminFilter";
 
 export default function ProgramBox() {
   const [onModal, setOnModal] = useState<boolean>(false);
   const [modalId, setModalId] = useState<number>(0);
   const [onDetail, setOnDetail] = useState<boolean>(false);
-  const [detailId, setDetailId] = useState<number>(0);
   const [status, setStatus] = useState<string>("");
   const { programContent } = useAdminProgramStore();
+  const { setProgramDetail } = useAdminProgramDetailStore();
 
-  const onSetDetail = (id: number) => {
+  const onSetDetail = (detail: IAdminProgramContent) => {
     setOnDetail(!onDetail);
-    setDetailId(id);
+    setProgramDetail(detail);
   };
 
   const onClickModifyButton = (id: number, status: string) => {
@@ -24,38 +29,12 @@ export default function ProgramBox() {
     setStatus(status);
   };
 
-  const statusToKor = (status: string): string => {
-    let kor = "";
-    switch (status) {
-      case "NOT_STARTED":
-        kor = "등록 전";
-        break;
-      case "IN_PROGRESS":
-        kor = "진행 중";
-        break;
-      case "SUSPEND":
-        kor = "일시 정지";
-        break;
-      case "REFUND":
-        kor = "환불";
-        break;
-      case "EXPIRED":
-        kor = "만료";
-        break;
-      default:
-        kor = "알 수 없음";
-        break;
-    }
-    return kor;
-  };
-
-  const skipNull = (date: string): string => {
-    if (date === null) return "미정";
-    else return date;
-  };
-
-  const statusOnModal = (status: string) => {
-    if (status === "IN_PROGRESS" || status === "SUSPEND") return true;
+  const statusOnModal = (status: string, type: "PT" | "MEMBERSHIP") => {
+    if (
+      type === "MEMBERSHIP" &&
+      (status === "IN_PROGRESS" || status === "SUSPEND")
+    )
+      return true;
     else return false;
   };
 
@@ -73,7 +52,7 @@ export default function ProgramBox() {
               <S.ContentHover
                 $nameNumber={6}
                 onClick={() => {
-                  onSetDetail(content.id);
+                  onSetDetail(content);
                 }}
               >
                 <S.Content key={"id"}>{content.id}</S.Content>
@@ -99,7 +78,7 @@ export default function ProgramBox() {
                   {statusToKor(content.status)}
                 </S.Content>
               </S.ContentHover>
-              {statusOnModal(content.status) ? (
+              {statusOnModal(content.status, content.type) ? (
                 <S.ModifyButton
                   onClick={() => {
                     onClickModifyButton(content.id, content.status);
@@ -114,8 +93,10 @@ export default function ProgramBox() {
           ))}
         </S.ContentContainer>
       </S.ManageBox>
-      {onDetail && <ProgramDetail setOnDetail={setOnDetail} id={detailId} />}
-      {onModal && <ProgramModal setOnModal={setOnModal} id={modalId} status={status}/>}
+      {onDetail && <ProgramDetail setOnDetail={setOnDetail} />}
+      {onModal && (
+        <ProgramModal setOnModal={setOnModal} id={modalId} status={status} />
+      )}
     </>
   );
 }

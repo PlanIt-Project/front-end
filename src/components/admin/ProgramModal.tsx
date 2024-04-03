@@ -4,6 +4,7 @@ import { IModal } from "../../types/admin/Admin.types";
 import { ProgramChangeStatus } from "../../hooks/queries/admin/changeProgramStatus";
 
 export default function ProgramModal({ setOnModal, id, status }: IModal) {
+  // program type 추가해 달라고 하기, Detail로 전송할 store 만들기
   const [isSuspended, setIsSuspended] = useState(false);
 
   const { mutate, data } = ProgramChangeStatus(Number(id), isSuspended);

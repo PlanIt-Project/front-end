@@ -36,6 +36,7 @@ export interface IAdminProgramContent {
   startAt: string;
   status: IStatus;
   suspendAt: string;
+  type: "PT" | "MEMBERSHIP";
 }
 
 interface IUser {
@@ -49,5 +50,4 @@ export interface IAdminProgramStatusResponse {
   message: string;
   code: number;
   data: string;
-};
-
+}
