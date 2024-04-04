@@ -35,7 +35,7 @@ export default function ProductDetail({ setOnDetail }: IDetail) {
           ) : (
             <S.DetailContent>
               <S.DetailName>횟수:</S.DetailName>
-              <S.DetailText>{productDetail.number}</S.DetailText>
+              <S.DetailText>{productDetail.number}회</S.DetailText>
             </S.DetailContent>
           )}
           <S.DetailContent>
