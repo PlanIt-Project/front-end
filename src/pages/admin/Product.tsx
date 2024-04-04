@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "../../styles/admin/AdminCommon.styles";
 import ProductBox from "../../components/admin/ProductBox";
 import ProductMakeModal from "../../components/admin/ProductMakeModal";
 import { useParams } from "react-router-dom";
 import Pagination from "../../components/CommonPagination";
+import { getAdminProduct } from "../../hooks/queries/admin/getProducts";
+import { useAdminProductStore } from "../../stores/adminProductStore";
 
 // TO DO, Modal과 Detail 컴포넌트로 분리
 // Modal은 등록 관련해서 사용
@@ -12,10 +14,18 @@ export default function Product() {
   const param = useParams();
   const [page, setPage] = useState(Number(param.pageId));
   const [onModal, setOnModal] = useState(false);
-
+  const { setProductContent } = useAdminProductStore();
   const onClickMakeButton = () => {
     setOnModal(!onModal);
   };
+
+  const { data } = getAdminProduct(page - 1, 8);
+
+  useEffect(() => {
+    if (data) {
+      setProductContent(data.content);
+    }
+  }, [data]);
 
   return (
     <>
@@ -23,10 +33,6 @@ export default function Product() {
         <S.AdminContent>
           <S.Title>상품 관리</S.Title>
           <S.ButtonContainer>
-            <S.SelectButton>
-              <S.SelectOption>판매중</S.SelectOption>
-              <S.SelectOption>판매중지</S.SelectOption>
-            </S.SelectButton>
             <S.MakeButton
               onClick={() => {
                 onClickMakeButton();
@@ -40,7 +46,7 @@ export default function Product() {
         </S.AdminContent>
         <Pagination
           page={page}
-          totalPage={10}
+          totalPage={Number(data?.totalPages)}
           setPage={setPage}
           name={"admin/product"}
         />

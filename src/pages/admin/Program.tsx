@@ -22,7 +22,6 @@ export default function Program() {
     if (data) {
       setProgramContent(data.content);
     }
-    console.log(data);
   }, [data]);
 
   return (
