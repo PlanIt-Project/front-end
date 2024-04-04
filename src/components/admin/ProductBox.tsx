@@ -3,61 +3,28 @@ import { PRODUCT_NAMES } from "../../constants/Admin.constants";
 import * as S from "../../styles/admin/AdminCommon.styles";
 import ProductDetail from "./ProductDetail";
 import ProductModal from "./ProductModal";
-import { useAdminProductStore } from "../../stores/adminProductStore";
+import {
+  useAdminProductDetailStore,
+  useAdminProductStore,
+} from "../../stores/adminProductStore";
+import { IAdminProductContent } from "../../types/admin/Admin.product.types";
+import { parsePeriod, sellingTypeToKor, typeToKor } from "../../utils/adminFilter";
 
 export default function ProductBox() {
   const [onModal, setOnModal] = useState<boolean>(false);
   const [modalId, setModalId] = useState<number>(0);
   const [onDetail, setOnDetail] = useState<boolean>(false);
-  const [detailId, setDetailId] = useState<number>(0);
   const { productContent } = useAdminProductStore();
+  const { setProductDetail } = useAdminProductDetailStore();
 
-  const onSetDetail = (id: number) => {
+  const onSetDetail = (content: IAdminProductContent ) => {
     setOnDetail(!onDetail);
-    setDetailId(id);
+    setProductDetail(content);
   };
 
   const onClickModifyButton = (id: number) => {
     setOnModal(!onModal);
     setModalId(id);
-  };
-
-  const typeToKor = (type: "PT" | "MEMBERSHIP"): string => {
-    if (type === "MEMBERSHIP") return "맴버쉽";
-    else return "PT";
-  };
-
-  const sellingTypeToKor = (sellingType: string): string => {
-    if (sellingType === "SELLING") return "판매중";
-    else return "판매중지";
-  };
-
-  const parsePeriod = (period: string): string => {
-    const regex = /P(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?/;
-    const matches = period.match(regex);
-
-    if (!matches) {
-      return "Invalid period format";
-    }
-
-    const [, years, months, days] = matches
-      .slice(1)
-      .map((value) => parseInt(value || "0", 10));
-    const result = [];
-
-    if (years) {
-      result.push(`${years}년`);
-    }
-
-    if (months) {
-      result.push(`${months}개월`);
-    }
-
-    if (days) {
-      result.push(`${days}일`);
-    }
-
-    return result.join(" ");
   };
 
   return (
@@ -74,7 +41,7 @@ export default function ProductBox() {
               <S.ContentHover
                 $nameNumber={6}
                 onClick={() => {
-                  onSetDetail(content.id);
+                  onSetDetail(content);
                 }}
               >
                 <S.Content key={"id"}>{content.id}</S.Content>
@@ -101,7 +68,7 @@ export default function ProductBox() {
           ))}
         </S.ContentContainer>
       </S.ManageBox>
-      {onDetail && <ProductDetail setOnDetail={setOnDetail} id={detailId} />}
+      {onDetail && <ProductDetail setOnDetail={setOnDetail} />}
       {onModal && <ProductModal setOnModal={setOnModal} id={modalId} />}
     </>
   );
