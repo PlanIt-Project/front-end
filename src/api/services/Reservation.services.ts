@@ -1,6 +1,7 @@
 import { ICancelUserReservationResponse } from "../../hooks/queries/reservation/cancelUserReservation";
 import { IRegisterUserReservationResponse } from "../../hooks/queries/reservation/registerUserReservation";
 import { ITrainerReservationResponse } from "../../types/reservation/TrainerReservation.types";
+import { ITrainerWorkScheduleResponse } from "../../types/reservation/TrainerWorkSchedule.types";
 import { IUserScheduleResponse } from "../../types/reservation/UserReservation.types";
 import { instance } from "../instance";
 
@@ -41,8 +42,14 @@ export const registerTrainerScheduleService = async (
   reservationDate: string,
   reservationTimes: string[],
 ) => {
-  return await instance.put("/reservation/change/", {
+  return await instance.put("/reservation/change", {
     reservationDate,
     reservationTimes,
   });
+};
+
+export const getTrainerWorkScheduleService = async (
+  trainerId: number,
+): Promise<ITrainerWorkScheduleResponse> => {
+  return await instance.get(`/member/trainerschedule/${trainerId}`);
 };
