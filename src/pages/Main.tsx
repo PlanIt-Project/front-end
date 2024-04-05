@@ -11,6 +11,8 @@ import RightArrowIcon from "../assets/icon_right-arrow.png";
 import { IBannerListData } from "../types/BannerList.types";
 
 export default function Main() {
+  const api = process.env.REACT_APP_API_URL ?? "";
+
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState(0);
   const [bannerList, setBannerList] = useState<IBannerListData[]>([]);
@@ -69,7 +71,7 @@ export default function Main() {
         {bannerList.map((el) => (
           <S.Banner
             key={el.id}
-            src={el.imagePath}
+            src={`${api}/${el.imagePath}`}
             $translateX={currentBannerIndex * 100}
           />
         ))}
