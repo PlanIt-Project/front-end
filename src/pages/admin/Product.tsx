@@ -5,7 +5,10 @@ import ProductMakeModal from "../../components/admin/ProductMakeModal";
 import { useParams } from "react-router-dom";
 import Pagination from "../../components/CommonPagination";
 import { getAdminProduct } from "../../hooks/queries/admin/getProducts";
-import { useAdminProductStore } from "../../stores/adminProductStore";
+import {
+  useAdminProductStore,
+  useAdminProductTriggerStore,
+} from "../../stores/adminProductStore";
 
 // TO DO, Modal과 Detail 컴포넌트로 분리
 // Modal은 등록 관련해서 사용
@@ -14,12 +17,15 @@ export default function Product() {
   const param = useParams();
   const [page, setPage] = useState(Number(param.pageId));
   const [onModal, setOnModal] = useState(false);
+
   const { setProductContent } = useAdminProductStore();
+  const { productTrigger } = useAdminProductTriggerStore();
+
   const onClickMakeButton = () => {
     setOnModal(!onModal);
   };
 
-  const { data } = getAdminProduct(page - 1, 8);
+  const { data, refetch } = getAdminProduct(page - 1, 8);
 
   useEffect(() => {
     if (data) {
@@ -27,6 +33,9 @@ export default function Product() {
     }
   }, [data]);
 
+  useEffect(() => {
+    refetch();
+  }, [productTrigger]);
   return (
     <>
       <S.AdminContainer>

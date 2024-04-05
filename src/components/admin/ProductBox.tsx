@@ -8,7 +8,11 @@ import {
   useAdminProductStore,
 } from "../../stores/adminProductStore";
 import { IAdminProductContent } from "../../types/admin/Admin.product.types";
-import { parsePeriod, sellingTypeToKor, typeToKor } from "../../utils/adminFilter";
+import {
+  parsePeriod,
+  sellingTypeToKor,
+  typeToKor,
+} from "../../utils/adminFilter";
 
 export default function ProductBox() {
   const [onModal, setOnModal] = useState<boolean>(false);
@@ -17,7 +21,7 @@ export default function ProductBox() {
   const { productContent } = useAdminProductStore();
   const { setProductDetail } = useAdminProductDetailStore();
 
-  const onSetDetail = (content: IAdminProductContent ) => {
+  const onSetDetail = (content: IAdminProductContent) => {
     setOnDetail(!onDetail);
     setProductDetail(content);
   };
