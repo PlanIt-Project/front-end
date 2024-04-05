@@ -45,12 +45,11 @@ export const statusToKor = (status: string): string => {
     if (!matches) {
       return "Invalid period format";
     }
-
-    const [, years, months, days] = matches
+    
+    const [years, months, days] = matches
       .slice(1)
       .map((value) => parseInt(value || "0", 10));
     const result = [];
-
     if (years) {
       result.push(`${years}년`);
     }
