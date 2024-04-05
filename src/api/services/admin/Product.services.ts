@@ -1,4 +1,5 @@
 import {
+  IAdminDeleteProductRes,
   IAdminMakeProductRes,
   IAdminProductResponse,
   IMakeProductParams,
@@ -20,7 +21,7 @@ export const makeProductServices = async (
   params: IMakeProductParams,
 ): Promise<IAdminMakeProductRes> => {
   const { name, period, number, price, type } = params;
-  console.log(params)
+  console.log(params);
   return await instance.post("/admin/product", {
     name,
     period,
@@ -28,4 +29,11 @@ export const makeProductServices = async (
     price,
     type,
   });
+};
+
+export const deleteProductServices = async (
+  productId: number,
+): Promise<IAdminDeleteProductRes> => {
+  // 이후에 delete로 변경
+  return await instance.put(`/admin/product/${productId}`);
 };

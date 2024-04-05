@@ -10,5 +10,6 @@ export const getAdminProduct = (page: number, size: number) => {
 
       return response.data;
     },
+    refetchOnMount: true
   });
 };

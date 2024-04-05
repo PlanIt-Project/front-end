@@ -56,3 +56,9 @@ export interface IMakeProductParams {
   price: number;
   type: "PT" | "MEMBERSHIP";
 }
+
+export interface IAdminDeleteProductRes {
+  message: string;
+  code: number;
+  data: string;
+}
