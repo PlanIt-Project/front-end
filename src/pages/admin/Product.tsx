@@ -25,7 +25,7 @@ export default function Product() {
     setOnModal(!onModal);
   };
 
-  const { data, refetch } = getAdminProduct(page - 1, 8);
+  const { data, refetch } = getAdminProduct(page - 1, 7);
 
   useEffect(() => {
     if (data) {

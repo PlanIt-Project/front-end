@@ -16,7 +16,7 @@ export default function Program() {
     setOption(e.target.value);
   };
 
-  const { data } = getAdminProgram(page - 1, 8, option);
+  const { data } = getAdminProgram(page - 1, 7, option);
 
   useEffect(() => {
     if (data) {

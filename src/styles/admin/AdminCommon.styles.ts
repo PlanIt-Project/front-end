@@ -66,10 +66,10 @@ export const MakeButton = styled(CommonButton)`
 export const ManageBox = styled.div`
   width: 85%;
   min-height: 500px;
-  height: 70vh;
+  height: 600px;
   display: flex;
   flex-direction: column;
-  padding-bottom: 30px;
+  padding-bottom: 45px;
 `;
 
 export const NameBar = styled.div<{ $nameNumber?: number }>`

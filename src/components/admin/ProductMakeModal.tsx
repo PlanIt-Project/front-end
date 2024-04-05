@@ -47,7 +47,7 @@ export default function ProductMakeModal({ setOnModal }: IModal) {
       name: form.name,
       period,
       number: form.number.toString(),
-      price: form.number,
+      price: form.price,
       type: form.type,
     });
     mutate();
