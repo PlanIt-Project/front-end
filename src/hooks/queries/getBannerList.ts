@@ -7,7 +7,7 @@ export const getBannerList = () => {
     queryKey: ["getBannerList"],
     queryFn: async (): Promise<IBannerListData[]> => {
       const response = await getBannerListService();
-      return response.data;
+      return response.data.content;
     },
   });
 };
