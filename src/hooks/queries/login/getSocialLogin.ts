@@ -1,13 +1,17 @@
-import {useQuery} from "@tanstack/react-query";
-import {IApiError} from "../../../../../../planIT_front/front-end/src/types/Error.types";
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import {socialLoginFormService} from "../../../api/services/Login.services";
+import { IApiError } from "../../../types/Error.types";
 
 export const getSocialLogin = (
     registrationId: string,
-) => {
-  return useQuery<string, IApiError>({
+): UseQueryResult<string, IApiError> & { mutate: (registrationId: string) => Promise<{ data: string }> } => {
+  const queryResult = useQuery<string, IApiError>({
     queryKey: ["getSocialLogin"],
-    queryFn: async (): Promise<string> => {
+    queryFn: async () => {
+      if (!registrationId) {
+        return '';
+      }
+
       const response = await socialLoginFormService(registrationId);
 
       if (response.code !== 200) {
@@ -16,5 +20,18 @@ export const getSocialLogin = (
 
       return response.data;
     },
+    enabled: !!registrationId,
   });
+
+  return {
+    ...queryResult,
+    mutate: async (registrationId: string) => {
+      try {
+        const response = await socialLoginFormService(registrationId);
+        return { data: response.data };
+      } catch (error) {
+        throw new Error("error");
+      }
+    },
+  };
 };
