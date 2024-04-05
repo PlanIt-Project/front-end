@@ -21,7 +21,6 @@ export default function Pagination({
   const navigate = useNavigate();
 
   const firstNum = currPage - (((currPage - 1) % 5) + 1) + 1;
-  console.log(firstNum)
   return (
     <Container>
       <Button

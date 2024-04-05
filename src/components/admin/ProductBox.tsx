@@ -8,7 +8,8 @@ import ProductDetail from "./ProductDetail";
 import ProductModal from "./ProductModal";
 
 export default function ProductBox() {
-  const [onModal, setOnModal] = useState(false);
+  const [onModal, setOnModal] = useState<boolean>(false);
+  const [modalId, setModalId] = useState<number>(0);
   const [onDetail, setOnDetail] = useState<boolean>(false);
   const [detailId, setDetailId] = useState<number>(0);
 
@@ -17,8 +18,9 @@ export default function ProductBox() {
     setDetailId(id);
   };
 
-  const onClickModifyButton = () => {
+  const onClickModifyButton = (id: number) => {
     setOnModal(!onModal);
+    setModalId(id);
   };
 
   return (
@@ -51,7 +53,7 @@ export default function ProductBox() {
               </S.ContentHover>
               <S.ModifyButton
                 onClick={() => {
-                  onClickModifyButton();
+                  onClickModifyButton(content.id);
                 }}
               >
                 설정
@@ -61,7 +63,7 @@ export default function ProductBox() {
         </S.ContentContainer>
       </S.ManageBox>
       {onDetail && <ProductDetail setOnDetail={setOnDetail} id={detailId} />}
-      {onModal && <ProductModal setOnModal={setOnModal}/>}
+      {onModal && <ProductModal setOnModal={setOnModal} id={modalId}/>}
     </>
   );
 }

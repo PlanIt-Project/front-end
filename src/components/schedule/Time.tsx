@@ -18,7 +18,7 @@ export default function Time({
     if (typeof selectedTime === "string") {
       return selectedTime === timeBoundary;
     } else {
-      return selectedTime.includes(timeBoundary);
+      return selectedTime?.includes(timeBoundary);
     }
   };
 
