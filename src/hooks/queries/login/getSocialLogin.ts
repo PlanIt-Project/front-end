@@ -1,37 +1,25 @@
-import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {socialLoginFormService} from "../../../api/services/Login.services";
+import { useMutation } from "@tanstack/react-query";
+import {socialLoginService} from "../../../api/services/Login.services";
+import { ILoginResponse } from "../../../types/Login.types";
+import { useAuthStore } from "../../../stores/authStore";
+import { useNavigate } from "react-router";
 import { IApiError } from "../../../types/Error.types";
 
 export const getSocialLogin = (
-    registrationId: string,
-): UseQueryResult<string, IApiError> & { mutate: (registrationId: string) => Promise<{ data: string }> } => {
-  const queryResult = useQuery<string, IApiError>({
-    queryKey: ["getSocialLogin"],
-    queryFn: async () => {
-      if (!registrationId) {
-        return '';
-      }
+    code: string
+) => {
+    const navigate = useNavigate();
 
-      const response = await socialLoginFormService(registrationId);
+    return useMutation<ILoginResponse, IApiError>({
+        mutationFn: async () => await socialLoginService(code),
+        onSuccess: async (data) => {
+            useAuthStore.setState({
+                accessToken: data.data.accessToken,
+                refreshToken: data.data.refreshToken,
+            });
 
-      if (response.code !== 200) {
-        throw new Error("error");
-      }
-
-      return response.data;
-    },
-    enabled: !!registrationId,
-  });
-
-  return {
-    ...queryResult,
-    mutate: async (registrationId: string) => {
-      try {
-        const response = await socialLoginFormService(registrationId);
-        return { data: response.data };
-      } catch (error) {
-        throw new Error("error");
-      }
-    },
-  };
+            await useAuthStore.getState().userInfo();
+            navigate("/main");
+        },
+    });
 };

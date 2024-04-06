@@ -5,8 +5,7 @@ import { useAuthStore } from "../stores/authStore";
 const retryCounts: Record<string, number> = {};
 
 export const instance = axios.create({
-  baseURL: "http://localhost:8080",
-  // baseURL: process.env.REACT_APP_API_URL,
+  baseURL: process.env.REACT_APP_API_URL,
   headers: {
     "Content-Type": "application/json",
   },

@@ -3,6 +3,7 @@ import Landing from "../pages/Landing";
 import About from "../pages/About";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
+import SocialLogin from "../pages/SocialLogin";
 import MyPage from "../pages/MyPage";
 import Main from "../pages/Main";
 import UserTicket from "../pages/user/Ticket";
@@ -31,6 +32,8 @@ export const router = createBrowserRouter([
       { path: "/about", element: <About /> },
       { path: "/login", element: <Login /> },
       { path: "/signUp", element: <SignUp /> },
+      { path: "/login/oauth2/code/naver", element: <SocialLogin /> },
+      { path: "/login/oauth2/code/google", element: <SocialLogin /> },
       {
         element: <LoginRoute />,
         children: [

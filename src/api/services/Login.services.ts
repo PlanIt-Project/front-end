@@ -32,3 +32,9 @@ export const socialLoginFormService = async (
 ): Promise<ISocialLoginFormResponse> => {
   return await instance.get(`/login/${registrationId}`);
 };
+
+export const socialLoginService = async (
+    apiEndpoint: string,
+): Promise<ILoginResponse> => {
+  return await instance.get(apiEndpoint)
+}

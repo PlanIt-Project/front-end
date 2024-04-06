@@ -7,7 +7,7 @@ import { getLogin } from "../hooks/queries/login/getLogin";
 import googleicon from "../assets/GoogleIcon.svg";
 import navericon from "../assets/NaverIcon.svg";
 import ToastNotification from "../components/modal/ToastNotification";
-import {getSocialLogin} from "../hooks/queries/login/getSocialLogin";
+import {getSocialLoginForm} from "../hooks/queries/login/getSocialLoginForm";
 
 export default function Login() {
   const [email, setEmail] = useState<string>("abcd");
@@ -23,7 +23,7 @@ export default function Login() {
     setLoginError,
   );
 
-  const { mutate: socialLoginMutate} = getSocialLogin(
+  const { mutate: socialLoginMutate} = getSocialLoginForm(
       socialProvider,
   );
 
