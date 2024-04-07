@@ -161,8 +161,14 @@ export default function Login() {
           <S.CheckEmailContainer>
             <S.EmailNumberInput
               placeholder="인증번호"
+              maxLength={6}
               onChange={(e) => {
                 if (!isEmailCheckSuccess) setEmailConfirmNumber(e.target.value);
+              }}
+              onKeyPress={(e) => {
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault();
+                }
               }}
               $disabled={isEmailCheckSuccess}
             />
@@ -230,24 +236,26 @@ export default function Login() {
         </S.SignUpColumn>
         <S.SignUpColumn>
           <p>성별</p>
-          <S.GenderInput
-            type="radio"
-            name="gender"
-            onChange={() => {
-              setGender("MALE");
-            }}
-            required
-          />
-          <p>남자</p>
-          <S.GenderInput
-            type="radio"
-            name="gender"
-            onChange={() => {
-              setGender("FEMALE");
-            }}
-            required
-          />
-          <p>여자</p>
+          <S.GenderContainer>
+            <S.GenderInput
+              type="radio"
+              name="gender"
+              onChange={() => {
+                setGender("MALE");
+              }}
+              required
+            />
+            <span>남자</span>
+            <S.GenderInput
+              type="radio"
+              name="gender"
+              onChange={() => {
+                setGender("FEMALE");
+              }}
+              required
+            />
+            <span>여자</span>
+          </S.GenderContainer>
         </S.SignUpColumn>
         <S.SignUpColumn>
           <p>휴대폰번호</p>

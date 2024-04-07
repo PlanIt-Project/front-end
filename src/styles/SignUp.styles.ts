@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { CommonButton, CommonInput } from "./globalStyles";
+import { breakPoints } from "./breakPoints";
 
 export const Container = styled.div`
   display: flex;
@@ -21,9 +22,18 @@ export const SignUpContainer = styled.div`
   gap: 15px;
   padding: 20px 40px;
 
+  @media screen and (max-width: ${breakPoints.medium}px) {
+    width: 400px;
+  }
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    width: 330px;
+    padding: 20px;
+  }
+
   h1 {
     font-size: var(--font-size-100);
-    margin: 10px 0px;
+    margin: 20px 0px;
   }
 
   p {
@@ -38,6 +48,12 @@ export const SignUpButton = styled(CommonButton)`
   margin: 20px 0px;
   height: 30px;
   width: 230px;
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    width: 200px;
+    height: 27px;
+    font-size: var(--font-size-500);
+  }
 `;
 
 export const SignUpInput = styled(CommonInput)`
@@ -48,6 +64,29 @@ export const SignUpInput = styled(CommonInput)`
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+
+  @media screen and (max-width: ${breakPoints.medium}px) {
+    width: 250px;
+  }
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    width: 220px;
+    font-size: var(--font-size-700);
+  }
+`;
+
+export const GenderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 320px;
+
+  @media screen and (max-width: ${breakPoints.medium}px) {
+    width: 270px;
+  }
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    width: 250px;
   }
 `;
 
@@ -73,11 +112,22 @@ export const GenderInput = styled.input`
 
 export const SignUpColumn = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
 
   p {
-    width: 130px;
+    width: 120px;
     cursor: default;
+
+    @media screen and (max-width: ${breakPoints.small}px) {
+      font-size: var(--font-size-700);
+    }
+  }
+
+  span {
+    font-size: var(--font-size-600);
+    margin-right: 20px;
   }
 `;
 
@@ -87,6 +137,15 @@ export const CheckEmailContainer = styled.div`
   width: 300px;
   margin-left: 110px;
   gap: 10px;
+
+  @media screen and (max-width: ${breakPoints.medium}px) {
+    margin-left: 160px;
+  }
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    width: 250px;
+    margin-left: 140px;
+  }
 `;
 
 export const CheckEmail = styled.button<{ $disabled: boolean }>`
@@ -103,6 +162,11 @@ export const EmailNumberInput = styled(CommonInput)<{ $disabled: boolean }>`
   height: 20px;
   background-color: ${(props) => props.$disabled && "var(--white-color-400)"};
   cursor: ${(props) => props.$disabled && "not-allowed"};
+
+  @media screen and (max-width: ${breakPoints.small}px) {
+    width: 100px;
+    height: 18px;
+  }
 `;
 
 export const Timer = styled.div<{ $disabled: boolean }>`
