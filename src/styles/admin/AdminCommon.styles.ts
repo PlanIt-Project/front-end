@@ -29,9 +29,9 @@ export const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   align-self: flex-end;
-  gap: 80px;
+  gap: 50px;
   margin-right: 100px;
-`
+`;
 
 export const SelectButton = styled.select`
   height: 55px;
@@ -42,19 +42,18 @@ export const SelectButton = styled.select`
   font-size: var(--font-size-600);
   font-weight: 600;
   color: #595959;
-  &:focus{
+  &:focus {
     outline: none;
     outline: 2px solid var(--main-color-300);
   }
-`
+`;
 export const SelectOption = styled.option`
   font-weight: 600;
   color: #595959;
   height: 50px;
-`
+`;
 
 export const MakeButton = styled(CommonButton)`
-  
   color: white;
   width: 100px;
   font-size: var(--font-size-500);
@@ -67,10 +66,10 @@ export const MakeButton = styled(CommonButton)`
 export const ManageBox = styled.div`
   width: 85%;
   min-height: 500px;
-  height: 70vh;
+  height: 600px;
   display: flex;
   flex-direction: column;
-  padding-bottom: 30px;
+  padding-bottom: 45px;
 `;
 
 export const NameBar = styled.div<{ $nameNumber?: number }>`
@@ -78,7 +77,8 @@ export const NameBar = styled.div<{ $nameNumber?: number }>`
   color: white;
   border-radius: 20px 20px 0 0;
   display: grid;
-  grid-template-columns: ${props => props.$nameNumber ? `repeat(${props.$nameNumber}, 1fr)` : `repeat(7, 1fr)`};
+  grid-template-columns: ${(props) =>
+    props.$nameNumber ? `repeat(${props.$nameNumber}, 1fr)` : `repeat(7, 1fr)`};
   justify-items: center;
   align-items: center;
   margin-top: 30px;
@@ -101,20 +101,36 @@ export const ContentContainer = styled.ul`
 
 export const ContentBar = styled.li<{ $nameNumber?: number }>`
   display: grid;
-  grid-template-columns: ${props => props.$nameNumber ? `repeat(${props.$nameNumber}, 1fr)` : `repeat(7, 1fr)`};
+  grid-template-columns: ${(props) =>
+    props.$nameNumber ? `${props.$nameNumber}fr 1fr` : `6fr 1fr`};
   justify-items: center;
   align-items: center;
   width: 1020px;
-  padding: 15px 0;
-  &:hover{
+  height: 70px;
+  &:hover {
     background-color: var(--main-color-200);
     cursor: pointer;
   }
 `;
 
+export const ContentHover = styled.div<{ $nameNumber?: number }>`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: ${(props) =>
+    props.$nameNumber ? `repeat(${props.$nameNumber}, 1fr)` : `repeat(6, 1fr)`};
+  justify-items: center;
+  align-items: center;
+`;
+
 export const Content = styled.span`
   font-size: var(--font-size-600);
 `;
+
+export const DateContent = styled.span`
+  display: flex;
+  flex-direction: column;
+`
 
 export const ModifyButton = styled(CommonButton)`
   width: 80px;
@@ -126,3 +142,16 @@ export const ModifyButton = styled(CommonButton)`
     background-color: var(--main-color-300);
   }
 `;
+
+export const DisableButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  width: 80px;
+  height: 20px;
+  padding: 10px;
+  font-size: var(--font-size-500);
+  color: white;
+  background-color: var(--white-color-700);
+`

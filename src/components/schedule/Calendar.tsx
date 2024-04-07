@@ -9,6 +9,7 @@ import dayjs from "dayjs";
 export default function Calendar({
   selectedDay,
   handleClickDay,
+  isAllowClick = false,
 }: ICalendarProps) {
   const [currentMonth, setCurrentMonth] = useState(TODAY);
 
@@ -59,22 +60,36 @@ export default function Calendar({
     return calendarDays.map((day: string, index: number) => {
       const dayObject = dayjs(day);
       const isCurrentMonth = dayObject.month() === dayjs(currentMonth).month();
-      const today = dayjs().format("YYYY-MM-DD");
+      const isBeforeToday = dayObject.isBefore(TODAY, "day");
 
-      const dayClass = !isCurrentMonth
-        ? "otherMonth"
-        : day < today
-          ? "prevDay"
-          : "futureDay";
+      let dayClass = "";
 
-      const selectedDayClass = isSameDay(day, selectedDay) ? "choiceDay" : "";
+      // 현재 월의 과거 날짜 처리
+      if (isCurrentMonth && isBeforeToday) {
+        dayClass = isAllowClick ? "pastDayClickable" : "pastDay";
+      }
+
+      // 다른 달의 과거 날짜 처리
+      if (!isCurrentMonth && isBeforeToday) {
+        dayClass = "pastDay";
+      }
+
+      // 현재 월이 아닌 날짜 처리
+      if (!isCurrentMonth) {
+        dayClass = "otherMonth";
+      }
+
+      // 사용자가 선택한 날짜 처리
+      if (isSameDay(day, selectedDay)) {
+        dayClass = "choiceDay";
+      }
 
       return (
         <S.CalendarDay key={index}>
           <S.Day
-            className={`${dayClass} ${selectedDayClass}`}
+            className={`${dayClass}`}
             onClick={() => {
-              if (isCurrentMonth) {
+              if (isCurrentMonth && (!isBeforeToday || isAllowClick)) {
                 handleClickDay(dayObject.format("YYYY-MM-DD"));
               }
             }}

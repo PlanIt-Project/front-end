@@ -2,6 +2,7 @@ import { MouseEvent, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import styled from "styled-components";
 import { breakPoints } from "../styles/breakPoints";
+import { useAuthStore } from "../stores/authStore";
 
 export default function TabMenu() {
   const trainerTabMenus = [
@@ -12,11 +13,13 @@ export default function TabMenu() {
     { path: "/user/ticket/available", label: "사용가능" },
     { path: "/user/ticket/expired", label: "만료" },
   ];
+
+  const { user } = useAuthStore((state) => state);
+
   const navigate = useNavigate();
   const location = useLocation();
 
   const [currentTab, setCurrentTab] = useState(location.pathname);
-  const [trainerLogin] = useState(false);
 
   useEffect(() => {
     setCurrentTab(location.pathname);
@@ -31,7 +34,7 @@ export default function TabMenu() {
     }
   };
 
-  const menus = trainerLogin ? trainerTabMenus : userTabMenus;
+  const menus = user?.role === "TRAINER" ? trainerTabMenus : userTabMenus;
 
   return (
     <TabContainer>

@@ -3,6 +3,7 @@ import Landing from "../pages/Landing";
 import About from "../pages/About";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
+import SocialLogin from "../pages/SocialLogin";
 import MyPage from "../pages/MyPage";
 import Main from "../pages/Main";
 import UserTicket from "../pages/user/Ticket";
@@ -31,6 +32,8 @@ export const router = createBrowserRouter([
       { path: "/about", element: <About /> },
       { path: "/login", element: <Login /> },
       { path: "/signUp", element: <SignUp /> },
+      { path: "/login/oauth2/code/naver", element: <SocialLogin /> },
+      { path: "/login/oauth2/code/google", element: <SocialLogin /> },
       {
         element: <LoginRoute />,
         children: [
@@ -44,10 +47,6 @@ export const router = createBrowserRouter([
               { path: "/user/ticket/expired", element: <UserTicket /> },
               { path: "/user/schedule", element: <UserSchedule /> },
               { path: "/user/reservation", element: <UserReservation /> },
-              {
-                path: "/user/reservation/:reservationId",
-                element: <UserReservation />,
-              },
             ],
           },
           {
@@ -62,12 +61,15 @@ export const router = createBrowserRouter([
             path: "/admin",
             element: <AdminRoute />,
             children: [
-              { path: "/admin/account", element: <Account /> },
-              { path: "/admin/trainer", element: <Trainer /> },
-              { path: "/admin/banner", element: <Banner /> },
+              { path: "/admin/account/:pageId", element: <Account /> },
+              { path: "/admin/trainer/:pageId", element: <Trainer /> },
+              { path: "/admin/banner/:pageId", element: <Banner /> },
               { path: "/admin/product/:pageId", element: <Product /> },
-              { path: "/admin/program", element: <Program /> },
-              { path: "/admin/adminRequest", element: <AdminRequest /> },
+              { path: "/admin/program/:pageId", element: <Program /> },
+              {
+                path: "/admin/adminRequest/:pageId",
+                element: <AdminRequest />,
+              },
             ],
           },
         ],

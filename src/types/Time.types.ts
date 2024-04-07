@@ -1,6 +1,6 @@
 export interface ITimeProps {
   selectedDay: string;
-  selectedTime: string;
-  isTimeAvailable: (time: string) => boolean;
+  selectedTime: string | string[];
+  getTimeStatus: (time: string) => "unavailable" | "available";
   handleClickTime: (time: string) => void;
 }
