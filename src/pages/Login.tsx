@@ -5,21 +5,26 @@ import { LoginSignUpContainer } from "../styles/LoginSignUp.style";
 import { useState, ChangeEvent } from "react";
 import { getLogin } from "../hooks/queries/login/getLogin";
 import googleicon from "../assets/GoogleIcon.svg";
-import kakaoicon from "../assets/KakaoIcon.svg";
 import navericon from "../assets/NaverIcon.svg";
 import ToastNotification from "../components/modal/ToastNotification";
+import {getSocialLoginForm} from "../hooks/queries/login/getSocialLoginForm";
 
 export default function Login() {
   const [email, setEmail] = useState<string>("abcd");
   const [password, setPassword] = useState<string>("dddd");
   const [isToastOpen, setIsToastOpen] = useState(false);
   const [loginError, setLoginError] = useState("");
+  const [socialProvider, setSocialProvider] = useState("");
 
   const { mutate: loginMutate } = getLogin(
     email,
     password,
     setIsToastOpen,
     setLoginError,
+  );
+
+  const { mutate: socialLoginMutate} = getSocialLoginForm(
+      socialProvider,
   );
 
   const navigate = useNavigate();
@@ -44,6 +49,17 @@ export default function Login() {
 
   const handleLogin = () => {
     loginMutate();
+  };
+
+  const handleSocialLogin = async (registrationId: string) => {
+    setSocialProvider(registrationId);
+
+    try {
+      const { data: redirectUrl }  = await socialLoginMutate(registrationId);
+      window.location.href = redirectUrl;
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -71,9 +87,8 @@ export default function Login() {
         <LoginButton onClick={handleLogin}>로그인</LoginButton>
         <p onClick={goToSignUp}>회원가입</p>
         <div>
-          <img src={googleicon} />
-          <img src={kakaoicon} />
-          <img src={navericon} />
+          <img src={googleicon} onClick={() => {handleSocialLogin("google")}}/>
+          <img src={navericon} onClick={() => {handleSocialLogin("naver")}}/>
         </div>
       </LoginPageContainer>
 

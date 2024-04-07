@@ -36,3 +36,9 @@ export interface IMemberResponse {
   message: string;
   data: IMemberData;
 }
+
+export interface ISocialLoginFormResponse {
+  code: number;
+  message: string;
+  data: string;
+}
