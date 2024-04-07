@@ -25,7 +25,7 @@ export const PRODUCT_NAMES = [
   },
   {
     id: 7,
-    value: "판매 설정",
+    value: "상품 삭제",
   },
 ];
 
