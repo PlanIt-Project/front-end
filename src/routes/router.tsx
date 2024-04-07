@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import Landing from "../pages/Landing";
-import About from "../pages/About";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import SocialLogin from "../pages/SocialLogin";
@@ -29,7 +28,6 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "/", element: <Landing /> },
-      { path: "/about", element: <About /> },
       { path: "/login", element: <Login /> },
       { path: "/signUp", element: <SignUp /> },
       { path: "/login/oauth2/code/naver", element: <SocialLogin /> },

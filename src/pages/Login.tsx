@@ -1,13 +1,12 @@
-import styled from "styled-components";
-import { CommonInput, CommonButton } from "../styles/globalStyles";
+import * as S from "../styles/Login.styles";
+import { CommonInput } from "../styles/globalStyles";
 import { useNavigate } from "react-router";
-import { LoginSignUpContainer } from "../styles/LoginSignUp.style";
 import { useState, ChangeEvent } from "react";
 import { getLogin } from "../hooks/queries/login/getLogin";
 import googleicon from "../assets/GoogleIcon.svg";
 import navericon from "../assets/NaverIcon.svg";
 import ToastNotification from "../components/modal/ToastNotification";
-import {getSocialLoginForm} from "../hooks/queries/login/getSocialLoginForm";
+import { getSocialLoginForm } from "../hooks/queries/login/getSocialLoginForm";
 
 export default function Login() {
   const [email, setEmail] = useState<string>("abcd");
@@ -23,9 +22,7 @@ export default function Login() {
     setLoginError,
   );
 
-  const { mutate: socialLoginMutate} = getSocialLoginForm(
-      socialProvider,
-  );
+  const { mutate: socialLoginMutate } = getSocialLoginForm(socialProvider);
 
   const navigate = useNavigate();
 
@@ -55,16 +52,16 @@ export default function Login() {
     setSocialProvider(registrationId);
 
     try {
-      const { data: redirectUrl }  = await socialLoginMutate(registrationId);
-      window.location.href = redirectUrl;
+      const { data: redirectUrl } = await socialLoginMutate(registrationId);
+      navigate(redirectUrl);
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <>
-      <LoginPageContainer>
+    <S.Container>
+      <S.LoginPageContainer>
         <h1>LOGIN</h1>
         <CommonInput
           id="eamil"
@@ -84,13 +81,23 @@ export default function Login() {
           onChange={handleChange}
           value={password}
         ></CommonInput>
-        <LoginButton onClick={handleLogin}>로그인</LoginButton>
-        <p onClick={goToSignUp}>회원가입</p>
-        <div>
-          <img src={googleicon} onClick={() => {handleSocialLogin("google")}}/>
-          <img src={navericon} onClick={() => {handleSocialLogin("naver")}}/>
-        </div>
-      </LoginPageContainer>
+        <S.LoginButton onClick={handleLogin}>로그인</S.LoginButton>
+        <S.SignUpButton onClick={goToSignUp}>회원가입</S.SignUpButton>
+        <S.SocialLoginContainer>
+          <img
+            src={googleicon}
+            onClick={() => {
+              handleSocialLogin("google");
+            }}
+          />
+          <img
+            src={navericon}
+            onClick={() => {
+              handleSocialLogin("naver");
+            }}
+          />
+        </S.SocialLoginContainer>
+      </S.LoginPageContainer>
 
       {isToastOpen && (
         <ToastNotification
@@ -99,25 +106,6 @@ export default function Login() {
           setIsToastOpen={setIsToastOpen}
         />
       )}
-    </>
+    </S.Container>
   );
 }
-
-const LoginPageContainer = styled(LoginSignUpContainer)`
-  p {
-    font-size: 2rem;
-  }
-  div {
-    display: flex;
-    gap: 3rem;
-
-    img {
-      cursor: pointer;
-    }
-  }
-`;
-
-const LoginButton = styled(CommonButton)`
-  background: white;
-  color: black;
-`;
