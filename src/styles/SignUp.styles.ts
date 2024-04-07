@@ -18,7 +18,7 @@ export const SignUpContainer = styled.div`
   margin: auto;
   color: white;
   border-radius: 10px;
-  gap: 20px;
+  gap: 15px;
   padding: 20px 40px;
 
   h1 {
@@ -37,12 +37,18 @@ export const SignUpButton = styled(CommonButton)`
   color: black;
   margin: 20px 0px;
   height: 30px;
-  width: 250px;
+  width: 230px;
 `;
 
 export const SignUpInput = styled(CommonInput)`
   width: 300px;
   color: black;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 export const GenderInput = styled.input`
@@ -61,6 +67,7 @@ export const GenderInput = styled.input`
 
   &:checked {
     background-color: var(--main-color-400);
+    border: 2px solid var(--main-color-200);
   }
 `;
 
@@ -70,6 +77,7 @@ export const SignUpColumn = styled.div`
 
   p {
     width: 130px;
+    cursor: default;
   }
 `;
 
@@ -77,9 +85,27 @@ export const CheckEmailContainer = styled.div`
   display: flex;
   align-items: center;
   width: 300px;
-  margin-left: 120px;
+  margin-left: 110px;
+  gap: 10px;
 `;
 
-export const CheckEmail = styled.button`
+export const CheckEmail = styled.button<{ $disabled: boolean }>`
   font-size: var(--font-size-700);
+  padding: 10px;
+  background-color: ${(props) =>
+    props.$disabled ? "var(--white-color-500)" : "var(--main-color-400)"};
+  border-radius: 10px;
+  cursor: ${(props) => (props.$disabled ? "not-allowed" : "pointer")};
+`;
+
+export const EmailNumberInput = styled(CommonInput)<{ $disabled: boolean }>`
+  width: 130px;
+  height: 20px;
+  background-color: ${(props) => props.$disabled && "var(--white-color-400)"};
+  cursor: ${(props) => props.$disabled && "not-allowed"};
+`;
+
+export const Timer = styled.div<{ $disabled: boolean }>`
+  font-size: var(--font-size-500);
+  color: ${(props) => props.$disabled && "var(--white-color-500)"};
 `;

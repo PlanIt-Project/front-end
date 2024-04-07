@@ -1,43 +1,142 @@
 import * as S from "../styles/SignUp.styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { SignUpService } from "../api/services/SignUp.services";
+import { registerSignUp } from "../hooks/queries/registerSignUp";
+import ToastNotification from "../components/modal/ToastNotification";
+import { formatTime } from "../utils/formatTime";
+import { getEmailNumber } from "../hooks/queries/getEmailNumber";
+import { getEmailConfirm } from "../hooks/queries/getEmailConfirm";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [isEmailConfirm, setIsEmailConfirm] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(300);
+  const [emailConfirmNumber, setEmailConfirmNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [name, setName] = useState("");
+  const [birth, setBirth] = useState("");
+  const [gender, setGender] = useState("");
+  const [number, setNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [isErrorToastOpen, setIsErrorToastOpen] = useState(false);
+  const [errorContents, setErrorContents] = useState("");
+  const [isToastOpen, setIsToastOpen] = useState(false);
+  const [toastContents, setToastContents] = useState("");
+
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [passwordConfirm, setPasswordConfirm] = useState<string>("");
-  const [name, setName] = useState<string>("");
-  const [birth, setBirth] = useState<string>("");
-  const [number, setNumber] = useState<string>("");
-  const [address, setAddress] = useState<string>("");
+  const { mutate: signUpMutate, isSuccess: isSignUpSuccess } = registerSignUp(
+    email,
+    password,
+    name,
+    birth,
+    gender,
+    number,
+    address,
+    setIsToastOpen,
+    setToastContents,
+  );
+  const { mutate: getEmailNumberMutate } = getEmailNumber(
+    email,
+    setIsToastOpen,
+    setToastContents,
+  );
+  const { mutate: getEmailConfirmMutate, isSuccess: isEmailCheckSuccess } =
+    getEmailConfirm(
+      email,
+      emailConfirmNumber,
+      setIsToastOpen,
+      setToastContents,
+    );
+
+  useEffect(() => {
+    if (!isToastOpen && isSignUpSuccess) {
+      navigate("/login");
+    }
+  });
+
+  useEffect(() => {
+    if (isEmailCheckSuccess) {
+      setTimeLeft(0);
+      return;
+    }
+
+    if (isEmailConfirm) {
+      const interval = setInterval(() => {
+        setTimeLeft((timeLeft) => {
+          if (timeLeft === 0) {
+            clearInterval(interval);
+            return 0;
+          } else {
+            return timeLeft - 1;
+          }
+        });
+      }, 1000);
+
+      if (timeLeft === 0) {
+        clearInterval(interval);
+        if (!isEmailCheckSuccess) {
+          setIsEmailConfirm(false);
+        }
+      }
+
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [isEmailConfirm, timeLeft, isEmailCheckSuccess]);
+
+  const handleGetEmailNumber = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      setIsErrorToastOpen(true);
+      setErrorContents("유효한 이메일 주소를 입력해 주세요.");
+      return;
+    }
+
+    if (!isEmailCheckSuccess) {
+      setIsEmailConfirm(true);
+      getEmailNumberMutate();
+    }
+  };
+
+  const handleEmailConfirm = () => {
+    if (!isEmailCheckSuccess) getEmailConfirmMutate();
+  };
 
   const handleSignUp = () => {
-    if (password !== passwordConfirm) {
-      alert("비밀번호가 일치하지 않습니다");
+    if (!email || !password || !name || !birth || !gender || !number) {
+      setIsErrorToastOpen(true);
+      setErrorContents("모든 항목을 입력해 주세요.");
+      return;
+    } else if (password !== passwordConfirm) {
+      setIsErrorToastOpen(true);
+      setErrorContents("비밀번호가 일치하지 않습니다.");
+      return;
+    } else if (password.length < 8) {
+      setIsErrorToastOpen(true);
+      setErrorContents("비밀번호를 8자리 이상으로 설정해 주세요.");
+      return;
+    } else if (!isEmailCheckSuccess) {
+      setIsErrorToastOpen(true);
+      setErrorContents("이메일 인증이 필요합니다.");
+      return;
     }
-    if (!email || !password || !name || !birth || !number) {
-      alert("모든 항목을 입력해주세요");
-    }
-    // TO DO signup api 추가
-    (async () => {
-      await SignUpService({ email, password, name, birth, number, address });
-    })();
-    navigate("/login");
+
+    signUpMutate();
   };
 
   return (
     <S.Container>
-      ₩
       <S.SignUpContainer>
         <h1>SIGN UP</h1>
         <S.SignUpColumn>
-          <p>Email</p>
+          <p>이메일</p>
           <S.SignUpInput
             type="email"
-            placeholder="Email"
+            placeholder="이메일"
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
@@ -46,10 +145,37 @@ export default function Login() {
           ></S.SignUpInput>
         </S.SignUpColumn>
         <S.CheckEmailContainer>
-          <S.CheckEmail>Email 인증</S.CheckEmail>
+          <S.CheckEmail
+            onClick={handleGetEmailNumber}
+            $disabled={isEmailCheckSuccess}
+          >
+            이메일 인증
+          </S.CheckEmail>
+          {isEmailConfirm && (
+            <S.Timer $disabled={isEmailCheckSuccess}>
+              {formatTime(timeLeft)}
+            </S.Timer>
+          )}
         </S.CheckEmailContainer>
+        {isEmailConfirm && (
+          <S.CheckEmailContainer>
+            <S.EmailNumberInput
+              placeholder="인증번호"
+              onChange={(e) => {
+                if (!isEmailCheckSuccess) setEmailConfirmNumber(e.target.value);
+              }}
+              $disabled={isEmailCheckSuccess}
+            />
+            <S.CheckEmail
+              onClick={handleEmailConfirm}
+              $disabled={isEmailCheckSuccess}
+            >
+              인증하기
+            </S.CheckEmail>
+          </S.CheckEmailContainer>
+        )}
         <S.SignUpColumn>
-          <p>PW</p>
+          <p>비밀번호</p>
           <S.SignUpInput
             type="password"
             placeholder="영문,숫자 포함 8자리 이상"
@@ -61,7 +187,7 @@ export default function Login() {
           ></S.SignUpInput>
         </S.SignUpColumn>
         <S.SignUpColumn>
-          <p>PW 확인</p>
+          <p>비밀번호 확인</p>
           <S.SignUpInput
             type="password"
             placeholder="영문,숫자 포함 8자리 이상"
@@ -88,30 +214,56 @@ export default function Login() {
           <p>출생년도</p>
           <S.SignUpInput
             type="text"
-            placeholder="8자리 입력"
+            maxLength={8}
+            placeholder="숫자만 8자리 입력 (19000101)"
             required
             value={birth}
             onChange={(e) => {
               setBirth(e.target.value);
             }}
+            onKeyPress={(e) => {
+              if (!/[0-9]/.test(e.key)) {
+                e.preventDefault();
+              }
+            }}
           ></S.SignUpInput>
         </S.SignUpColumn>
         <S.SignUpColumn>
           <p>성별</p>
-          <S.GenderInput type="radio" name="gender" required />
+          <S.GenderInput
+            type="radio"
+            name="gender"
+            onChange={() => {
+              setGender("MALE");
+            }}
+            required
+          />
           <p>남자</p>
-          <S.GenderInput type="radio" name="gender" required />
+          <S.GenderInput
+            type="radio"
+            name="gender"
+            onChange={() => {
+              setGender("FEMALE");
+            }}
+            required
+          />
           <p>여자</p>
         </S.SignUpColumn>
         <S.SignUpColumn>
           <p>휴대폰번호</p>
           <S.SignUpInput
             type="text"
+            maxLength={11}
             placeholder="-없이 숫자만"
             required
             value={number}
             onChange={(e) => {
               setNumber(e.target.value);
+            }}
+            onKeyPress={(e) => {
+              if (!/[0-9]/.test(e.key)) {
+                e.preventDefault();
+              }
             }}
           ></S.SignUpInput>
         </S.SignUpColumn>
@@ -129,6 +281,20 @@ export default function Login() {
         </S.SignUpColumn>
         <S.SignUpButton onClick={handleSignUp}>회원가입</S.SignUpButton>
       </S.SignUpContainer>
+      {isErrorToastOpen && (
+        <ToastNotification
+          contents={errorContents}
+          isToastOpen={isErrorToastOpen}
+          setIsToastOpen={setIsErrorToastOpen}
+        />
+      )}
+      {isToastOpen && (
+        <ToastNotification
+          contents={toastContents}
+          isToastOpen={isToastOpen}
+          setIsToastOpen={setIsToastOpen}
+        />
+      )}
     </S.Container>
   );
 }
