@@ -6,7 +6,7 @@ interface MenuFactory {
 
 class BasicMenuFactory implements MenuFactory {
   public createMenuList() {
-    return [{ label: "PlanIt?", path: "/about" }];
+    return [];
   }
 }
 
@@ -14,7 +14,6 @@ class BasicMenuFactory implements MenuFactory {
 class UserMenuFactory implements MenuFactory {
   public createMenuList() {
     return [
-      { label: "PlanIt?", path: "/about" },
       { label: "이용권", path: "/user/ticket/available" },
       { label: "스케줄", path: "/user/schedule" },
     ];
@@ -24,10 +23,7 @@ class UserMenuFactory implements MenuFactory {
 // TrainerMenuFactory 클래스
 class TrainerMenuFactory implements MenuFactory {
   public createMenuList() {
-    return [
-      { label: "PlanIt?", path: "/about" },
-      { label: "스케줄", path: "/trainer/reservation" },
-    ];
+    return [{ label: "스케줄", path: "/trainer/reservation" }];
   }
 }
 
