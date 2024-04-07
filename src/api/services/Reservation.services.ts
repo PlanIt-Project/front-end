@@ -51,5 +51,5 @@ export const registerTrainerScheduleService = async (
 export const getTrainerWorkScheduleService = async (
   trainerId: number,
 ): Promise<ITrainerWorkScheduleResponse> => {
-  return await instance.get(`/member/trainerschedule/${trainerId}`);
+  return await instance.get(`/member/trainer-schedule/${trainerId}`);
 };
