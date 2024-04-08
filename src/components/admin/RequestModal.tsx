@@ -5,7 +5,7 @@ import { IModal } from "../../types/admin/Admin.types";
 
 export default function RequestModal({ setOnModal }: IModal) {
   const { requestDetail } = useAdminRequestDetailStore();
-  const { mutate } = requestApprove(Number(requestDetail.id), Number(requestDetail.trainerId), setOnModal);
+  const { mutate } = requestApprove(Number(requestDetail.id), Number(requestDetail.trainer.id), setOnModal);
 
 
   const onClickApprove = () => {
