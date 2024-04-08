@@ -184,7 +184,7 @@ export const TRAINER_NAMES = [
   },
   {
     id: 6,
-    value: "성별",
+    value: "경력",
   },
   {
     id: 7,

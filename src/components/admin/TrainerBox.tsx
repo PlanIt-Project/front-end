@@ -1,18 +1,24 @@
 import { useState } from "react";
-import {
-  TRAINER_CONTENTS,
-  TRAINER_NAMES,
-} from "../../constants/Admin.constants";
+import { TRAINER_NAMES } from "../../constants/Admin.constants";
 import * as S from "../../styles/admin/AdminCommon.styles";
 import TrainerModal from "./TrainerModal";
 import TrainerDetail from "./TrainerDetail";
+import { IAdminTrainerContent } from "../../types/admin/Admin.trainer.types";
+import {
+  useAdminTrainerDetailStore,
+  useAdminTrainerStore,
+} from "../../stores/adminTrainerStore";
+import { parsePeriod } from "../../utils/adminFilter";
 
 export default function TrainerBox() {
   const [onModal, setOnModal] = useState(false);
   const [onDetail, setOnDetail] = useState(false);
+  const { trainerContent } = useAdminTrainerStore();
+  const { setTrainerDetail } = useAdminTrainerDetailStore();
 
-  const onSetDetail = (id: number) => {
+  const onSetDetail = (content: IAdminTrainerContent) => {
     setOnDetail(true);
+    setTrainerDetail(content);
   };
 
   const onClickModifyButton = () => {
@@ -27,20 +33,24 @@ export default function TrainerBox() {
           ))}
         </S.NameBar>
         <S.ContentContainer>
-          {TRAINER_CONTENTS.map((content) => (
+          {trainerContent.map((content) => (
             <S.ContentBar key={content.id} $nameNumber={6}>
               <S.ContentHover
                 $nameNumber={6}
                 onClick={() => {
-                  onSetDetail(content.id);
+                  onSetDetail(content);
                 }}
               >
                 <S.Content key={"id"}>{content.id}</S.Content>
                 <S.Content key={"name"}>{content.name}</S.Content>
-                <S.Content key={"emailId"}>{content.emailId}</S.Content>
-                <S.Content key={"birthday"}>{content.birthday}</S.Content>
-                <S.Content key={"phoneNumber"}>{content.phoneNumber}</S.Content>
-                <S.Content key={"gender"}>{content.gender}</S.Content>
+                <S.Content key={"email"}>{content.email}</S.Content>
+                <S.Content key={"birth"}>{content.birth}</S.Content>
+                <S.Content key={"phone_number"}>
+                  {content.phone_number}
+                </S.Content>
+                <S.Content key={"career"}>
+                  {parsePeriod(`P${content.career}`)}
+                </S.Content>
               </S.ContentHover>
               <S.ModifyButton
                 onClick={() => {
