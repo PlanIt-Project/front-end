@@ -13,7 +13,7 @@ export const makeProduct = (
 ) => {
   const { productTrigger, setProductTrigger } = useAdminProductTriggerStore();
 
-  return useMutation<IAdminMakeProductRes>({
+  return useMutation<IAdminMakeProductRes, Error>({
     mutationFn: async () => await makeProductServices(params),
     onSuccess: () => {
       alert("상품 등록에 성공했습니다");

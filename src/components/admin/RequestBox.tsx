@@ -13,7 +13,6 @@ import { IAdminRequestContent } from "../../types/admin/Admin.Request.types";
 export default function RequestBox() {
   const [onModal, setOnModal] = useState(false);
   const [onDetail, setOnDetail] = useState<boolean>(false);
-  const [detailId, setDetailId] = useState<number>(0);
   const { requestContent } = useAdminRequestStore();
   const { setRequestDetail } = useAdminRequestDetailStore();
 
@@ -22,9 +21,9 @@ export default function RequestBox() {
     setRequestDetail(content);
   };
 
-  const onClickModifyButton = (id: number) => {
+  const onClickModifyButton = (content:IAdminRequestContent) => {
     setOnModal(!onModal);
-    setDetailId(id);
+    setRequestDetail(content);
   };
 
   return (
@@ -61,7 +60,7 @@ export default function RequestBox() {
               {content.status === "PENDING" ? (
                 <S.ModifyButton
                   onClick={() => {
-                    onClickModifyButton(content.id);
+                    onClickModifyButton(content);
                   }}
                 >
                   설정
@@ -74,7 +73,7 @@ export default function RequestBox() {
         </S.ContentContainer>
       </S.ManageBox>
       {onDetail && <RequestDetail setOnDetail={setOnDetail} />}
-      {onModal && <RequestModal setOnModal={setOnModal} id={detailId} />}
+      {onModal && <RequestModal setOnModal={setOnModal} />}
     </>
   );
 }

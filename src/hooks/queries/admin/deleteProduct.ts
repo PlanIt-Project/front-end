@@ -10,7 +10,7 @@ export const deleteProduct = (
 ) => {
   const { productTrigger, setProductTrigger } = useAdminProductTriggerStore();
 
-  return useMutation<IAdminDeleteProductRes>({
+  return useMutation<IAdminDeleteProductRes, Error>({
     mutationFn: async () => await deleteProductServices(productId),
     onSuccess: () => {
       alert("상품이 삭제되었습니다");

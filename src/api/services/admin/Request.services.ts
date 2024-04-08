@@ -1,4 +1,4 @@
-import { IAdminRequestResponse } from "../../../types/admin/Admin.Request.types";
+import { IAdminRequestApproveResponse, IAdminRequestResponse } from "../../../types/admin/Admin.Request.types";
 import { instance } from "../../instance";
 
 export const getAdminRequestServices = async (
@@ -10,3 +10,12 @@ export const getAdminRequestServices = async (
       params: { option, size, page },
     });
   };
+
+export const requestApproveServices = async (
+  registrationId: number,
+  trainerId:number,
+): Promise<IAdminRequestApproveResponse> => {
+  return await instance.post(`/admin/program/approve/${registrationId}`, {
+    trainerId 
+  })
+}

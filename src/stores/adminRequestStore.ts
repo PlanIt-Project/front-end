@@ -11,6 +11,11 @@ export interface IAdminRequestDetailStore {
   setRequestDetail: (detail: IAdminRequestContent) => void;
 }
 
+export interface IAdminRequestTrigger {
+  requestTrigger: boolean;
+  setRequestTrigger: (trigger: boolean) => void;
+}
+
 export const useAdminRequestStore = create<IAdminRequestStore>((set) => ({
   requestContent: [],
   setRequestContent: (content) => {
@@ -42,11 +47,21 @@ export const useAdminRequestDetailStore = create<IAdminRequestDetailStore>(
       totalPrice: "",
       trainer: {
         id: 0,
-        name: ""
+        name: "",
       },
+      trainerId: 0
     },
     setRequestDetail: (detail) => {
       set({ requestDetail: detail });
+    },
+  }),
+);
+
+export const useAdminRequestTriggerStore = create<IAdminRequestTrigger>(
+  (set) => ({
+    requestTrigger: true,
+    setRequestTrigger: (trigger) => {
+      set({ requestTrigger: trigger });
     },
   }),
 );

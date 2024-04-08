@@ -5,7 +5,7 @@ import {
 } from "../../../api/services/admin/Program.services";
 
 export const ProgramChangeStatus = (programId: number, isSuspended: boolean) => {
-  return useMutation<IAdminProgramStatusResponse>({
+  return useMutation<IAdminProgramStatusResponse, Error>({
     mutationFn: async () => await getAdminProgramChangeStatusServices(programId, isSuspended),
   });
 };

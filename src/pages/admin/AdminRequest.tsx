@@ -4,19 +4,23 @@ import { useParams } from "react-router-dom";
 import Pagination from "../../components/CommonPagination";
 import RequestBox from "../../components/admin/RequestBox";
 import { getAdminRequest } from "../../hooks/queries/admin/getRequest";
-import { useAdminRequestStore } from "../../stores/adminRequestStore";
+import {
+  useAdminRequestStore,
+  useAdminRequestTriggerStore,
+} from "../../stores/adminRequestStore";
 
 export default function AdminRequest() {
   const param = useParams();
   const [page, setPage] = useState(Number(param.pageId));
   const [option, setOption] = useState<string>("READY");
   const { setRequestContent } = useAdminRequestStore();
+  const { requestTrigger } = useAdminRequestTriggerStore();
 
   const onChangeOption = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOption(e.target.value);
   };
 
-  const { data } = getAdminRequest(page - 1, 7, option);
+  const { data, refetch } = getAdminRequest(page - 1, 7, option);
 
   // member가 트레이너 인지 회원인지
   // 회원과 트레이너 모두 접근할 수 있어야 할 것 같음
@@ -26,6 +30,10 @@ export default function AdminRequest() {
     }
     console.log(data?.content);
   }, [data]);
+
+  useEffect(() => {
+    refetch();
+  }, [requestTrigger]);
   return (
     <>
       <S.AdminContainer>

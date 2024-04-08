@@ -27,6 +27,8 @@ export interface IAdminRequestContent {
   status: string;
   totalPrice: string;
   trainer: IUser;
+  trainerId: number;
+
 }
 
 interface IPageable {
@@ -48,4 +50,10 @@ interface IProduct {
   price: number;
   sellingType: string;
   type: "PT" | "MEMBERSHIP";
+}
+
+export interface IAdminRequestApproveResponse {
+  message: string;
+  code: number;
+  data: number;
 }
