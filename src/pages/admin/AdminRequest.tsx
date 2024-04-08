@@ -30,7 +30,7 @@ export default function AdminRequest() {
     <>
       <S.AdminContainer>
         <S.AdminContent>
-          <S.Title>등록 요청 관리</S.Title>
+          <S.Title>승인 요청 관리</S.Title>
           <S.ButtonContainer>
             <S.SelectButton
               value={option}
