@@ -1,4 +1,4 @@
-export const statusToKor = (status: string): string => {
+export const programStatusToKor = (status: string): string => {
     let kor = "";
     switch (status) {
       case "NOT_STARTED":
@@ -23,10 +23,37 @@ export const statusToKor = (status: string): string => {
     return kor;
   };
 
-  export const skipNull = (date: string): string => {
+  export const requestStatusToKor = (status: string): string => {
+    let kor = "";
+    switch (status) {
+      case "ACCEPTED":
+        kor = "승인됨";
+        break;
+      case "PENDING":
+        kor = "승인 대기 중";
+        break;
+      case "DECLINED":
+        kor = "취소됨";
+        break;
+      case "REFUND":
+        kor = "환불";
+        break;
+      default:
+        kor = "알 수 없음";
+        break;
+    }
+    return kor;
+  };
+
+  export const skipNullDate = (date: string): string => {
     if (date === null) return "미정";
     else return date;
   };
+
+  export const skipNullName = (name: string): string => {
+    if(name === null || name === "") return "없음";
+    else return name;
+  }
 
   export const typeToKor = (type: "PT" | "MEMBERSHIP"): string => {
     if (type === "MEMBERSHIP") return "맴버쉽";
