@@ -1,7 +1,7 @@
 import { useAdminProgramDetailStore } from "../../stores/adminProgramStore";
 import * as S from "../../styles/admin/AdminDetail.styles";
 import { IDetail } from "../../types/admin/Admin.types";
-import { programStatusToKor, skipNullDate } from "../../utils/adminFilter";
+import { programStatusToKor, skipNull } from "../../utils/adminFilter";
 
 export default function ProgramDetail({ setOnDetail }: IDetail) {
   const { programDetail } = useAdminProgramDetailStore();
@@ -29,8 +29,8 @@ export default function ProgramDetail({ setOnDetail }: IDetail) {
               <S.DetailName>종료 일자:</S.DetailName>
             </S.DetailDateColumn>
             <S.DetailDateColumn>
-              <S.DetailText>{skipNullDate(programDetail.startAt)}/</S.DetailText>
-              <S.DetailText>{skipNullDate(programDetail.endAt)}</S.DetailText>
+              <S.DetailText>{skipNull(programDetail.startAt, "date")}/</S.DetailText>
+              <S.DetailText>{skipNull(programDetail.endAt, "date")}</S.DetailText>
             </S.DetailDateColumn>
           </S.DetailContent>
 
@@ -40,8 +40,8 @@ export default function ProgramDetail({ setOnDetail }: IDetail) {
               <S.DetailName>재시작 일자:</S.DetailName>
             </S.DetailDateColumn>
             <S.DetailDateColumn>
-              <S.DetailText>{skipNullDate(programDetail.suspendAt)}/</S.DetailText>
-              <S.DetailText>{skipNullDate(programDetail.resumeAt)}</S.DetailText>
+              <S.DetailText>{skipNull(programDetail.suspendAt, "date")}/</S.DetailText>
+              <S.DetailText>{skipNull(programDetail.resumeAt, "date")}</S.DetailText>
             </S.DetailDateColumn>
             <S.DetailText></S.DetailText>
           </S.DetailContent>

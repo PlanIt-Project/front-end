@@ -1,7 +1,7 @@
 import * as S from "../../styles/admin/AdminDetail.styles";
 import { IDetail } from "../../types/admin/Admin.types";
 
-export default function TrainerDetail({ setOnDetail, id }: IDetail) {
+export default function TrainerDetail({ setOnDetail }: IDetail) {
   const onCloseButton = () => {
     setOnDetail(false);
   };
@@ -11,7 +11,7 @@ export default function TrainerDetail({ setOnDetail, id }: IDetail) {
         <S.DetailTitle>트레이너 상세</S.DetailTitle>
         <S.DetailContent>
           <S.DetailName>이름:</S.DetailName>
-          <S.DetailText>개인레슨 3개월{id}</S.DetailText>
+          <S.DetailText>개인레슨 3개월</S.DetailText>
         </S.DetailContent>
         <S.DetailContent>
           <S.DetailName>종류: </S.DetailName>

@@ -10,10 +10,8 @@ import TrainerDetail from "./TrainerDetail";
 export default function TrainerBox() {
   const [onModal, setOnModal] = useState(false);
   const [onDetail, setOnDetail] = useState(false);
-  const [detailId, setDetailId] = useState<number>(0);
 
   const onSetDetail = (id: number) => {
-    setDetailId(id);
     setOnDetail(true);
   };
 
@@ -55,7 +53,7 @@ export default function TrainerBox() {
           ))}
         </S.ContentContainer>
         {onModal && <TrainerModal setOnModal={setOnModal} />}
-        {onDetail && <TrainerDetail setOnDetail={setOnDetail} id={detailId} />}
+        {onDetail && <TrainerDetail setOnDetail={setOnDetail} />}
       </S.ManageBox>
     </>
   );

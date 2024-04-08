@@ -8,6 +8,5 @@ export interface IModal {
 
 export interface IDetail {
   setOnDetail:Dispatch<SetStateAction<boolean>>;
-  id?: number;
 }
 

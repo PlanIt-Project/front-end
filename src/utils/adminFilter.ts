@@ -45,15 +45,10 @@ export const programStatusToKor = (status: string): string => {
     return kor;
   };
 
-  export const skipNullDate = (date: string): string => {
-    if (date === null) return "미정";
-    else return date;
+  export const skipNull = (content: string, type:string): string => {
+    if (content === null || content === "") return type === "name" ? "없음" : "미정";
+    else return content;
   };
-
-  export const skipNullName = (name: string): string => {
-    if(name === null || name === "") return "없음";
-    else return name;
-  }
 
   export const typeToKor = (type: "PT" | "MEMBERSHIP"): string => {
     if (type === "MEMBERSHIP") return "맴버쉽";

@@ -10,11 +10,9 @@ import BannerModal from "./BannerModal";
 export default function BannerBox() {
   const [onModal, setOnModal] = useState(false);
   const [onDetail, setOnDetail] = useState<boolean>(false);
-  const [detailId, setDetailId] = useState<number>(0);
 
-  const onSetDetail = (id: number) => {
+  const onSetDetail = () => {
     setOnDetail(!onDetail);
-    setDetailId(id);
   };
 
   const onClickModifyButton = () => {
@@ -35,7 +33,7 @@ export default function BannerBox() {
               <S.ContentHover
                 $nameNumber={4}
                 onClick={() => {
-                  onSetDetail(content.id);
+                  onSetDetail();
                 }}
               >
                 <S.Content key={"id"}>{content.id}</S.Content>
@@ -54,7 +52,7 @@ export default function BannerBox() {
           ))}
         </S.ContentContainer>
       </S.ManageBox>
-      {onDetail && <BannerDetail setOnDetail={setOnDetail} id={detailId} />}
+      {onDetail && <BannerDetail setOnDetail={setOnDetail} />}
       {onModal && <BannerModal setOnModal={setOnModal}/>}
     </>
   );

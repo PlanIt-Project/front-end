@@ -46,7 +46,7 @@ export default function AdminRequest() {
         </S.AdminContent>
         <Pagination
           page={page}
-          totalPage={10}
+          totalPage={Number(data?.totalPages)}
           setPage={setPage}
           name={"admin/adminRequest"}
         />

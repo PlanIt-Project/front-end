@@ -1,7 +1,7 @@
 import * as S from "../../styles/admin/AdminDetail.styles";
 import { IDetail } from "../../types/admin/Admin.types";
 
-export default function BannerDetail({ setOnDetail, id }: IDetail) {
+export default function BannerDetail({ setOnDetail }: IDetail) {
 
   const onCloseButton = () => {
     setOnDetail(false);
@@ -14,7 +14,7 @@ export default function BannerDetail({ setOnDetail, id }: IDetail) {
             <S.DetailTitle>배너 상세</S.DetailTitle>
           <S.DetailContent>
             <S.DetailName>배너 제목:</S.DetailName>
-            <S.DetailText>오픈 이벤트{id}</S.DetailText>
+            <S.DetailText>오픈 이벤트</S.DetailText>
           </S.DetailContent>
           <S.DetailContent>
             <S.DetailName>배너 이미지:</S.DetailName>

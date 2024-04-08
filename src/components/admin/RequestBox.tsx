@@ -3,8 +3,11 @@ import { REQUEST_NAMES } from "../../constants/Admin.constants";
 import * as S from "../../styles/admin/AdminCommon.styles";
 import RequestDetail from "./RequestDetail";
 import RequestModal from "./RequestModal";
-import { useAdminRequestStore } from "../../stores/adminRequestStore";
-import { requestStatusToKor} from "../../utils/adminFilter";
+import {
+  useAdminRequestDetailStore,
+  useAdminRequestStore,
+} from "../../stores/adminRequestStore";
+import { requestStatusToKor } from "../../utils/adminFilter";
 import { IAdminRequestContent } from "../../types/admin/Admin.Request.types";
 
 export default function RequestBox() {
@@ -12,10 +15,11 @@ export default function RequestBox() {
   const [onDetail, setOnDetail] = useState<boolean>(false);
   const [detailId, setDetailId] = useState<number>(0);
   const { requestContent } = useAdminRequestStore();
+  const { setRequestDetail } = useAdminRequestDetailStore();
 
-  const onSetDetail = (content:IAdminRequestContent) => {
+  const onSetDetail = (content: IAdminRequestContent) => {
     setOnDetail(!onDetail);
-    console.log(content)
+    setRequestDetail(content);
   };
 
   const onClickModifyButton = (id: number) => {
@@ -42,7 +46,7 @@ export default function RequestBox() {
               >
                 <S.Content key={"id"}>{content.id}</S.Content>
                 <S.Content key={"registrationAt"}>
-                  {content.registrationAt.slice(0,10)}
+                  {content.registrationAt.slice(0, 10)}
                 </S.Content>
                 <S.Content key={"productName"}>
                   {content.product.name}
@@ -50,7 +54,9 @@ export default function RequestBox() {
                 <S.Content key={"member"}>{content.member.name}</S.Content>
                 <S.Content key={"trainer"}>{}</S.Content>
                 <S.Content key={"totalPrice"}>{content.totalPrice}원</S.Content>
-                <S.Content key={"status"}>{requestStatusToKor(content.status)}</S.Content>
+                <S.Content key={"status"}>
+                  {requestStatusToKor(content.status)}
+                </S.Content>
               </S.ContentHover>
               {content.status === "PENDING" ? (
                 <S.ModifyButton
@@ -67,7 +73,7 @@ export default function RequestBox() {
           ))}
         </S.ContentContainer>
       </S.ManageBox>
-      {onDetail && <RequestDetail setOnDetail={setOnDetail} id={detailId} />}
+      {onDetail && <RequestDetail setOnDetail={setOnDetail} />}
       {onModal && <RequestModal setOnModal={setOnModal} id={detailId} />}
     </>
   );
