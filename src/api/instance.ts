@@ -77,6 +77,12 @@ instance.interceptors.response.use(
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
           return await instance(originalRequest);
+        } else {
+          useAuthStore.setState({
+            accessToken: "",
+            refreshToken: "",
+            user: null,
+          });
         }
       } catch (error) {
         console.log(error);

@@ -1,4 +1,8 @@
-import {ILoginResponse, IMemberResponse, ISocialLoginFormResponse} from "../../types/Login.types";
+import {
+  ILoginResponse,
+  IMemberResponse,
+  ISocialLoginFormResponse,
+} from "../../types/Login.types";
 import { instance, refreshInstance } from "../instance";
 
 export const loginService = async (
@@ -28,13 +32,13 @@ export const getUserInfoService = async (): Promise<IMemberResponse> => {
 };
 
 export const socialLoginFormService = async (
-    registrationId: string,
+  registrationId: string,
 ): Promise<ISocialLoginFormResponse> => {
   return await instance.get(`/login/${registrationId}`);
 };
 
 export const socialLoginService = async (
-    apiEndpoint: string,
+  apiEndpoint: string,
 ): Promise<ILoginResponse> => {
-  return await instance.get(apiEndpoint)
-}
+  return await instance.get(apiEndpoint);
+};
