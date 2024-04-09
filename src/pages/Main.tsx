@@ -71,7 +71,7 @@ export default function Main() {
         {bannerList.map((el) => (
           <S.Banner
             key={el.id}
-            src={`${api}/${el.imagePath}`}
+            src={`${api}${el.imagePath}`}
             $translateX={currentBannerIndex * 100}
           />
         ))}
