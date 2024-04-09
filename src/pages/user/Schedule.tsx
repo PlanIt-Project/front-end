@@ -1,35 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Calendar from "../../components/schedule/Calendar";
 import * as S from "../../styles/Schedule.styles";
 import { TODAY } from "../../constants/Calendar.constants";
 import { useNavigate } from "react-router";
 import ModalPortal from "../../components/modal/ModalPortal";
 import ConfirmModal from "../../components/modal/ConfirmModal";
+import { getUserSchedule } from "../../hooks/queries/reservation/getUserSchedule";
+import dayjs from "dayjs";
+import { IUserScheduleData } from "../../types/reservation/UserReservation.types";
+import ToastNotification from "../../components/modal/ToastNotification";
+import { cancelUserReservation } from "../../hooks/queries/reservation/cancelUserReservation";
+import { getTimeWithLabel } from "../../utils/getTimeWithLabel";
 
 export default function UserSchedule() {
-  const scheduleList = [
-    {
-      id: "1",
-      trainer: "홍길동",
-      time: "오전 11:00 ~ 11:50",
-      item: "개인 레슨 3개월",
-    },
-    {
-      id: "2",
-      trainer: "홍길동",
-      time: "오전 11:00 ~ 11:50",
-      item: "개인 레슨 3개월",
-    },
-    {
-      id: "3",
-      trainer: "홍길동",
-      time: "오전 11:00 ~ 11:50",
-      item: "개인 레슨 3개월",
-    },
-  ];
-
   const [selectedDay, setSelectedDay] = useState(TODAY);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [userSchedule, setUserSchedule] = useState<IUserScheduleData[]>();
+  const [isToastOpen, setIsToastOpen] = useState(false);
+  const [cancelId, setCancelId] = useState(-1);
+
+  const { data, refetch } = getUserSchedule(selectedDay);
+  const { mutate: cancelReservationMutate } = cancelUserReservation(
+    refetch,
+    setIsToastOpen,
+    setIsConfirmModalOpen,
+  );
+
+  useEffect(() => {
+    if (data) setUserSchedule(data[selectedDay]);
+  }, [data]);
 
   const navigate = useNavigate();
 
@@ -38,16 +37,13 @@ export default function UserSchedule() {
   };
 
   // NOTE 날짜 선택
-  const handleClickDay = (day: Date) => {
+  const handleClickDay = (day: string) => {
     setSelectedDay(day);
   };
 
-  const handleMoveToEdit = (id: string) => {
-    navigate(`/user/reservation/${id}`);
-  };
-
-  const handleCancel = () => {
+  const handleCancel = (reservationId: number) => {
     setIsConfirmModalOpen(true);
+    setCancelId(reservationId);
   };
 
   return (
@@ -59,32 +55,33 @@ export default function UserSchedule() {
           </S.ReservationButton>
         </S.TopContainer>
         <S.CalendarContainer>
-          <Calendar selectedDay={selectedDay} handleClickDay={handleClickDay} />
+          <Calendar
+            selectedDay={selectedDay}
+            handleClickDay={handleClickDay}
+            isAllowClick={true}
+          />
         </S.CalendarContainer>
         <S.BottomContainer>
           <S.Title>
-            {selectedDay.getFullYear()}년 {selectedDay.getMonth() + 1}월{" "}
-            {selectedDay.getDate()}일 예약 내역
+            {dayjs(selectedDay).year()}년 {dayjs(selectedDay).month() + 1}월{" "}
+            {dayjs(selectedDay).date()}일 예약 내역
           </S.Title>
-          {scheduleList ? (
-            scheduleList.map((schedule) => (
+          {userSchedule ? (
+            userSchedule.map((schedule) => (
               <S.ReservationContainer key={schedule.id}>
                 <S.LeftContainer>
                   <S.InfoContainer>
-                    <p>{schedule.trainer}</p>
-                    <p>{schedule.time}</p>
-                    <p>이용권 : {schedule.item}</p>
+                    <p>{schedule.employee.name}</p>
+                    <p>{getTimeWithLabel(schedule.reservationTime)}</p>
+                    <p>이용권 : {schedule.programName}</p>
                   </S.InfoContainer>
                 </S.LeftContainer>
                 <S.RightContainer>
                   <S.ChangeDeleteButton
                     onClick={() => {
-                      handleMoveToEdit(schedule.id);
+                      handleCancel(schedule.id);
                     }}
                   >
-                    변경하기
-                  </S.ChangeDeleteButton>
-                  <S.ChangeDeleteButton onClick={handleCancel}>
                     취소하기
                   </S.ChangeDeleteButton>
                 </S.RightContainer>
@@ -101,8 +98,19 @@ export default function UserSchedule() {
           <ConfirmModal
             contents="취소하시겠습니까?"
             setIsModalOpen={setIsConfirmModalOpen}
+            cancelFn={() => {
+              cancelReservationMutate(cancelId);
+            }}
           />
         </ModalPortal>
+      )}
+
+      {isToastOpen && (
+        <ToastNotification
+          contents="취소가 완료되었습니다."
+          isToastOpen={isToastOpen}
+          setIsToastOpen={setIsToastOpen}
+        />
       )}
     </>
   );

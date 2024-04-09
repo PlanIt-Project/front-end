@@ -2,6 +2,8 @@ import axios from "axios";
 import { getRefreshTokenService } from "./services/Login.services";
 import { useAuthStore } from "../stores/authStore";
 
+const retryCounts: Record<string, number> = {};
+
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   headers: {
@@ -41,7 +43,22 @@ instance.interceptors.response.use(
 
     const originalRequest = config;
 
-    if (status === 401 && !originalRequest._retry) {
+    const requestKey = originalRequest.url;
+    retryCounts[requestKey] = (retryCounts[requestKey] || 0) + 1;
+
+    if (status === 401) {
+      originalRequest._retryCount = Number(originalRequest._retryCount) + 1;
+
+      if (retryCounts[requestKey] > 3) {
+        alert("재로그인이 필요합니다. 로그인 페이지로 돌아갑니다.");
+        window.location.href = "/login";
+        useAuthStore.setState({
+          accessToken: "",
+          refreshToken: "",
+          user: null,
+        });
+      }
+
       try {
         // refreshToken으로 새 토큰 발급
         const { refreshToken } = useAuthStore.getState();
@@ -58,8 +75,6 @@ instance.interceptors.response.use(
 
           instance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
           originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-
-          originalRequest._retry = true;
 
           return await instance(originalRequest);
         } else {

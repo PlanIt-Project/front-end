@@ -14,8 +14,8 @@ export const Overlay = styled.div`
   align-items: center;
 `;
 
-export const Modal = styled.form`
-  width: 550px;
+export const Modal = styled.form<{ $width?: number }>`
+  width: ${props => props.$width ? `${props.$width}px` : "550px"};
   height: fit-content;
   background: var(--background-color-100);
   border-radius: 20px;
@@ -36,12 +36,22 @@ export const ModalContent = styled.div`
   display: flex;
   align-items: center;
   align-self: flex-start;
-  gap: 50px;
+  gap: 20px;
   width: 100%;
-  margin-left: 80px;
+  margin-left: 30px;
 `;
+ 
+export const ModalGrid = styled.div`
+  display: grid;
+  grid-template-columns: 80px 150px 150px;
+  row-gap: 20px;
+  justify-items: center;
+  align-items: center;
+`
 
 export const ContentName = styled.span`
+  width: 150px;
+  text-align: center;
   font-size: var(--font-size-400);
   font-weight: 600;
 `;
@@ -68,6 +78,31 @@ export const ContentInput = styled.input<{
     outline: 1px solid var(--main-color-500);
   }
 `;
+
+export const ContentImageInput = styled.input`
+  display: none;
+`
+
+export const ContentLabel = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 200px;
+  border-radius: 10px;
+  background-color: var(--white-color-400);
+  cursor: pointer;
+`
+export const NoImage = styled.img`
+  width: 100px;
+  height: 100px;
+`
+
+export const ContentImage = styled.img`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+`
 
 export const InputText = styled.span`
   font-size: var(--font-size-500);
@@ -115,3 +150,50 @@ export const ModalButton = styled(CommonButton)`
     background-color: var(--main-color-300);
   }
 `;
+
+export const CloseButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 100px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: var(--font-size-500);
+  background-color: var(--main-color-400);
+  &:hover {
+    background-color: var(--main-color-300);
+  }
+`
+
+export const LittleModal = styled.div`
+  width: 400px;
+  height: fit-content;
+  background: var(--background-color-100);
+  border-radius: 20px;
+  padding: 50px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+`;
+
+export const LittleModalTitle = styled.div`
+  font-weight: 600;
+  font-size: var(--font-size-400);
+`;
+
+export const LittleModalText = styled.div`
+  font-size: var(--font-size-400);
+`;
+
+
+export const ErrorMsg = styled.span`
+  margin-top: -25px;
+  margin-bottom: -25px;
+  margin-left: 20px;
+  font-size: 15px;
+  color: var(--main-color-500);
+  
+`
+

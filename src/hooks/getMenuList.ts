@@ -6,7 +6,7 @@ interface MenuFactory {
 
 class BasicMenuFactory implements MenuFactory {
   public createMenuList() {
-    return [{ label: "PlanIt?", path: "/about" }];
+    return [];
   }
 }
 
@@ -14,7 +14,6 @@ class BasicMenuFactory implements MenuFactory {
 class UserMenuFactory implements MenuFactory {
   public createMenuList() {
     return [
-      { label: "PlanIt?", path: "/about" },
       { label: "이용권", path: "/user/ticket/available" },
       { label: "스케줄", path: "/user/schedule" },
     ];
@@ -24,10 +23,7 @@ class UserMenuFactory implements MenuFactory {
 // TrainerMenuFactory 클래스
 class TrainerMenuFactory implements MenuFactory {
   public createMenuList() {
-    return [
-      { label: "PlanIt?", path: "/about" },
-      { label: "스케줄", path: "/trainer/schedule" },
-    ];
+    return [{ label: "스케줄", path: "/trainer/reservation" }];
   }
 }
 
@@ -35,12 +31,12 @@ class TrainerMenuFactory implements MenuFactory {
 class AdminMenuFactory implements MenuFactory {
   public createMenuList() {
     return [
-      { label: "계정 관리", path: "/admin/account" },
-      { label: "트레이너 관리", path: "/admin/trainer" },
-      { label: "배너 관리", path: "/admin/banner" },
+      { label: "계정 관리", path: "/admin/account/1" },
+      { label: "트레이너 관리", path: "/admin/trainer/1" },
+      { label: "배너 관리", path: "/admin/banner/1" },
       { label: "상품 관리", path: "/admin/product/1" },
-      { label: "이용권 관리", path: "/admin/program" },
-      { label: "승인 요청 관리", path: "/admin/adminRequest" },
+      { label: "이용권 관리", path: "/admin/program/1" },
+      { label: "승인 요청 관리", path: "/admin/adminRequest/1" },
     ];
   }
 }
