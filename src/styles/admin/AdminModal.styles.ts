@@ -43,10 +43,11 @@ export const ModalContent = styled.div`
  
 export const ModalGrid = styled.div`
   display: grid;
-  grid-template-columns: 80px 150px 150px;
-  row-gap: 20px;
+  grid-template-columns: 80px 140px 140px 140px;
   justify-items: center;
   align-items: center;
+  margin-top: -8px;
+  margin-bottom: -8px;
 `
 
 export const ContentName = styled.span`
@@ -165,6 +166,17 @@ export const CloseButton = styled.div`
     background-color: var(--main-color-300);
   }
 `
+
+export const ModalLittleButton = styled(CommonButton)`
+  color: white;
+  width: 70px;
+  height: 30px;
+  font-size: var(--font-size-500);
+  background-color: var(--main-color-400);
+  &:hover {
+    background-color: var(--main-color-300);
+  }
+`;
 
 export const LittleModal = styled.div`
   width: 400px;

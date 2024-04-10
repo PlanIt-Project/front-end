@@ -12,6 +12,7 @@ import { parsePeriod } from "../../utils/adminFilter";
 
 export default function TrainerBox() {
   const [onModal, setOnModal] = useState(false);
+  const [trainerId, setTrainerId] = useState(0);
   const [onDetail, setOnDetail] = useState(false);
   const { trainerContent } = useAdminTrainerStore();
   const { setTrainerDetail } = useAdminTrainerDetailStore();
@@ -21,8 +22,9 @@ export default function TrainerBox() {
     setTrainerDetail(content);
   };
 
-  const onClickModifyButton = () => {
+  const onClickModifyButton = (id:number) => {
     setOnModal(!onModal);
+    setTrainerId(id);
   };
   return (
     <>
@@ -54,7 +56,7 @@ export default function TrainerBox() {
               </S.ContentHover>
               <S.ModifyButton
                 onClick={() => {
-                  onClickModifyButton();
+                  onClickModifyButton(content.id);
                 }}
               >
                 설정
@@ -62,7 +64,7 @@ export default function TrainerBox() {
             </S.ContentBar>
           ))}
         </S.ContentContainer>
-        {onModal && <TrainerModal setOnModal={setOnModal} />}
+        {onModal && <TrainerModal setOnModal={setOnModal} id={trainerId}/>}
         {onDetail && <TrainerDetail setOnDetail={setOnDetail} />}
       </S.ManageBox>
     </>

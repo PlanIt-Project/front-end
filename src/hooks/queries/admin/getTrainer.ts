@@ -8,7 +8,7 @@ export const getAdminTrainer = (page: number, size: number) => {
         queryFn: async (): Promise<IAdminTrainerData> => {
             const response = await getAdminTrainerServices(page, size);
 
-            return response.data
+            return response.data;
         }
     })
 }
