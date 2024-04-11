@@ -39,3 +39,9 @@ interface ITrainer {
   id: number;
   career: string;
 }
+
+export interface IAdminAccountTransformRes {
+  message: string;
+  code: number;
+  data: string;
+}
