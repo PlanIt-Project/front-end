@@ -26,6 +26,18 @@ export const Modal = styled.form<{ $width?: number }>`
   gap: 40px;
 `;
 
+export const ModalDiv = styled.div<{ $width?: number }>`
+  width: ${props => props.$width ? `${props.$width}px` : "550px"};
+  height: fit-content;
+  background: var(--background-color-100);
+  border-radius: 20px;
+  padding: 50px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+`;
+
 export const ModalTitle = styled.div`
   font-size: var(--font-size-300);
   font-weight: 600;

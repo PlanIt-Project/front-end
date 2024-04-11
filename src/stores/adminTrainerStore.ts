@@ -1,5 +1,8 @@
 import { create } from "zustand";
-import { IAdminTrainerContent, IAdminTrainerScheduleData } from "../types/admin/Admin.trainer.types";
+import {
+  IAdminTrainerContent,
+  IAdminTrainerScheduleData,
+} from "../types/admin/Admin.trainer.types";
 
 export interface IAdminTrainerStore {
   trainerContent: IAdminTrainerContent[];
@@ -19,6 +22,11 @@ export interface IAdminTrainerScheduleStore {
 export interface IAdminTrainerTrigger {
   trainerTrigger: boolean;
   setTrainerTrigger: (trigger: boolean) => void;
+}
+
+export interface IAdminTrainerSpecificScheduleStore {
+  specificSchedule: IAdminTrainerScheduleData;
+  setSpecificSchedule: (specific: IAdminTrainerScheduleData) => void;
 }
 
 export const useAdminTrainerStore = create<IAdminTrainerStore>((set) => ({
@@ -51,10 +59,10 @@ export const useAdminTrainerScheduleStore = create<IAdminTrainerScheduleStore>(
   (set) => ({
     trainerSchedule: [],
     setTrainerSchedule: (schedule) => {
-      set({trainerSchedule: schedule})
-    }
-  })
-)
+      set({ trainerSchedule: schedule });
+    },
+  }),
+);
 
 export const useAdminTrainerTriggerStore = create<IAdminTrainerTrigger>(
   (set) => ({
@@ -64,3 +72,18 @@ export const useAdminTrainerTriggerStore = create<IAdminTrainerTrigger>(
     },
   }),
 );
+
+export const useAdminTrainerSpecificScheduleStore =
+  create<IAdminTrainerSpecificScheduleStore>((set) => ({
+    specificSchedule: {
+      schedule_id: 0,
+      week: "Mon",
+      startAt: "",
+      endAt: "",
+    },
+    setSpecificSchedule: (specific) => {
+      set({
+        specificSchedule: specific,
+      });
+    },
+  }));

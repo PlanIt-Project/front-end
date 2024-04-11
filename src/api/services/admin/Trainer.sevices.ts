@@ -1,4 +1,9 @@
-import { IAdminTrainerResponse, IAdminTrainerScheduleRes } from "../../../types/admin/Admin.trainer.types";
+import {
+  IAdminTrainerResponse,
+  IAdminTrainerScheduleModifyRes,
+  IAdminTrainerScheduleRes,
+  IModifyScheduleParams,
+} from "../../../types/admin/Admin.trainer.types";
 import { instance } from "../../instance";
 
 export const getAdminTrainerServices = async (
@@ -11,7 +16,18 @@ export const getAdminTrainerServices = async (
 };
 
 export const getAdminTrainerScheduleServices = async (
-  trainerId:number,
+  trainerId: number,
 ): Promise<IAdminTrainerScheduleRes> => {
-  return await instance.get(`/admin/trainer-schedule/${trainerId}`)
-}
+  return await instance.get(`/admin/trainer-schedule/${trainerId}`);
+};
+
+export const modifyScheduleServices = async (
+  scheduleId: number,
+  params:IModifyScheduleParams
+): Promise<IAdminTrainerScheduleModifyRes> => {
+  const {startAt, endAt} = params;
+  return await instance.put(`/admin/trainer-schedule/${scheduleId}`, {
+    startAt,
+    endAt,
+  });
+};

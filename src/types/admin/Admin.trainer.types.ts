@@ -43,7 +43,18 @@ export interface IAdminTrainerScheduleRes {
 
 export interface IAdminTrainerScheduleData {
   schedule_id: number;
-  week: "Mon" | "Tue" | 'wed' | 'thu' | 'fri' | 'sat' | 'sun';
+  week: "Mon" | "Tue" | "wed" | "thu" | "fri" | "sat" | "sun";
+  startAt: string;
+  endAt: string;
+}
+
+export interface IAdminTrainerScheduleModifyRes {
+  code: number;
+  message: string;
+  data: string;
+}
+
+export interface IModifyScheduleParams {
   startAt: string;
   endAt: string;
 }
