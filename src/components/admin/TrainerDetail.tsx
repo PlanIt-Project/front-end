@@ -1,15 +1,10 @@
 import { useAdminTrainerDetailStore } from "../../stores/adminTrainerStore";
 import * as S from "../../styles/admin/AdminDetail.styles";
 import { IDetail } from "../../types/admin/Admin.types";
-import { parsePeriod } from "../../utils/adminFilter";
+import { parsePeriod, phoneNumberFormat } from "../../utils/adminFilter";
 
 export default function TrainerDetail({ setOnDetail }: IDetail) {
   const { trainerDetail } = useAdminTrainerDetailStore();
-
-  const phoneNumberFormat = (phone: string): string => {
-    const format = `${phone.slice(0, 3)}-${phone.slice(3, 7)}-${phone.slice(7)}`;
-    return format;
-  };
 
   const onCloseButton = () => {
     setOnDetail(false);

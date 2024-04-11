@@ -120,3 +120,33 @@ export const weekToKor = (
   }
   return kor;
 };
+
+export const genderToKor = (gender: "FEMALE" | "MALE"): string => {
+  let kor = "";
+  if (gender === "FEMALE") kor = "여성";
+  else kor = "남성";
+
+  return kor;
+};
+
+export const roleToKor = (role: "ADMIN" | "TRAINER" | "MEMBER"): string => {
+  let kor = "";
+  switch (role) {
+    case "ADMIN":
+      kor = "관리자";
+      break;
+    case "TRAINER":
+      kor = "트레이너";
+      break;
+    case "MEMBER":
+      kor = "회원";
+      break;
+  }
+
+  return kor;
+};
+
+export const phoneNumberFormat = (phone: string): string => {
+  const format = `${phone.slice(0, 3)}-${phone.slice(3, 7)}-${phone.slice(7)}`;
+  return format;
+};
