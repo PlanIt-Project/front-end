@@ -128,9 +128,9 @@ export const InputContainer = styled.div`
   gap: 5px;
 `;
 
-export const ContentSelect = styled.select`
+export const ContentSelect = styled.select<{ $width?: number }>`
   height: 40px;
-  width: 290px;
+  width: ${(props) => (props.$width ? `${props.$width}px` : "290px")};
   padding-left: 20px;
   border-radius: 30px;
   border: 1px solid var(--main-color-400);
@@ -144,6 +144,7 @@ export const ContentSelect = styled.select`
 `;
 
 export const ContentOption = styled.option`
+  text-align: center;
   font-weight: 600;
   color: #595959;
   height: 50px;

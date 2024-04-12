@@ -28,6 +28,7 @@ export default function Banner() {
     if (data) {
       setBannerContent(data.content);
     }
+    console.log(data)
   }, [data]);
 
   useEffect(() => {
@@ -52,7 +53,7 @@ export default function Banner() {
         </S.AdminContent>
         <Pagination
           page={page}
-          totalPage={10}
+          totalPage={Number(data?.totalPages)}
           setPage={setPage}
           name={"admin/banner"}
         />

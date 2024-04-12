@@ -32,3 +32,9 @@ interface IPageable {
   pageNumber: number;
   pageSize: number;
 }
+
+export interface IAdminMakeBannerRes {
+  code: number;
+  message: string;
+  data: string;
+}
