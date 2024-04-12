@@ -4,6 +4,7 @@ import * as S from "../../styles/admin/AdminModal.styles";
 import { IModal } from "../../types/admin/Admin.types";
 
 export default function RequestModal({ setOnModal }: IModal) {
+  // 수정 필요, 등록 요청 승인시에 400 발생
   const { requestDetail } = useAdminRequestDetailStore();
   const { mutate } = requestApprove(Number(requestDetail.id), Number(requestDetail.trainer.id), setOnModal);
 

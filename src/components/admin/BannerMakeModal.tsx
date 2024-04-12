@@ -27,6 +27,7 @@ function withExceptionCapturing<S, T extends any[]>(
 }
 
 export default function BannerMakeModal({ setOnModal }: IModal) {
+  // 수정 필요, 전송시에 null로 표시 됨
   const {
     register,
     handleSubmit,
