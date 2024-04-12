@@ -60,7 +60,6 @@ export const DetailImage = styled.img`
   width: 400px;
   height: 200px;
   border-radius: 10px;
-  background-color: aliceblue;
 `
 
 export const DetailDateColumn = styled.span`

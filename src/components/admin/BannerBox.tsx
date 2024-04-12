@@ -3,15 +3,22 @@ import { BANNER_NAMES } from "../../constants/Admin.constants";
 import * as S from "../../styles/admin/AdminCommon.styles";
 import BannerDetail from "./BannerDetail";
 import BannerModal from "./BannerModal";
-import { useAdminBannerStore } from "../../stores/adminBannerStore";
+import {
+  useAdminBannerDetailStore,
+  useAdminBannerStore,
+} from "../../stores/adminBannerStore";
+import { IAdminBannerContent } from "../../types/admin/Admin.banner.types";
 
 export default function BannerBox() {
   const [onModal, setOnModal] = useState(false);
   const [onDetail, setOnDetail] = useState<boolean>(false);
-  const { bannerContent } = useAdminBannerStore();
 
-  const onSetDetail = () => {
+  const { bannerContent } = useAdminBannerStore();
+  const { setBannerDetail } = useAdminBannerDetailStore();
+
+  const onSetDetail = (content: IAdminBannerContent) => {
     setOnDetail(!onDetail);
+    setBannerDetail(content);
   };
 
   const onClickModifyButton = () => {
@@ -32,7 +39,7 @@ export default function BannerBox() {
               <S.ContentHover
                 $nameNumber={4}
                 onClick={() => {
-                  onSetDetail();
+                  onSetDetail(content);
                 }}
               >
                 <S.Content key={"id"}>{content.id}</S.Content>
