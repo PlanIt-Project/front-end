@@ -1,15 +1,14 @@
 import { useState } from "react";
-import {
-    BANNER_CONTENTS,
-    BANNER_NAMES,
-} from "../../constants/Admin.constants";
+import { BANNER_NAMES } from "../../constants/Admin.constants";
 import * as S from "../../styles/admin/AdminCommon.styles";
 import BannerDetail from "./BannerDetail";
 import BannerModal from "./BannerModal";
+import { useAdminBannerStore } from "../../stores/adminBannerStore";
 
 export default function BannerBox() {
   const [onModal, setOnModal] = useState(false);
   const [onDetail, setOnDetail] = useState<boolean>(false);
+  const { bannerContent } = useAdminBannerStore();
 
   const onSetDetail = () => {
     setOnDetail(!onDetail);
@@ -28,7 +27,7 @@ export default function BannerBox() {
           ))}
         </S.NameBar>
         <S.ContentContainer>
-          {BANNER_CONTENTS.map((content) => (
+          {bannerContent.map((content) => (
             <S.ContentBar key={content.id} $nameNumber={4}>
               <S.ContentHover
                 $nameNumber={4}
@@ -37,9 +36,9 @@ export default function BannerBox() {
                 }}
               >
                 <S.Content key={"id"}>{content.id}</S.Content>
-                <S.Content key={"name"}>{content.name}</S.Content>
-                <S.Content key={"date"}>{content.date}</S.Content>
-                <S.Content key={"view"}>{content.view}</S.Content>
+                <S.Content key={"name"}>{content.title}</S.Content>
+                <S.Content key={"startAt"}>{content.startAt}</S.Content>
+                <S.Content key={"endAt"}>{content.endAt}</S.Content>
               </S.ContentHover>
               <S.ModifyButton
                 onClick={() => {
@@ -53,7 +52,7 @@ export default function BannerBox() {
         </S.ContentContainer>
       </S.ManageBox>
       {onDetail && <BannerDetail setOnDetail={setOnDetail} />}
-      {onModal && <BannerModal setOnModal={setOnModal}/>}
+      {onModal && <BannerModal setOnModal={setOnModal} />}
     </>
   );
 }

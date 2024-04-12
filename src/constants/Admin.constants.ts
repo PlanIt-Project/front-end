@@ -324,11 +324,11 @@ export const BANNER_NAMES = [
   },
   {
     id: 3,
-    value: "등록일자",
+    value: "시작 시간",
   },
   {
     id: 4,
-    value: "노출 여부",
+    value: "종료 시간",
   },
   {
     id: 5,
