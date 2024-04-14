@@ -16,5 +16,9 @@ export const getAdminBannerServices = async (
 export const makeBannerServices = async (
   form: FormData,
 ): Promise<IAdminMakeBannerRes> => {
-  return await instance.post("/admin/banner", form);
+  return await instance.post("/admin/banner", form, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+  });
 };
