@@ -1,14 +1,28 @@
-import { useAdminBannerDetailStore } from "../../stores/adminBannerStore";
+import { useEffect, useState } from "react";
+import { useAdminBannerDetailStore, useAdminBannerTriggerStore } from "../../stores/adminBannerStore";
 import * as S from "../../styles/admin/AdminDetail.styles";
 import { IDetail } from "../../types/admin/Admin.types";
+import BannerDeleteModal from "./BannerDeleteModal";
 
 export default function BannerDetail({ setOnDetail }: IDetail) {
+  const [onDelete, setOnDelete] = useState<boolean>(false);
+  const { bannerTrigger, setBannerTrigger } = useAdminBannerTriggerStore();
   const { bannerDetail } = useAdminBannerDetailStore();
 
   const onCloseButton = () => {
     setOnDetail(false);
   };
 
+  const onDeleteButton = () => {
+    setOnDelete(true);
+  };
+
+  useEffect(()=>{
+    if(!bannerTrigger){
+      setBannerTrigger(true)
+      setOnDetail(false)
+    } 
+  },[bannerTrigger])
   return (
     <>
       <S.Overlay>
@@ -33,6 +47,13 @@ export default function BannerDetail({ setOnDetail }: IDetail) {
           <S.ButtonContainer>
             <S.DetailButton
               onClick={() => {
+                onDeleteButton();
+              }}
+            >
+              삭제
+            </S.DetailButton>
+            <S.DetailButton
+              onClick={() => {
                 onCloseButton();
               }}
             >
@@ -41,6 +62,9 @@ export default function BannerDetail({ setOnDetail }: IDetail) {
           </S.ButtonContainer>
         </S.Detail>
       </S.Overlay>
+      {onDelete && (
+        <BannerDeleteModal setOnModal={setOnDelete} id={bannerDetail.id} />
+      )}
     </>
   );
 }

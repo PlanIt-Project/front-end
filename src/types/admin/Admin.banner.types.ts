@@ -38,3 +38,9 @@ export interface IAdminMakeBannerRes {
   message: string;
   data: string;
 }
+
+export interface IAdminDeleteBannerRes {
+  message: string;
+  code: number;
+  data: string;
+}

@@ -1,5 +1,6 @@
 import {
   IAdminBannerResponse,
+  IAdminDeleteBannerRes,
   IAdminMakeBannerRes,
 } from "../../../types/admin/Admin.banner.types";
 import { instance } from "../../instance";
@@ -21,4 +22,10 @@ export const makeBannerServices = async (
       'Content-Type': 'multipart/form-data'
     },
   });
+};
+
+export const deleteBannerServices = async (
+  bannerId:number,
+): Promise<IAdminDeleteBannerRes> => {
+  return await instance.delete(`/admin/banner/${bannerId}`);
 };

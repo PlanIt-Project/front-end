@@ -74,7 +74,7 @@ export const DetailDateRow = styled.span`
 
 export const ButtonContainer = styled.div`
   display: flex;
-  gap: 50px;
+  gap: 100px;
 `;
 
 export const DetailButton = styled(CommonButton)`
