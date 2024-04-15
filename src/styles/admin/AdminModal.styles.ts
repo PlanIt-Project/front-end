@@ -232,10 +232,13 @@ export const LittleModalText = styled.div`
   font-size: var(--font-size-400);
 `;
 
+
 export const ErrorMsg = styled.span`
   margin-top: -25px;
   margin-bottom: -25px;
   margin-left: 20px;
   font-size: 15px;
   color: var(--main-color-500);
-`;
+  
+`
+
