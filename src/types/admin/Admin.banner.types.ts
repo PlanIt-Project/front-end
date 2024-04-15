@@ -33,13 +33,13 @@ interface IPageable {
   pageSize: number;
 }
 
-export interface IAdminMakeBannerRes {
+export interface IAdminBannerRes {
   code: number;
   message: string;
   data: string;
 }
 
-export interface IAdminDeleteBannerRes {
+export interface IAdminBannerRes {
   message: string;
   code: number;
   data: string;

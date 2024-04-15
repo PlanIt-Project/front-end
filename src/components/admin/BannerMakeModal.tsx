@@ -27,7 +27,6 @@ function withExceptionCapturing<S, T extends any[]>(
 }
 
 export default function BannerMakeModal({ setOnModal }: IModal) {
-  // 수정 필요, 전송시에 null로 표시 됨
   const {
     register,
     handleSubmit,
@@ -36,11 +35,13 @@ export default function BannerMakeModal({ setOnModal }: IModal) {
   } = useForm<IAdminBannerForm>();
   const [bannerPreview, setBannerPreview] = useState<string>();
   const [form, setForm] = useState<FormData>(new FormData());
+
   const MonthData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const DayData = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
     22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
   ];
+
   const banner = watch("banner");
 
   const { mutate } = makeBanner(form, setOnModal);
@@ -62,8 +63,6 @@ export default function BannerMakeModal({ setOnModal }: IModal) {
       mutate();
     }
   };
-
-  
 
   useEffect(() => {
     if (banner && banner.length > 0) {
@@ -109,6 +108,7 @@ export default function BannerMakeModal({ setOnModal }: IModal) {
         <S.ModalContent>
           <S.ContentName>노출 시작일</S.ContentName>
           <S.ContentSelect $width={100} {...register("startYear")}>
+            <S.ContentOption value="2023">2023</S.ContentOption>
             <S.ContentOption value="2024">2024</S.ContentOption>
             <S.ContentOption value="2025">2025</S.ContentOption>
           </S.ContentSelect>

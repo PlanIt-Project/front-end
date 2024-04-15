@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { useAdminBannerTriggerStore } from "../../../stores/adminBannerStore";
 import { useMutation } from "@tanstack/react-query";
-import { IAdminDeleteBannerRes } from "../../../types/admin/Admin.banner.types";
+import { IAdminBannerRes } from "../../../types/admin/Admin.banner.types";
 import { deleteBannerServices } from "../../../api/services/admin/Banner.services";
 
 export const deleteBanner = (
@@ -10,7 +10,7 @@ export const deleteBanner = (
 ) => {
   const { bannerTrigger, setBannerTrigger } = useAdminBannerTriggerStore();
 
-  return useMutation<IAdminDeleteBannerRes, Error>({
+  return useMutation<IAdminBannerRes, Error>({
     mutationFn: async () => await deleteBannerServices(bannerId),
     onSuccess: () => {
         alert("상품이 삭제되었습니다");

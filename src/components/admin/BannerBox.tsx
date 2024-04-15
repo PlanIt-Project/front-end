@@ -21,8 +21,9 @@ export default function BannerBox() {
     setBannerDetail(content);
   };
 
-  const onClickModifyButton = () => {
+  const onClickModifyButton = (content: IAdminBannerContent) => {
     setOnModal(!onModal);
+    setBannerDetail(content);
   };
 
   return (
@@ -49,7 +50,7 @@ export default function BannerBox() {
               </S.ContentHover>
               <S.ModifyButton
                 onClick={() => {
-                  onClickModifyButton();
+                  onClickModifyButton(content);
                 }}
               >
                 설정
