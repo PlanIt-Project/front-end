@@ -64,7 +64,7 @@ export const MakeButton = styled(CommonButton)`
 `;
 
 export const ManageBox = styled.div`
-  width: 85%;
+  width: 90%;
   min-height: 500px;
   height: 600px;
   display: flex;
@@ -105,7 +105,7 @@ export const ContentBar = styled.li<{ $nameNumber?: number }>`
     props.$nameNumber ? `${props.$nameNumber}fr 1fr` : `6fr 1fr`};
   justify-items: center;
   align-items: center;
-  width: 1020px;
+  width: 100%;
   height: 70px;
   &:hover {
     background-color: var(--main-color-200);
@@ -126,6 +126,10 @@ export const ContentHover = styled.div<{ $nameNumber?: number }>`
 export const Content = styled.span`
   font-size: var(--font-size-600);
 `;
+
+export const LongContent = styled.span`
+  font-size: var(--font-size-700);
+`
 
 export const DateContent = styled.span`
   display: flex;

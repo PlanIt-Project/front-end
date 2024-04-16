@@ -15,7 +15,19 @@ export const Overlay = styled.div`
 `;
 
 export const Modal = styled.form<{ $width?: number }>`
-  width: ${props => props.$width ? `${props.$width}px` : "550px"};
+  width: ${(props) => (props.$width ? `${props.$width}px` : "550px")};
+  height: fit-content;
+  background: var(--background-color-100);
+  border-radius: 20px;
+  padding: 50px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+`;
+
+export const ModalDiv = styled.div<{ $width?: number }>`
+  width: ${(props) => (props.$width ? `${props.$width}px` : "550px")};
   height: fit-content;
   background: var(--background-color-100);
   border-radius: 20px;
@@ -40,14 +52,15 @@ export const ModalContent = styled.div`
   width: 100%;
   margin-left: 30px;
 `;
- 
+
 export const ModalGrid = styled.div`
   display: grid;
-  grid-template-columns: 80px 150px 150px;
-  row-gap: 20px;
+  grid-template-columns: 80px 140px 140px 140px;
   justify-items: center;
   align-items: center;
-`
+  margin-top: -8px;
+  margin-bottom: -8px;
+`;
 
 export const ContentName = styled.span`
   width: 150px;
@@ -81,7 +94,7 @@ export const ContentInput = styled.input<{
 
 export const ContentImageInput = styled.input`
   display: none;
-`
+`;
 
 export const ContentLabel = styled.label`
   display: flex;
@@ -92,17 +105,17 @@ export const ContentLabel = styled.label`
   border-radius: 10px;
   background-color: var(--white-color-400);
   cursor: pointer;
-`
+`;
 export const NoImage = styled.img`
   width: 100px;
   height: 100px;
-`
+`;
 
 export const ContentImage = styled.img`
   width: 100%;
   height: 100%;
   overflow: hidden;
-`
+`;
 
 export const InputText = styled.span`
   font-size: var(--font-size-500);
@@ -115,9 +128,9 @@ export const InputContainer = styled.div`
   gap: 5px;
 `;
 
-export const ContentSelect = styled.select`
+export const ContentSelect = styled.select<{ $width?: number }>`
   height: 40px;
-  width: 290px;
+  width: ${(props) => (props.$width ? `${props.$width}px` : "290px")};
   padding-left: 20px;
   border-radius: 30px;
   border: 1px solid var(--main-color-400);
@@ -131,9 +144,30 @@ export const ContentSelect = styled.select`
 `;
 
 export const ContentOption = styled.option`
+  text-align: center;
   font-weight: 600;
   color: #595959;
   height: 50px;
+`;
+
+export const ContentTextArea = styled.textarea`
+  background: none;
+  border: 1px solid var(--main-color-400);
+  border-radius: 10px;
+  height: 20px;
+  width: 250px;
+  height: 70px;
+  padding: 10px;
+  font-size: 1.4rem;
+  ::placeholder {
+    color: var(--white-color-700);
+    font-size: var(--font-size-600);
+    font-weight: 700;
+  }
+  &:focus {
+    outline: none;
+    outline: 1px solid var(--main-color-500);
+  }
 `;
 
 export const ButtonContainer = styled.div`
@@ -164,7 +198,18 @@ export const CloseButton = styled.div`
   &:hover {
     background-color: var(--main-color-300);
   }
-`
+`;
+
+export const ModalLittleButton = styled(CommonButton)`
+  color: white;
+  width: 70px;
+  height: 30px;
+  font-size: var(--font-size-500);
+  background-color: var(--main-color-400);
+  &:hover {
+    background-color: var(--main-color-300);
+  }
+`;
 
 export const LittleModal = styled.div`
   width: 400px;

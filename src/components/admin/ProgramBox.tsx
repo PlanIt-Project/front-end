@@ -8,7 +8,7 @@ import {
   useAdminProgramStore,
 } from "../../stores/adminProgramStore";
 import { IAdminProgramContent } from "../../types/admin/Admin.program.types";
-import { skipNull, statusToKor } from "../../utils/adminFilter";
+import { programStatusToKor, skipNull } from "../../utils/adminFilter";
 
 export default function ProgramBox() {
   const [onModal, setOnModal] = useState<boolean>(false);
@@ -62,20 +62,20 @@ export default function ProgramBox() {
                 </S.Content>
                 <S.DateContent>
                   <S.Content key={"startAt"}>
-                    {skipNull(content.startAt)}/
+                    {skipNull(content.startAt, "date")}/
                   </S.Content>
-                  <S.Content key={"endAt"}>{skipNull(content.endAt)}</S.Content>
+                  <S.Content key={"endAt"}>{skipNull(content.endAt, "date")}</S.Content>
                 </S.DateContent>
                 <S.DateContent>
                   <S.Content key={"suspendAt"}>
-                    {skipNull(content.suspendAt)}/
+                    {skipNull(content.suspendAt, "date")}/
                   </S.Content>
                   <S.Content key={"resumeAt"}>
-                    {skipNull(content.resumeAt)}
+                    {skipNull(content.resumeAt, "date")}
                   </S.Content>
                 </S.DateContent>
                 <S.Content key={"status"}>
-                  {statusToKor(content.status)}
+                  {programStatusToKor(content.status)}
                 </S.Content>
               </S.ContentHover>
               {statusOnModal(content.status, content.type) ? (
