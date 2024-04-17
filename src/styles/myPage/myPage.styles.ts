@@ -140,7 +140,7 @@ export const Select = styled.select<{ $width?: number }>`
   font-size: var(--font-size-600);
   text-align: center;
   background: none;
-  margin-left:-10px;
+  margin-left: -10px;
   &:focus {
     outline: none;
     outline: 1px solid var(--main-color-500);
@@ -152,4 +152,12 @@ export const Option = styled.option`
   font-weight: 600;
   color: #595959;
   height: 50px;
+`;
+
+export const ErrorMsg = styled.span`
+  margin-top: -25px;
+  margin-bottom: -25px;
+  margin-left: 20px;
+  font-size: 15px;
+  color: var(--main-color-500);
 `;

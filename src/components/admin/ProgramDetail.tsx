@@ -5,7 +5,7 @@ import { programStatusToKor, skipNull } from "../../utils/adminFilter";
 
 export default function ProgramDetail({ setOnDetail }: IDetail) {
   const { programDetail } = useAdminProgramDetailStore();
-  
+
   const onCloseButton = () => {
     setOnDetail(false);
   };
@@ -29,8 +29,12 @@ export default function ProgramDetail({ setOnDetail }: IDetail) {
               <S.DetailName>종료 일자:</S.DetailName>
             </S.DetailDateColumn>
             <S.DetailDateColumn>
-              <S.DetailText>{skipNull(programDetail.startAt, "date")}/</S.DetailText>
-              <S.DetailText>{skipNull(programDetail.endAt, "date")}</S.DetailText>
+              <S.DetailText>
+                {skipNull(programDetail.startAt, "date")}/
+              </S.DetailText>
+              <S.DetailText>
+                {skipNull(programDetail.endAt, "date")}
+              </S.DetailText>
             </S.DetailDateColumn>
           </S.DetailContent>
 
@@ -40,14 +44,21 @@ export default function ProgramDetail({ setOnDetail }: IDetail) {
               <S.DetailName>재시작 일자:</S.DetailName>
             </S.DetailDateColumn>
             <S.DetailDateColumn>
-              <S.DetailText>{skipNull(programDetail.suspendAt, "date")}/</S.DetailText>
-              <S.DetailText>{skipNull(programDetail.resumeAt, "date")}</S.DetailText>
+              <S.DetailText>
+                {skipNull(programDetail.suspendAt, "date")}/
+              </S.DetailText>
+              <S.DetailText>
+                {skipNull(programDetail.resumeAt, "date")}
+              </S.DetailText>
             </S.DetailDateColumn>
             <S.DetailText></S.DetailText>
           </S.DetailContent>
           <S.DetailContent>
             <S.DetailName>프로그램 상태:</S.DetailName>
-            <S.DetailText>{programStatusToKor(programDetail.status)}</S.DetailText>;
+            <S.DetailText>
+              {programStatusToKor(programDetail.status)}
+            </S.DetailText>
+            ;
           </S.DetailContent>
           <S.DetailContent>
             <S.DetailName>고객 이름:</S.DetailName>

@@ -22,7 +22,7 @@ export default function TrainerBox() {
     setTrainerDetail(content);
   };
 
-  const onClickModifyButton = (id:number) => {
+  const onClickModifyButton = (id: number) => {
     setOnModal(!onModal);
     setTrainerId(id);
   };
@@ -64,7 +64,7 @@ export default function TrainerBox() {
             </S.ContentBar>
           ))}
         </S.ContentContainer>
-        {onModal && <TrainerModal setOnModal={setOnModal} id={trainerId}/>}
+        {onModal && <TrainerModal setOnModal={setOnModal} id={trainerId} />}
         {onDetail && <TrainerDetail setOnDetail={setOnDetail} />}
       </S.ManageBox>
     </>
