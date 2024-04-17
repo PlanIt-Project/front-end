@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { IModal } from "../../types/admin/Admin.types";
 import noImage from "../../assets/svg/icon_no-image.svg";
 import { makeBanner } from "../../hooks/queries/admin/makeBanner";
+import { withExceptionCapturing } from "../../hooks/withExceptionCapturing";
 
 interface IAdminBannerForm {
   name: string;
@@ -16,15 +17,6 @@ interface IAdminBannerForm {
   endDay: number;
 }
 
-function withExceptionCapturing<S, T extends any[]>(
-  fn: (...rest: T) => Promise<S>,
-) {
-  return (...args: T) => {
-    fn(...args).catch((error) => {
-      console.log("Unexpected error", error);
-    });
-  };
-}
 
 export default function BannerMakeModal({ setOnModal }: IModal) {
   const {

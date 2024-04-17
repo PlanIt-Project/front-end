@@ -5,6 +5,7 @@ import { IModal } from "../../types/admin/Admin.types";
 import noImage from "../../assets/svg/icon_no-image.svg";
 import { useAdminBannerDetailStore } from "../../stores/adminBannerStore";
 import { modifyBanner } from "../../hooks/queries/admin/modifyBanner";
+import { withExceptionCapturing } from "../../hooks/withExceptionCapturing";
 
 interface IAdminBannerForm {
   name: string;
@@ -15,16 +16,6 @@ interface IAdminBannerForm {
   endYear: number;
   endMonth: number;
   endDay: number;
-}
-
-function withExceptionCapturing<S, T extends any[]>(
-  fn: (...rest: T) => Promise<S>,
-) {
-  return (...args: T) => {
-    fn(...args).catch((error) => {
-      console.log("Unexpected error", error);
-    });
-  };
 }
 
 export default function BannerModal({ setOnModal }: IModal) {
