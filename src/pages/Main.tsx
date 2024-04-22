@@ -77,10 +77,7 @@ export default function Main() {
         ))}
         <S.BannerRightArrow
           onClick={handleRightArrowClick}
-          $disabled={
-            currentBannerIndex === bannerList.length - 1 ||
-            bannerList.length - 1 !== 0
-          }
+          $disabled={currentBannerIndex === bannerList.length - 1}
         >
           <S.ArrowIcon src={RightArrowIcon} />
         </S.BannerRightArrow>
