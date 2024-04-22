@@ -39,7 +39,7 @@ export interface IAdminProgramContent {
   type: "PT" | "MEMBERSHIP";
 }
 
-interface IUser {
+export interface IUser {
   id: number;
   name: string;
 }

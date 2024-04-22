@@ -39,11 +39,13 @@ export default function Menu() {
           {menu.label}
         </S.Content>
       ))}
-      <S.Profile
-        onClick={() => {
-          handleMenu();
-        }}
-      />
+      {user && (
+        <S.Profile
+          onClick={() => {
+            handleMenu();
+          }}
+        />
+      )}
       {onMenu && (
         <S.Overlay
           onClick={() => {

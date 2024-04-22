@@ -29,7 +29,7 @@ export const registerProgramService = async (
 ): Promise<IRegisterProgramResponse> => {
   return await instance.post("/program/registration", {
     productId,
-    trainerId,
+    trainerId: trainerId === -1 ? null : trainerId,
     registrationAt,
   });
 };

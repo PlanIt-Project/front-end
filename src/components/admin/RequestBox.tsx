@@ -1,25 +1,29 @@
 import { useState } from "react";
-import {
-  REQUEST_CONTENTS,
-  REQUEST_NAMES,
-} from "../../constants/Admin.constants";
+import { REQUEST_NAMES } from "../../constants/Admin.constants";
 import * as S from "../../styles/admin/AdminCommon.styles";
 import RequestDetail from "./RequestDetail";
 import RequestModal from "./RequestModal";
+import {
+  useAdminRequestDetailStore,
+  useAdminRequestStore,
+} from "../../stores/adminRequestStore";
+import { requestStatusToKor } from "../../utils/adminFilter";
+import { IAdminRequestContent } from "../../types/admin/Admin.Request.types";
 
 export default function RequestBox() {
   const [onModal, setOnModal] = useState(false);
   const [onDetail, setOnDetail] = useState<boolean>(false);
-  const [detailId, setDetailId] = useState<number>(0);
+  const { requestContent } = useAdminRequestStore();
+  const { setRequestDetail } = useAdminRequestDetailStore();
 
-  const onSetDetail = (id: number) => {
+  const onSetDetail = (content: IAdminRequestContent) => {
     setOnDetail(!onDetail);
-    setDetailId(id);
+    setRequestDetail(content);
   };
 
-  const onClickModifyButton = (id: number) => {
+  const onClickModifyButton = (content:IAdminRequestContent) => {
     setOnModal(!onModal);
-    setDetailId(id);
+    setRequestDetail(content);
   };
 
   return (
@@ -31,41 +35,45 @@ export default function RequestBox() {
           ))}
         </S.NameBar>
         <S.ContentContainer>
-          {REQUEST_CONTENTS.map((content) => (
+          {requestContent.map((content) => (
             <S.ContentBar key={content.id} $nameNumber={7}>
               <S.ContentHover
                 $nameNumber={7}
                 onClick={() => {
-                  onSetDetail(content.id);
+                  onSetDetail(content);
                 }}
               >
                 <S.Content key={"id"}>{content.id}</S.Content>
                 <S.Content key={"registrationAt"}>
-                  {content.registrationAt}
+                  {content.registrationAt.slice(0, 10)}
                 </S.Content>
-                <S.Content key={"productName"}>{content.productName}</S.Content>
-                <S.Content key={"member"}>{content.member}</S.Content>
-                <S.Content key={"trainer"}>{content.trainer}</S.Content>
-                <S.Content key={"totalPrice"}>{content.totalPrice}</S.Content>
-                <S.Content key={"status"}>{content.status}</S.Content>
+                <S.Content key={"productName"}>
+                  {content.product.name}
+                </S.Content>
+                <S.Content key={"member"}>{content.member.name}</S.Content>
+                <S.Content key={"trainer"}>{}</S.Content>
+                <S.Content key={"totalPrice"}>{content.totalPrice}원</S.Content>
+                <S.Content key={"status"}>
+                  {requestStatusToKor(content.status)}
+                </S.Content>
               </S.ContentHover>
-              {content.status === "취소됨" ? (
-                <S.DisableButton>설정</S.DisableButton>
-              ) : (
+              {content.status === "PENDING" ? (
                 <S.ModifyButton
                   onClick={() => {
-                    onClickModifyButton(content.id);
+                    onClickModifyButton(content);
                   }}
                 >
                   설정
                 </S.ModifyButton>
+              ) : (
+                <S.DisableButton>설정</S.DisableButton>
               )}
             </S.ContentBar>
           ))}
         </S.ContentContainer>
       </S.ManageBox>
-      {onDetail && <RequestDetail setOnDetail={setOnDetail} id={detailId} />}
-      {onModal && <RequestModal setOnModal={setOnModal} id={detailId} />}
+      {onDetail && <RequestDetail setOnDetail={setOnDetail} />}
+      {onModal && <RequestModal setOnModal={setOnModal} />}
     </>
   );
 }

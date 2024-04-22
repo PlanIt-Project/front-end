@@ -14,7 +14,7 @@ export const getAdminProgramServices = async (
   });
 };
 
-export const getAdminChangeProgramStatusServices = async (
+export const getAdminProgramChangeStatusServices = async (
   programId: number,
   isSuspended: boolean,
 ): Promise<IAdminProgramStatusResponse> => {

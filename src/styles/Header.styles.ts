@@ -19,6 +19,7 @@ export const LogoContainer = styled.div`
   width: 220px;
   height: 100px;
   margin-left: -20px;
+  cursor: pointer;
 
   @media screen and (max-width: ${breakPoints.medium}px) {
     width: 200px;
@@ -53,7 +54,7 @@ export const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-`
+`;
 
 export const AdminMenuContainer = styled.div`
   position: absolute;
@@ -63,16 +64,16 @@ export const AdminMenuContainer = styled.div`
   height: 500px;
   border-bottom-left-radius: 20px;
   background-color: var(--main-color-300);
-  box-shadow: 4px 3px 4px rgba(0,0,0,0.30);
+  box-shadow: 4px 3px 4px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 35px;
-  
+
   @media screen and (max-width: ${breakPoints.small}px) {
     width: 250px;
   }
-`
+`;
 
 export const AdminMenuTitle = styled.div`
   font-size: var(--font-size-300);
@@ -82,7 +83,7 @@ export const AdminMenuTitle = styled.div`
   @media screen and (max-width: ${breakPoints.small}px) {
     font-size: var(--font-size-500);
   }
-`
+`;
 
 export const AdminMenuContent = styled.div`
   font-size: var(--font-size-400);
@@ -90,4 +91,4 @@ export const AdminMenuContent = styled.div`
   @media screen and (max-width: ${breakPoints.small}px) {
     font-size: var(--font-size-600);
   }
-`
+`;

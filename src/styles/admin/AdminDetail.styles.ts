@@ -60,7 +60,6 @@ export const DetailImage = styled.img`
   width: 400px;
   height: 200px;
   border-radius: 10px;
-  background-color: aliceblue;
 `
 
 export const DetailDateColumn = styled.span`
@@ -75,7 +74,7 @@ export const DetailDateRow = styled.span`
 
 export const ButtonContainer = styled.div`
   display: flex;
-  gap: 50px;
+  gap: 100px;
 `;
 
 export const DetailButton = styled(CommonButton)`
