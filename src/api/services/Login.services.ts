@@ -1,38 +1,44 @@
-import { LoginParams } from "../../types/Login.types";
-import { instance } from "../instance";
+import {
+  ILoginResponse,
+  IMemberResponse,
+  ISocialLoginFormResponse,
+} from "../../types/Login.types";
+import { instance, refreshInstance } from "../instance";
 
-interface LoginRes {
-  accessToken: string;
-  refreshToken: string;
-}
-
-export const LoginService = async (user: LoginParams) => {
-  const res: LoginRes = await instance.post("/member/signin", {
-    email: user.email,
-    password: user.password,
-  });
-  console.log("res", res);
-  return res;
-};
-
-interface SignUpParams {
-  email: string;
-  password: string;
-  name: string;
-  number: string;
-  birth: string;
-  address: string;
-}
-
-export const SignUpService = async (params: SignUpParams) => {
-  const { email, password, name, number, birth, address } = params;
-  const res = await instance.post("/member/signup", {
+export const loginService = async (
+  email: string,
+  password: string,
+): Promise<ILoginResponse> => {
+  return await instance.post("/member/signin", {
     email,
     password,
-    name,
-    phone_number: number,
-    birth,
-    address,
   });
-  return res;
+};
+
+export const getRefreshTokenService = async (
+  refreshToken: string,
+): Promise<ILoginResponse> => {
+  const response = await refreshInstance.get("/member/refresh", {
+    headers: {
+      Authorization: `Bearer ${refreshToken}`,
+    },
+  });
+
+  return response.data;
+};
+
+export const getUserInfoService = async (): Promise<IMemberResponse> => {
+  return await instance.get("/member");
+};
+
+export const socialLoginFormService = async (
+  registrationId: string,
+): Promise<ISocialLoginFormResponse> => {
+  return await instance.get(`/login/${registrationId}`);
+};
+
+export const socialLoginService = async (
+  apiEndpoint: string,
+): Promise<ILoginResponse> => {
+  return await instance.get(apiEndpoint);
 };

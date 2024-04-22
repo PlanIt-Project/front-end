@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CommonButton } from "./globalStyles";
+import { CommonButton } from "../globalStyles";
 
 export const Background = styled.div`
   position: fixed;

@@ -1,17 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { getBannerListService } from "../../api/services/Main.services";
+import { IBannerListData } from "../../types/BannerList.types";
 
 export const getBannerList = () => {
-  return useQuery<any>({
+  return useQuery<IBannerListData[]>({
     queryKey: ["getBannerList"],
-    queryFn: async () => {
+    queryFn: async (): Promise<IBannerListData[]> => {
       const response = await getBannerListService();
-
-      if (response.status !== 200) {
-        throw new Error("error");
-      }
-
-      return response;
+      return response.data.content;
     },
   });
 };

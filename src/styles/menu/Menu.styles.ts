@@ -24,14 +24,14 @@ export const AdminMenuContainer = styled.div`
   top: 0;
   right: 0;
   width: 300px;
-  height: 500px;
+  height: 600px;
   border-bottom-left-radius: 20px;
   background-color: var(--main-color-300);
   box-shadow: 4px 3px 4px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 35px;
+  gap: 45px;
 
   @media screen and (max-width: ${breakPoints.small}px) {
     width: 250px;

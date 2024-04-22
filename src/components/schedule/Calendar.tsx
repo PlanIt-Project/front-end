@@ -4,138 +4,97 @@ import RightArrow from "../../assets/icon_right-arrow.png";
 import { DAYS_OF_WEEK, TODAY } from "../../constants/Calendar.constants";
 import { ICalendarProps } from "../../types/Calendar.types";
 import { useState } from "react";
+import dayjs from "dayjs";
 
 export default function Calendar({
   selectedDay,
   handleClickDay,
+  isAllowClick = false,
 }: ICalendarProps) {
   const [currentMonth, setCurrentMonth] = useState(TODAY);
 
-  const isSameDay = (toDay: Date, compareDay?: Date | null) => {
-    if (
-      toDay.getFullYear() === compareDay?.getFullYear() &&
-      toDay.getMonth() === compareDay?.getMonth() &&
-      toDay.getDate() === compareDay?.getDate()
-    ) {
-      return true;
-    }
-    return false;
+  const isSameDay = (today: string, compareDay?: string | null) => {
+    return today === compareDay;
   };
 
   // NOTE 전 달로 이동
   const handleMoveToPrevCalendar = () => {
     setCurrentMonth(
-      new Date(
-        currentMonth.getFullYear(),
-        currentMonth.getMonth() - 1,
-        currentMonth.getDate(),
-      ),
+      dayjs(currentMonth).subtract(1, "month").format("YYYY-MM-DD"),
     );
   };
 
   // NOTE 다음 달로 이동
   const handleMoveToNextCalendar = () => {
-    setCurrentMonth(
-      new Date(
-        currentMonth.getFullYear(),
-        currentMonth.getMonth() + 1,
-        currentMonth.getDate(),
-      ),
-    );
+    setCurrentMonth(dayjs(currentMonth).add(1, "month").format("YYYY-MM-DD"));
   };
 
   // NOTE 캘린더 날짜 세팅
   const buildCalendarDays = () => {
-    // 현재 월의 시작 요일
-    const currentMonthStartDate = new Date(
-      currentMonth.getFullYear(),
-      currentMonth.getMonth(),
-      1,
-    ).getDay();
+    const days = [];
+    const startOfCurrentMonth = dayjs(currentMonth).startOf("month");
+    const endOfCurrentMonth = dayjs(currentMonth).endOf("month");
+    const startDayOfWeek = startOfCurrentMonth.day();
 
-    // 현재 월의 마지막 날짜
-    const currentMonthEndDate = new Date(
-      currentMonth.getFullYear(),
-      currentMonth.getMonth() + 1,
-      0,
-    );
+    // 이전 달의 마지막 일부터 현재 월의 시작 요일까지
+    for (let i = startDayOfWeek; i > 0; i--) {
+      days.push(startOfCurrentMonth.subtract(i, "day").format("YYYY-MM-DD"));
+    }
 
-    // 이전 월의 마지막 날짜
-    const prevMonthEndDate = new Date(
-      currentMonth.getFullYear(),
-      currentMonth.getMonth(),
-      0,
-    );
+    // 현재 월
+    for (let i = 0; i < endOfCurrentMonth.date(); i++) {
+      days.push(startOfCurrentMonth.add(i, "days").format("YYYY-MM-DD"));
+    }
 
-    // 다음 월의 첫 번째 날짜
-    const nextMonthStartDate = new Date(
-      currentMonth.getFullYear(),
-      currentMonth.getMonth() + 1,
-      1,
-    );
-
-    // 이전 월의 마지막 날부터 현재 월의 첫 번째 요일까지의 날짜들을 담음
-    const days = Array.from({ length: currentMonthStartDate }, (_, i) => {
-      return new Date(
-        currentMonth.getFullYear(),
-        currentMonth.getMonth() - 1,
-        prevMonthEndDate.getDate() - i,
-      );
-    }).reverse();
-
-    // 현재 월의 첫 번째 날부터 마지막 날까지의 날짜들을 추가
-    days.push(
-      ...Array.from(
-        { length: currentMonthEndDate.getDate() },
-        (_, i) =>
-          new Date(currentMonth.getFullYear(), currentMonth.getMonth(), i + 1),
-      ),
-    );
-
-    // 남은 일수 계산
-    const remainingDays = 7 - (days.length % 7);
-    // 남은 일수가 7보다 작으면 다음 달의 시작 날짜부터 remainingDays개수 만큼 날짜 추가
-    if (remainingDays < 7) {
-      days.push(
-        ...Array.from(
-          { length: remainingDays },
-          (_, i) =>
-            new Date(
-              nextMonthStartDate.getFullYear(),
-              nextMonthStartDate.getMonth(),
-              i + 1,
-            ),
-        ),
-      );
+    // 다음 달 (42개 총 칸 - 생성된 일수)
+    const totalDays = 42 - days.length;
+    for (let i = 0; i < totalDays; i++) {
+      days.push(endOfCurrentMonth.add(i + 1, "day").format("YYYY-MM-DD"));
     }
 
     return days;
   };
 
   // NOTE 날짜를 통해 el 생성
-  const buildCalendarTag = (calendarDays: Date[]) => {
-    return calendarDays.map((day: Date, index: number) => {
-      const isCurrentMonth = day.getMonth() === currentMonth.getMonth();
+  const buildCalendarTag = (calendarDays: string[]) => {
+    return calendarDays.map((day: string, index: number) => {
+      const dayObject = dayjs(day);
+      const isCurrentMonth = dayObject.month() === dayjs(currentMonth).month();
+      const isBeforeToday = dayObject.isBefore(TODAY, "day");
 
-      const dayClass = !isCurrentMonth
-        ? "otherMonth"
-        : day < TODAY
-          ? "prevDay"
-          : "futureDay";
+      let dayClass = "";
 
-      const selectedDayClass = isSameDay(day, selectedDay) ? "choiceDay" : "";
+      // 현재 월의 과거 날짜 처리
+      if (isCurrentMonth && isBeforeToday) {
+        dayClass = isAllowClick ? "pastDayClickable" : "pastDay";
+      }
+
+      // 다른 달의 과거 날짜 처리
+      if (!isCurrentMonth && isBeforeToday) {
+        dayClass = "pastDay";
+      }
+
+      // 현재 월이 아닌 날짜 처리
+      if (!isCurrentMonth) {
+        dayClass = "otherMonth";
+      }
+
+      // 사용자가 선택한 날짜 처리
+      if (isSameDay(day, selectedDay)) {
+        dayClass = "choiceDay";
+      }
 
       return (
         <S.CalendarDay key={index}>
           <S.Day
-            className={`${dayClass} ${selectedDayClass}`}
+            className={`${dayClass}`}
             onClick={() => {
-              if (isCurrentMonth) {
-                handleClickDay(day);
+              if (isCurrentMonth && (!isBeforeToday || isAllowClick)) {
+                handleClickDay(dayObject.format("YYYY-MM-DD"));
               }
             }}
           >
-            {day.getDate()}
+            {dayObject.date()}
           </S.Day>
         </S.CalendarDay>
       );
@@ -165,7 +124,7 @@ export default function Calendar({
           <img src={LeftArrow} alt="왼쪽 화살표" />
         </S.ArrowIcon>
         <p>
-          {currentMonth.getFullYear()}년 {currentMonth.getMonth() + 1}월
+          {dayjs(currentMonth).year()}년 {dayjs(currentMonth).month() + 1}월
         </p>
         <S.ArrowIcon onClick={handleMoveToNextCalendar}>
           <img src={RightArrow} alt="오른쪽 화살표" />

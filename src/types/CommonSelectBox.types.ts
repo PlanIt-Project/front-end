@@ -9,9 +9,9 @@ export interface ICommonSelectBoxProps {
   selectBoxRef: RefObject<HTMLDivElement>;
   isSelectBoxOpen: boolean;
   setIsSelectBoxOpen: Dispatch<SetStateAction<boolean>>;
-  selectedOption: string;
-  setSelectedOption: Dispatch<SetStateAction<string>>;
-  optionList: IOptionList[];
+  selectedOption: number;
+  setSelectedOption: Dispatch<SetStateAction<number>>;
+  optionList: any[];
   width?: number;
   height?: number;
 }

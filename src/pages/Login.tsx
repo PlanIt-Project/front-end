@@ -1,15 +1,30 @@
-import styled from "styled-components";
-import { CommonInput, CommonButton } from "../styles/globalStyles";
+import * as S from "../styles/Login.styles";
+import { CommonInput } from "../styles/globalStyles";
 import { useNavigate } from "react-router";
-import { LoginSignUpContainer } from "../styles/LoginSignUp.style";
 import { useState, ChangeEvent } from "react";
-import { LoginService } from "../api/services/Login.services";
+import { getLogin } from "../hooks/queries/login/getLogin";
+import googleicon from "../assets/GoogleIcon.svg";
+import navericon from "../assets/NaverIcon.svg";
+import ToastNotification from "../components/modal/ToastNotification";
+import { getSocialLoginForm } from "../hooks/queries/login/getSocialLoginForm";
 
 export default function Login() {
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState<string>("abcd");
   const [password, setPassword] = useState<string>("dddd");
+  const [isToastOpen, setIsToastOpen] = useState(false);
+  const [loginError, setLoginError] = useState("");
+  const [socialProvider, setSocialProvider] = useState("");
+
+  const { mutate: loginMutate } = getLogin(
+    email,
+    password,
+    setIsToastOpen,
+    setLoginError,
+  );
+
+  const { mutate: socialLoginMutate } = getSocialLoginForm(socialProvider);
+
+  const navigate = useNavigate();
 
   const goToSignUp = () => {
     navigate("/signUp");
@@ -30,49 +45,67 @@ export default function Login() {
   };
 
   const handleLogin = () => {
-    (async () => {
-      try {
-        const res = await LoginService({ email, password });
-        const { accessToken, refreshToken } = res;
-        localStorage.setItem("access", accessToken);
-        localStorage.setItem("refresh", refreshToken);
-        navigate("/main");
-      } catch (error) {
-        console.error("로그인 실패:", error);
-      }
-    })();
+    loginMutate();
+  };
+
+  const handleSocialLogin = async (registrationId: string) => {
+    setSocialProvider(registrationId);
+
+    try {
+      const { data: redirectUrl } = await socialLoginMutate(registrationId);
+      navigate(redirectUrl);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-    <LoginPageContainer>
-      <h1>LOGIN</h1>
-      <CommonInput
-        id="eamil"
-        type="email"
-        name="email"
-        placeholder="Email"
-        required
-        onChange={handleChange}
-        value={email}
-      ></CommonInput>
-      <CommonInput
-        id="password"
-        type="password"
-        name="password"
-        placeholder="Password"
-        required
-        onChange={handleChange}
-        value={password}
-      ></CommonInput>
-      <LoginButton onClick={handleLogin}>로그인</LoginButton>
-      <p onClick={goToSignUp}>회원가입</p>
-    </LoginPageContainer>
+    <S.Container>
+      <S.LoginPageContainer>
+        <h1>LOGIN</h1>
+        <CommonInput
+          id="eamil"
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+          onChange={handleChange}
+          value={email}
+        ></CommonInput>
+        <CommonInput
+          id="password"
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+          onChange={handleChange}
+          value={password}
+        ></CommonInput>
+        <S.LoginButton onClick={handleLogin}>로그인</S.LoginButton>
+        <S.SignUpButton onClick={goToSignUp}>회원가입</S.SignUpButton>
+        <S.SocialLoginContainer>
+          <img
+            src={googleicon}
+            onClick={() => {
+              handleSocialLogin("google");
+            }}
+          />
+          <img
+            src={navericon}
+            onClick={() => {
+              handleSocialLogin("naver");
+            }}
+          />
+        </S.SocialLoginContainer>
+      </S.LoginPageContainer>
+
+      {isToastOpen && (
+        <ToastNotification
+          contents={loginError}
+          isToastOpen={isToastOpen}
+          setIsToastOpen={setIsToastOpen}
+        />
+      )}
+    </S.Container>
   );
 }
-
-const LoginPageContainer = styled(LoginSignUpContainer)``;
-
-const LoginButton = styled(CommonButton)`
-  background: white;
-  color: black;
-`;
