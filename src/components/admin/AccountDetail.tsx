@@ -1,8 +1,11 @@
 import { useAdminAccountDetailStore } from "../../stores/adminAccountStore";
 import * as S from "../../styles/admin/AdminDetail.styles";
 import { IDetail } from "../../types/admin/Admin.types";
-import { genderToKor, phoneNumberFormat, roleToKor } from "../../utils/adminFilter";
-
+import {
+  genderToKor,
+  phoneNumberFormat,
+  roleToKor,
+} from "../../utils/adminFilter";
 
 export default function AccountDetail({ setOnDetail }: IDetail) {
   const { accountDetail } = useAdminAccountDetailStore();
@@ -34,7 +37,9 @@ export default function AccountDetail({ setOnDetail }: IDetail) {
           </S.DetailContent>
           <S.DetailContent>
             <S.DetailName>핸드폰 번호:</S.DetailName>
-            <S.DetailText>{phoneNumberFormat(accountDetail.phone_number)}</S.DetailText>
+            <S.DetailText>
+              {phoneNumberFormat(accountDetail.phone_number)}
+            </S.DetailText>
           </S.DetailContent>
           <S.DetailContent>
             <S.DetailName>성별:</S.DetailName>

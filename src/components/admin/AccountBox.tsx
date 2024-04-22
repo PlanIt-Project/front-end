@@ -18,9 +18,9 @@ export default function AccountBox() {
   const { accountContent } = useAdminAccountStore();
   const { setAccountDetail } = useAdminAccountDetailStore();
 
-  const onClickModifyButton = (id:number) => {
+  const onClickModifyButton = (id: number) => {
     setOnModal(!onModal);
-    setAccountId(id)
+    setAccountId(id);
   };
 
   const onClickDetail = (content: IAdminAccountContent) => {
@@ -51,7 +51,9 @@ export default function AccountBox() {
                 <S.Content key={"phone_number"}>
                   {content.phone_number}
                 </S.Content>
-                <S.Content key={"gender"}>{genderToKor(content.gender)}</S.Content>
+                <S.Content key={"gender"}>
+                  {genderToKor(content.gender)}
+                </S.Content>
                 <S.Content key={"role"}>{roleToKor(content.role)}</S.Content>
               </S.ContentHover>
               {content.role === "MEMBER" ? (
@@ -65,12 +67,11 @@ export default function AccountBox() {
               ) : (
                 <S.DisableButton>설정</S.DisableButton>
               )}
-             
             </S.ContentBar>
           ))}
         </S.ContentContainer>
-        {onModal && <AccountModal setOnModal={setOnModal} id={accountId}/>}
-        {onDetail && <AccountDetail setOnDetail={setOnDetail}/>}
+        {onModal && <AccountModal setOnModal={setOnModal} id={accountId} />}
+        {onDetail && <AccountDetail setOnDetail={setOnDetail} />}
       </S.ManageBox>
     </>
   );

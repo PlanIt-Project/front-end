@@ -21,7 +21,7 @@ export default function RequestBox() {
     setRequestDetail(content);
   };
 
-  const onClickModifyButton = (content:IAdminRequestContent) => {
+  const onClickModifyButton = (content: IAdminRequestContent) => {
     setOnModal(!onModal);
     setRequestDetail(content);
   };

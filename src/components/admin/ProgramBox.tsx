@@ -64,7 +64,9 @@ export default function ProgramBox() {
                   <S.Content key={"startAt"}>
                     {skipNull(content.startAt, "date")}/
                   </S.Content>
-                  <S.Content key={"endAt"}>{skipNull(content.endAt, "date")}</S.Content>
+                  <S.Content key={"endAt"}>
+                    {skipNull(content.endAt, "date")}
+                  </S.Content>
                 </S.DateContent>
                 <S.DateContent>
                   <S.Content key={"suspendAt"}>

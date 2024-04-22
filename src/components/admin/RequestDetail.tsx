@@ -3,7 +3,7 @@ import * as S from "../../styles/admin/AdminDetail.styles";
 import { IDetail } from "../../types/admin/Admin.types";
 import { requestStatusToKor, skipNull } from "../../utils/adminFilter";
 
-export default function RequestDetail({ setOnDetail}: IDetail) {
+export default function RequestDetail({ setOnDetail }: IDetail) {
   const { requestDetail } = useAdminRequestDetailStore();
 
   const onCloseButton = () => {
@@ -17,11 +17,15 @@ export default function RequestDetail({ setOnDetail}: IDetail) {
           <S.DetailTitle>승인 요청 상세</S.DetailTitle>
           <S.DetailContent>
             <S.DetailName>등록 일자:</S.DetailName>
-            <S.DetailText>{requestDetail.registrationAt.slice(0, 10)}</S.DetailText>
+            <S.DetailText>
+              {requestDetail.registrationAt.slice(0, 10)}
+            </S.DetailText>
           </S.DetailContent>
           <S.DetailContent>
             <S.DetailName>환불 일자:</S.DetailName>
-            <S.DetailText>{skipNull(requestDetail.refundAt.slice(0, 10), "date")}</S.DetailText>
+            <S.DetailText>
+              {skipNull(requestDetail.refundAt.slice(0, 10), "date")}
+            </S.DetailText>
           </S.DetailContent>
           <S.DetailContent>
             <S.DetailName>상품명:</S.DetailName>
@@ -45,7 +49,9 @@ export default function RequestDetail({ setOnDetail}: IDetail) {
           </S.DetailContent>
           <S.DetailContent>
             <S.DetailName>상태:</S.DetailName>
-            <S.DetailText>{requestStatusToKor(requestDetail.status)}</S.DetailText>
+            <S.DetailText>
+              {requestStatusToKor(requestDetail.status)}
+            </S.DetailText>
           </S.DetailContent>
           <S.ButtonContainer>
             <S.DetailButton

@@ -19,6 +19,10 @@ export default function Menu() {
     setonMenu(!onMenu);
   };
 
+  const onClickMyPage = () => {
+    navigate("/myPage")
+  }
+
   const handleLogout = () => {
     useAuthStore.setState({
       accessToken: "",
@@ -56,7 +60,7 @@ export default function Menu() {
             <S.Infomation>abc@abc.com</S.Infomation>
             <S.Infomation>홍길동</S.Infomation>
             <S.ProfileButtons>
-              <S.Button>수정하기</S.Button>
+              <S.Button onClick={onClickMyPage}>내 정보</S.Button>
               <S.Button onClick={handleLogout}>로그아웃</S.Button>
             </S.ProfileButtons>
           </S.ProfileMenu>
