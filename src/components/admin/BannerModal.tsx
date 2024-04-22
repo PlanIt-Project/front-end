@@ -26,6 +26,8 @@ export default function BannerModal({ setOnModal }: IModal) {
     setValue,
     formState: { errors },
   } = useForm<IAdminBannerForm>();
+  const api = process.env.REACT_APP_API_URL ?? "";
+
   const [bannerPreview, setBannerPreview] = useState<string>();
   const [form, setForm] = useState<FormData>(new FormData());
 
@@ -100,7 +102,7 @@ export default function BannerModal({ setOnModal }: IModal) {
           <S.ContentName>배너 이미지</S.ContentName>
           <S.ContentLabel htmlFor="banner">
             {bannerPreview ? (
-              <S.ContentImage src={bannerPreview} alt="Image" />
+              <S.ContentImage src={`${api}${bannerPreview}`} alt="Image" />
             ) : (
               <S.NoImage src={noImage} alt="noImage" />
             )}
