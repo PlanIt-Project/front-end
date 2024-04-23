@@ -115,7 +115,7 @@ npm run start
     <tbody>
     <tr>
         <th>이름</th>
-        <td width="200" align="center">혜린</td>
+        <td width="200" align="center">전혜린</td>
         <td width="200" align="center">김민준</td>
     </tr>
     <tr>
