@@ -26,6 +26,7 @@ export default function BannerModal({ setOnModal }: IModal) {
     setValue,
     formState: { errors },
   } = useForm<IAdminBannerForm>();
+
   const api = process.env.REACT_APP_API_URL ?? "";
 
   const [bannerPreview, setBannerPreview] = useState<string>();

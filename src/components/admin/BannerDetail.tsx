@@ -5,6 +5,7 @@ import { IDetail } from "../../types/admin/Admin.types";
 import BannerDeleteModal from "./BannerDeleteModal";
 
 export default function BannerDetail({ setOnDetail }: IDetail) {
+
   const api = process.env.REACT_APP_API_URL ?? "";
 
   const [onDelete, setOnDelete] = useState<boolean>(false);
