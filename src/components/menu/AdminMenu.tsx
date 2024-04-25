@@ -11,6 +11,14 @@ export default function AdminMenu() {
   const menuList = getMenuList(user);
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    useAuthStore.setState({
+      accessToken: "",
+      refreshToken: "",
+      user: null,
+    });
+  };
+
   const handleMoveToMenu = (path: string) => {
     navigate(path);
   };
@@ -46,6 +54,9 @@ export default function AdminMenu() {
                 {menu.label}
               </S.AdminMenuContent>
             ))}
+            <S.AdminMenuContent onClick={handleLogout}>
+              로그아웃
+            </S.AdminMenuContent>
           </S.AdminMenuContainer>
         </S.Overlay>
       )}

@@ -5,6 +5,9 @@ import { IDetail } from "../../types/admin/Admin.types";
 import BannerDeleteModal from "./BannerDeleteModal";
 
 export default function BannerDetail({ setOnDetail }: IDetail) {
+
+  const api = process.env.REACT_APP_API_URL ?? "";
+
   const [onDelete, setOnDelete] = useState<boolean>(false);
   const { bannerTrigger, setBannerTrigger } = useAdminBannerTriggerStore();
   const { bannerDetail } = useAdminBannerDetailStore();
@@ -34,7 +37,7 @@ export default function BannerDetail({ setOnDetail }: IDetail) {
           </S.DetailContent>
           <S.DetailContent>
             <S.DetailName>배너 이미지:</S.DetailName>
-            <S.DetailImage src={bannerDetail.imagePath} />
+            <S.DetailImage src={`${api}${bannerDetail.imagePath}`} />
           </S.DetailContent>
           <S.DetailContent>
             <S.DetailName>시작 시간:</S.DetailName>
