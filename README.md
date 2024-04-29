@@ -28,7 +28,7 @@ JavaScript, TypeScript
 
 | **Frontend** |
 
-React, StyledComponents, Zustand, React-query
+React, Styled-Components, Zustand, React-query
 
 | **Communication** |
 
